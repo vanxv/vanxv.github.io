@@ -3,19 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>GoogleAnalytics自学教材 | vanxvBlog</title>
+  <title>GoogleAnalytics原理 | vanxvBlog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="#关于GA的学习">
+  <meta name="description" content="#关于GA的学习 ##工作原理：执行JS：analytics.js，向google GA传值。 下面是GA的代码：1234567&amp;lt;!-- Google Analytics --&amp;gt;(function(i,s,o,g,r,a,m)&amp;#123;i[&apos;GoogleAnalyticsObject&apos;]=r;i[r]=i[r]||function()&amp;#123;(i[r].q=i[r].q||[])">
 <meta name="keywords" content="Google-Analytics">
 <meta property="og:type" content="article">
-<meta property="og:title" content="GoogleAnalytics自学教材">
+<meta property="og:title" content="GoogleAnalytics原理">
 <meta property="og:url" content="http://vanxv.github.io/2017/04/24/GoogleAnalytics/index.html">
 <meta property="og:site_name" content="vanxvBlog">
-<meta property="og:description" content="#关于GA的学习">
-<meta property="og:updated_time" content="2017-04-24T04:38:11.000Z">
+<meta property="og:description" content="#关于GA的学习 ##工作原理：执行JS：analytics.js，向google GA传值。 下面是GA的代码：1234567&amp;lt;!-- Google Analytics --&amp;gt;(function(i,s,o,g,r,a,m)&amp;#123;i[&apos;GoogleAnalyticsObject&apos;]=r;i[r]=i[r]||function()&amp;#123;(i[r].q=i[r].q||[])">
+<meta property="og:updated_time" content="2017-04-24T05:03:28.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="GoogleAnalytics自学教材">
-<meta name="twitter:description" content="#关于GA的学习">
+<meta name="twitter:title" content="GoogleAnalytics原理">
+<meta name="twitter:description" content="#关于GA的学习 ##工作原理：执行JS：analytics.js，向google GA传值。 下面是GA的代码：1234567&amp;lt;!-- Google Analytics --&amp;gt;(function(i,s,o,g,r,a,m)&amp;#123;i[&apos;GoogleAnalyticsObject&apos;]=r;i[r]=i[r]||function()&amp;#123;(i[r].q=i[r].q||[])">
   
     <link rel="alternate" href="/atom.xml" title="vanxvBlog" type="application/atom+xml">
   
@@ -82,7 +82,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      GoogleAnalytics自学教材
+      GoogleAnalytics原理
     </h1>
   
 
@@ -91,11 +91,34 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>#关于GA的学习</p>
+<p>##工作原理：<br>执行JS：analytics.js，向google GA传值。</p>
+<p>下面是GA的代码：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;!-- Google Analytics --&gt;</div><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params">i,s,o,g,r,a,m</span>)</span>&#123;i[<span class="string">'GoogleAnalyticsObject'</span>]=r;i[r]=i[r]||<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">(i[r].q=i[r].q||[]).push(<span class="built_in">arguments</span>)&#125;,i[r].l=<span class="number">1</span>*<span class="keyword">new</span> <span class="built_in">Date</span>();a=s.createElement(o),</div><div class="line">m=s.getElementsByTagName(o)[<span class="number">0</span>];a.async=<span class="number">1</span>;a.src=g;m.parentNode.insertBefore(a,m)</div><div class="line">&#125;)(<span class="built_in">window</span>,<span class="built_in">document</span>,<span class="string">'script'</span>,<span class="string">'https://www.google-analytics.com/analytics.js'</span>,<span class="string">'ga'</span>);</div><div class="line"></div><div class="line">ga(<span class="string">'create'</span>, <span class="string">'UA-XXXXX-Y'</span>, <span class="string">'auto'</span>);</div></pre></td></tr></table></figure></p>
+<p>##跟踪代码可以获得什么数据：</p>
+<ol>
+<li>用户总共在您网站上停留了多少时间。</li>
+<li>用户在每个网页上停留的时间以及用户查看这些网页的次序。</li>
+<li>用户点击了哪些内部链接（根据下一个网页浏览的网址得到）。</li>
+<li>此外，IP 地址、用户代理字符串以及 analytics.js </li>
+<li>在创建新跟踪器时查看的初始网页可用于确定以下这类信息：<ol>
+<li>用户的地理位置。</li>
+<li>用户使用的浏览器和操作系统。</li>
+<li>屏幕尺寸以给跟踪器命名：</li>
+</ol>
+</li>
+</ol>
+<p>##创建跟踪器<br>什么是跟踪器？<br>顾名思义：跟踪代码。告诉GA的值。</p>
+<p>###创建跟踪器的方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ga(&apos;create&apos;, &apos;UA-XXXXX-Y&apos;, &apos;auto&apos;);</div></pre></td></tr></table></figure></p>
+<p>这里的意思是<br>第一个值是创建<br>第二个值是网页代码<br>第三个值不知。</p>
+<p>###给跟踪器命名：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ga(&apos;create&apos;, &apos;UA-XXXXX-Y&apos;, &apos;auto&apos;, &apos;myTracker&apos;);</div></pre></td></tr></table></figure></p>
+<p>myTracker是自定义的名字</p>
+<p>###自定义字段值<br>意思：自己再写一些值传给GA<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ga(&apos;create&apos;, &apos;UA-XXXXX-Y&apos;, &apos;auto&apos;, &apos;myTracker&apos;, &#123;</div><div class="line">  userId: &apos;12345&apos;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>  <strong>userId: ‘12345’</strong> 给ga传值userID：12345<br>  和元组是一个原理。</p>
+<p>##自定义多字段值<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">ga(&apos;create&apos;, &#123;</div><div class="line">  trackingId: &apos;UA-XXXXX-Y&apos;,</div><div class="line">  cookieDomain: &apos;auto&apos;,</div><div class="line">  name: &apos;myTracker&apos;,</div><div class="line">  userId: &apos;12345&apos;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vanxv.github.io/2017/04/24/GoogleAnalytics/" data-id="cj1vmtvsa0000b0u1o27l16s7" class="article-share-link">Share</a>
+      <a data-url="http://vanxv.github.io/2017/04/24/GoogleAnalytics/" data-id="cj1yhmg160000d8m6yon6nh1x" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Google-Analytics/">Google-Analytics</a></li></ul>
@@ -106,7 +129,7 @@
     
 <nav id="article-nav">
   
-    <a href="/2017/04/24/git-pull-强制覆盖本地文件/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/04/24/git_pull_Mandatory_local/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
@@ -115,6 +138,11 @@
       </div>
     </a>
   
+  
+    <a href="/2017/04/24/GoogleAnalytics_E_Business/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">GoogleAnalytics电子商务</div>
+    </a>
   
 </nav>
 
@@ -129,7 +157,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Google-Analytics/">Google-Analytics</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/bug/">bug</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/docker/">docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/github/">github</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Google-Analytics/">Google-Analytics</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/bug/">bug</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/docker/">docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/github/">github</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/maketting/">maketting</a></li></ul>
     </div>
   </div>
 
@@ -139,7 +167,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google-Analytics/">Google-Analytics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bug/">bug</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google-Analytics/">Google-Analytics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bug/">bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maketting/">maketting</a></li></ul>
     </div>
   </div>
 
@@ -149,7 +177,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Google-Analytics/" style="font-size: 10px;">Google-Analytics</a> <a href="/tags/bug/" style="font-size: 20px;">bug</a>
+      <a href="/tags/Google-Analytics/" style="font-size: 20px;">Google-Analytics</a> <a href="/tags/bug/" style="font-size: 20px;">bug</a> <a href="/tags/maketting/" style="font-size: 10px;">maketting</a>
     </div>
   </div>
 
@@ -171,23 +199,23 @@
       <ul>
         
           <li>
-            <a href="/2017/04/24/GoogleAnalytics/">GoogleAnalytics自学教材</a>
+            <a href="/2017/04/25/crawler/">crawler</a>
           </li>
         
           <li>
-            <a href="/2017/04/24/git-pull-强制覆盖本地文件/">git pull 强制覆盖本地文件</a>
+            <a href="/2017/04/24/maketting/">maketting</a>
           </li>
         
           <li>
-            <a href="/2017/04/24/docker/">docker</a>
+            <a href="/2017/04/24/GoogleAnalytics/">GoogleAnalytics原理</a>
           </li>
         
           <li>
-            <a href="/2017/04/24/python/">python</a>
+            <a href="/2017/04/24/GoogleAnalytics_E_Business/">GoogleAnalytics电子商务</a>
           </li>
         
           <li>
-            <a href="/2017/04/24/hello-world/">Hello World</a>
+            <a href="/2017/04/24/git_pull_Mandatory_local/">git pull 强制覆盖本地文件</a>
           </li>
         
       </ul>
