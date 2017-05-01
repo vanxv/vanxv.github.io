@@ -50,7 +50,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://vanxv.github.io"></form>
@@ -60,6 +60,76 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-Python-Crawler" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/26/Python-Crawler/" class="article-date">
+  <time datetime="2017-04-26T07:59:20.000Z" itemprop="datePublished">2017-04-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/26/Python-Crawler/">Python_Crawler</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#架构：<br>1.phanmjs读取数据<br>2.selenium 自动化点击<br>3.selenium下.find_element<br>可读取页面数据<br>4.页面数据拿到后可往下一步读取<br>5.正则可以洗数据</p>
+<p>#目标：</p>
+<ol>
+<li>写出一本教材（给6个月之前的自己）</li>
+<li>写出爬淘宝的爬虫</li>
+</ol>
+<p>#初知爬虫</p>
+<p>##网络分层：我们打开网页结果是：HTML、CSS、JavaScript，这些是前端页面。</p>
+<p>###原理：</p>
+<ol>
+<li>从A机到B机一次对话。</li>
+<li>B发送一串1和0的比特值，电路上的高低电压，构成一个信息：<ol>
+<li>请求头：B本地的路由器A的mac地址和A的ip服务器</li>
+<li>信息体：发一次请求服务器的应用请求</li>
+</ol>
+</li>
+<li>B家路由器收到1和0的比特质，把它理解成数据包（packet）寄到A的ip地址（盖上自己的ip）</li>
+<li>B的数据包游了很多的中介路由器，沿着物理／电路路径前进到A服务器</li>
+<li>A服务器读取数据包请求头里的目标端口（80）然后把它传递对应的应用-网络服务器应用上<pre><code>如果是网站的话，就是GET请求，然后返回一个index.html文件
+</code></pre></li>
+<li>网络对应给Bob返回一个HTML文件<br><img src="http://olsv0lzsv.bkt.clouddn.com/20170426149319554978913.png" alt="img"></li>
+</ol>
+<p>alice收到封包后</p>
+<p>#BeautifulSoup<br>什么是Beautifulsoup？<br>一个读取读取html页面的框架</p>
+<p>下面执行一下代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">from urllib.request import urlopen</div><div class="line">html = urlopen(&quot;http://pythonscraping.com/pages/page1.html&quot;)</div><div class="line">print(html.read())</div></pre></td></tr></table></figure></p>
+<p>可以在里面换html的数据值<br>urlopen：读取页面的html。<br>发送GET到网站，然后返回html代码</p>
+<p>安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip3 install beautifulsoup4</div></pre></td></tr></table></figure></p>
+<p>运行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">from urllib.request import urlopen</div><div class="line">from bs4 import BeautifulSoup</div><div class="line">html = urlopen(&quot;http://www.pythonscraping.com/pages/page1.html&quot;) bsObj = BeautifulSoup(html.read())</div><div class="line">print(bsObj.h1)</div></pre></td></tr></table></figure></p>
+<p><img src="http://olsv0lzsv.bkt.clouddn.com/20170426149319963014053.png" alt="img"><br>可以读取到h1的主题</p>
+<p>还可以print其他的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">from urllib.request import urlopen</div><div class="line">from bs4 import BeautifulSoup</div><div class="line">html = urlopen(&quot;http://www.pythonscraping.com/pages/page1.html&quot;) bsObj = BeautifulSoup(html.read())</div><div class="line">print(bsObj.body)</div><div class="line">print(bsObj.html)</div></pre></td></tr></table></figure></p>
+<p><img src="http://olsv0lzsv.bkt.clouddn.com/20170426149319976073266.png" alt="img"></p>
+<p>原理：BeautifulSoup是读取关键字段标签符</p>
+<p>如果网络不太好，请加判断语句：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> urllib.request <span class="keyword">import</span> urlopen</div><div class="line"><span class="keyword">from</span> urllib.error <span class="keyword">import</span> HTTPError</div><div class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getTitle</span><span class="params">(url)</span>:</span></div><div class="line">        <span class="keyword">try</span>:</div><div class="line">            html = urlopen(url)</div><div class="line">             HTTPError <span class="keyword">as</span> e:</div><div class="line">            <span class="keyword">return</span> <span class="keyword">None</span></div><div class="line">        <span class="keyword">try</span>:</div><div class="line">            bsObj = BeautifulSoup(html.read())</div><div class="line">            title = bsObj.body.h1</div><div class="line">        <span class="keyword">except</span> AttributeError <span class="keyword">as</span> e:</div><div class="line">            <span class="keyword">return</span> <span class="keyword">None</span></div><div class="line">        <span class="keyword">return</span> title</div><div class="line">title = getTitle(<span class="string">"http://www.pythonscraping.com/pages/page1.html"</span>)</div><div class="line"><span class="keyword">if</span> title == <span class="keyword">None</span>:</div><div class="line">    print(<span class="string">"Title could not be found"</span>)</div><div class="line"><span class="keyword">else</span>:</div><div class="line">    print(title)</div></pre></td></tr></table></figure></p>
+<h1 id="BeautifulSoup的find-和findAll"><a href="#BeautifulSoup的find-和findAll" class="headerlink" title="BeautifulSoup的find()和findAll()"></a>BeautifulSoup的find()和findAll()</h1><p>测试下下面的代码<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> urllib.request <span class="keyword">import</span> urlopen</div><div class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</div><div class="line">html = urlopen(<span class="string">"http://www.pythonscraping.com/pages/page3.html"</span>)</div><div class="line">bsObj = BeautifulSoup(html)</div><div class="line"><span class="keyword">for</span> child <span class="keyword">in</span> bsObj.find(<span class="string">"table"</span>,&#123;<span class="string">"id"</span>:<span class="string">"giftList"</span>&#125;).children:</div><div class="line">    print(child)</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://vanxv.github.io/2017/04/26/Python-Crawler/" data-id="cj25x679m00011bm627w41dtg" class="article-share-link">Delen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-qqmarktting" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -85,12 +155,17 @@
       
         <p>首先安装软件：vmware<br><a href="http://www.dntk.org/vmware-v12-1-1-guan-fang-jian-ti-zhuan-ye-ban-yong-jiu-mi-yue-zhu-ce-ji.html" target="_blank" rel="external">vmware下载地址：点我</a></p>
 <p>下面是win7的下载地址： 复制到迅雷里面<br>ed2k://|file|cn_windows_7_professional_with_sp1_vl_build_x86_dvd_u_677939.iso|2502909952|935E5B4B754527BE3C238FA6ABDD9B86|/</p>
+<p>vmware安装教材<br><img src="http://olsv0lzsv.bkt.clouddn.com/20170426149319308849560.png" alt="img"></p>
+<p><img src="http://olsv0lzsv.bkt.clouddn.com/20170426149319311391638.png" alt="img"><br>选择产品下载的win7文件</p>
+<p><img src="http://olsv0lzsv.bkt.clouddn.com/201704261493193158713.png" alt="img"></p>
+<p><img src="http://olsv0lzsv.bkt.clouddn.com/20170426149319317916402.png" alt="img"></p>
+<p>等待安装完毕<br><img src="http://olsv0lzsv.bkt.clouddn.com/20170426149319327134480.png" alt="img"></p>
 <p>1.把所有的淘宝卖家qq群拉出来<br>2.一个一个加<br>3.问有什么产品，说自己在海外卖，并有一家刷单公司<br>4.加人群发，<br>5.让商家做刷手。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vanxv.github.io/2017/04/26/qqmarktting/" data-id="cj1ynt0xe000jgsm6crmrb51l" class="article-share-link">Share</a>
+      <a data-url="http://vanxv.github.io/2017/04/26/qqmarktting/" data-id="cj25x67bc000k1bm618qe0grs" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -157,7 +232,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vanxv.github.io/2017/04/26/fbmarktting-auto-ad/" data-id="cj1ynt0x40009gsm6ggkyn90j" class="article-share-link">Share</a>
+      <a data-url="http://vanxv.github.io/2017/04/26/fbmarktting-auto-ad/" data-id="cj25x67at000b1bm64wiji797" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -193,7 +268,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vanxv.github.io/2017/04/26/markdown/" data-id="cj1ynt0xa000egsm6ippaehzg" class="article-share-link">Share</a>
+      <a data-url="http://vanxv.github.io/2017/04/26/markdown/" data-id="cj25x67b0000f1bm6wjrz2ed9" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -257,7 +332,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vanxv.github.io/2017/04/25/crawler/" data-id="cj1ynt0wj0003gsm6dgzawz1j" class="article-share-link">Share</a>
+      <a data-url="http://vanxv.github.io/2017/04/25/crawler/" data-id="cj25x67ao00091bm677nezy1h" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -439,10 +514,53 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vanxv.github.io/2017/04/24/fbmarktting/maketting/" data-id="cj1ynt0y8000qgsm6vsq8iw4d" class="article-share-link">Share</a>
+      <a data-url="http://vanxv.github.io/2017/04/24/fbmarktting/maketting/" data-id="cj25x67cq000n1bm6xp8jvzs1" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/maketting/">maketting</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-googleAnalytice/GoogleAnalytics_E_Business" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/24/googleAnalytice/GoogleAnalytics_E_Business/" class="article-date">
+  <time datetime="2017-04-24T04:36:22.000Z" itemprop="datePublished">2017-04-24</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Google-Analytics/">Google-Analytics</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/24/googleAnalytice/GoogleAnalytics_E_Business/">GoogleAnalytics电子商务</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>##</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://vanxv.github.io/2017/04/24/googleAnalytice/GoogleAnalytics_E_Business/" data-id="cj25x67cw000o1bm62kpf7sja" class="article-share-link">Delen</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Google-Analytics/">Google-Analytics</a></li></ul>
 
     </footer>
   </div>
@@ -505,50 +623,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vanxv.github.io/2017/04/24/googleAnalytice/GoogleAnalytics/" data-id="cj1ynt0y2000mgsm6khdc2115" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Google-Analytics/">Google-Analytics</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-googleAnalytice/GoogleAnalytics_E_Business" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/04/24/googleAnalytice/GoogleAnalytics_E_Business/" class="article-date">
-  <time datetime="2017-04-24T04:36:22.000Z" itemprop="datePublished">2017-04-24</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Google-Analytics/">Google-Analytics</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/24/googleAnalytice/GoogleAnalytics_E_Business/">GoogleAnalytics电子商务</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>##</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://vanxv.github.io/2017/04/24/googleAnalytice/GoogleAnalytics_E_Business/" data-id="cj1ynt0y3000ngsm64hg44pwp" class="article-share-link">Share</a>
+      <a data-url="http://vanxv.github.io/2017/04/24/googleAnalytice/GoogleAnalytics/" data-id="cj25x67d0000r1bm6e6mvqy3x" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Google-Analytics/">Google-Analytics</a></li></ul>
@@ -596,7 +671,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vanxv.github.io/2017/04/24/git_pull_Mandatory_local/" data-id="cj1ynt0x6000bgsm67cojmu4y" class="article-share-link">Share</a>
+      <a data-url="http://vanxv.github.io/2017/04/24/git_pull_Mandatory_local/" data-id="cj25x67aw000c1bm6f9eiwxkz" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bug/">bug</a></li></ul>
@@ -634,92 +709,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vanxv.github.io/2017/04/24/python/" data-id="cj1ynt0xc000hgsm622wvgdmu" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-docker" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/04/24/docker/" class="article-date">
-  <time datetime="2017-04-24T00:48:35.000Z" itemprop="datePublished">2017-04-24</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/docker/">docker</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/24/docker/">docker</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>#Docker<br>    我们以前是用系统+软件运行的，<br>    Docker把系统再拆成小的模块（集装箱）和环境运行</p>
-<p>##基本概念</p>
-<p>####镜像（Image）<br>    除了系统文件以外，还有程序、库、资源、配置。<br>    通俗点：(系统文件+程序）独立化</p>
-<p>####容器（Container）<br>    容器和镜像的关系好比类和实例一样。<br>    容器就是进程，</p>
-<p>####仓库（Repository）<br>    仓库分发数据“&lt;仓库名&gt;:&lt;标签&gt;<br>    例：ubuntu:14.04<br>    路径命名：<br>    jwilder/nginx-proxy<br>    前者用户名，后者是软件名，但不一定绝对。<br>    Docker还有加速服务以及API</p>
-<p>###查看系统内核<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">uname -a</div></pre></td></tr></table></figure></p>
-<p>##mac安装 docker<br><a href="www.docker.com">docker官网下载</a></p>
-<p>安装后在进入设置</p>
-<p><img src="http://olsv0lzsv.bkt.clouddn.com/20170302148842307479972.png" alt="20170302148842307479972.png"></p>
-<p>增加阿里云的下载地址</p>
-<p><img src="http://olsv0lzsv.bkt.clouddn.com/2017030214884230975517.png" alt="2017030214884230975517.png"></p>
-<p>通过下面的代码查看系统版本<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$ docker --version</div><div class="line">Docker version 1.12.3, build 6b644ec</div><div class="line">$ docker-compose --version</div><div class="line">docker-compose version 1.8.1, build 878cff1</div><div class="line">$ docker-machine --version</div><div class="line">docker-machine version 0.8.2, build e18a919</div></pre></td></tr></table></figure></p>
-<p>安装docker的 Nginx服务器：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run -d -p 80:80 --name webserver nginx</div></pre></td></tr></table></figure></p>
-<p><img src="http://olsv0lzsv.bkt.clouddn.com/20170302148842337156105.png" alt="20170302148842337156105.png"></p>
-<p>有网站了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ docker stop webserver</div><div class="line">$ docker rm webserver</div></pre></td></tr></table></figure></p>
-<p>停止和删除服务器</p>
-<p>查看镜像<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker images</div></pre></td></tr></table></figure></p>
-<p>##使用image<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run --name webserver -d -p 80:80 nginx</div></pre></td></tr></table></figure></p>
-<p>运行nginx 命名为webserver 并映射端口80</p>
-<p>现可以打开<br><a href="http://localhost" target="_blank" rel="external">http://localhost</a></p>
-<p>看见打开的Nginx 欢迎页面。</p>
-<p>##修改内容<br>如果不太喜欢可以用指令修改程序里面的文字</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ docker exec -it webserver bash</div><div class="line">root@3729b97e8226:/# echo &apos;&lt;h1&gt;Hello, Docker!&lt;/h1&gt;&apos; &gt; /usr/share</div><div class="line">/nginx/html/index.html</div><div class="line">root@3729b97e8226:/# exit</div><div class="line">exit</div></pre></td></tr></table></figure>
-<p>##查看文件的变化<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker diff webserver</div></pre></td></tr></table></figure></p>
-<p>我们修改了image，现在保存形成的镜像文件</p>
-<p>docker commit [选项] &lt;容器id或容器名&gt; [&lt;仓库名&gt;[:&lt;标签&gt;]]</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">docker commit \</div><div class="line">--author &quot;Tao Wang &lt;twang2218@gmail.com&gt;&quot; \</div><div class="line">--message &quot;修改了默认网页&quot; \</div><div class="line">webserver \</div><div class="line">nginx:v2</div><div class="line">sha256:07e33465974800ce65751acc279adc6ed2dc5ed4e0838f8b86f0c87aa</div><div class="line">1795214</div></pre></td></tr></table></figure>
-<p>author 作者<br>message 修改信息<br>nginx仓库名<br>v2 标签</p>
-<p>查看nginx<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker images nginx</div></pre></td></tr></table></figure></p>
-<p>查看历史记录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker history nginx:v2</div></pre></td></tr></table></figure></p>
-<p>运行我们新建的镜像文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run --name web2 -d -p 81:80 nginx:v2</div></pre></td></tr></table></figure></p>
-<p>81是映射到81端口<br>我们成功的定制了一个自己的镜像文件</p>
-<p>##安装和运行tensorflow<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker pull tensorflow/tensorflow</div></pre></td></tr></table></figure></p>
-<p>tensorflow名本不是这个，我用软件 ##docker tags## 指令修改过名字</p>
-<p>运行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run --name tensorflowvan -it -p 8888:8888 -v ~/Users/VANXV/tensorflow:/notebooks/data tensorflow:0.11.0-gpu</div></pre></td></tr></table></figure></p>
-<p>访问http:/localhost:8888</p>
-<p>docker run 运行镜像，</p>
-<p>–name 为容器创建别名，</p>
-<p>-it 保留命令行运行，</p>
-<p>-p 8888:8888 将本地的8888端口 <a href="http://localhost:8888/" target="_blank" rel="external">http://localhost:8888/</a> 映射，</p>
-<p>-v ~/tensorflow:/notebooks/data 将本地的~/tensorflow文件夹挂载到新建容器的/notebooks/data下（这样创建的文件可以保存到本地~/tensorflow）<br>tensorflow/tensorflow 为指定的镜像，<br>默认标签为latest（即tensorflow/tensorflow:latest）<br><img src="http://olsv0lzsv.bkt.clouddn.com/20170302148843067539639.png" alt="20170302148843067539639.png"></p>
-<p>增加python2的一个指令：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> print_function</div><div class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</div><div class="line"><span class="keyword">with</span> tf.Session():</div><div class="line">    input1 = tf.constant([<span class="number">1.0</span>, <span class="number">1.0</span>, <span class="number">1.0</span>, <span class="number">1.0</span>])</div><div class="line">    input2 = tf.constant([<span class="number">2.0</span>, <span class="number">2.0</span>, <span class="number">2.0</span>, <span class="number">2.0</span>])</div><div class="line">    output = tf.add(input1, input2)</div><div class="line">    result = output.eval()</div><div class="line">    print(<span class="string">"result: "</span>, result)</div></pre></td></tr></table></figure></p>
-<p><img src="http://olsv0lzsv.bkt.clouddn.com/20170302148843101024590.png" alt="20170302148843101024590.png"></p>
-<p>查看运行的容器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker ps</div></pre></td></tr></table></figure></p>
-<p>关闭tensorflow容器 和# 开启TensorFlow容器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">docker stop tensortflowvan</div><div class="line"></div><div class="line">docker start tensortflowvan</div></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://vanxv.github.io/2017/04/24/docker/" data-id="cj1ynt0wu0007gsm6d9zpys48" class="article-share-link">Share</a>
+      <a data-url="http://vanxv.github.io/2017/04/24/python/" data-id="cj25x67b5000i1bm6jnw55whr" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -740,7 +730,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
+    <h3 class="widget-title">Categorieën</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Google-Analytics/">Google-Analytics</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/bug/">bug</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/docker/">docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/github/">github</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/maketting/">maketting</a></li></ul>
     </div>
@@ -750,7 +740,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Labels</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google-Analytics/">Google-Analytics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bug/">bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maketting/">maketting</a></li></ul>
     </div>
@@ -769,7 +759,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archieven</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a></li></ul>
     </div>
@@ -779,9 +769,13 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Recente berichten</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/04/26/Python-Crawler/">Python_Crawler</a>
+          </li>
         
           <li>
             <a href="/2017/04/26/qqmarktting/">qqmarktting</a>
@@ -797,10 +791,6 @@
         
           <li>
             <a href="/2017/04/25/crawler/">crawler</a>
-          </li>
-        
-          <li>
-            <a href="/2017/04/24/fbmarktting/maketting/">maketting</a>
           </li>
         
       </ul>

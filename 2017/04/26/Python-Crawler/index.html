@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Python_Crawler | vanxvBlog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="#架构：1.phanmjs读取数据2.selenium 自动化点击3.selenium下.find_element可读取页面数据4.页面数据拿到后可往下一步读取5.正则可以洗数据 #目标：  写出一本教材（给6个月之前的自己） 写出爬淘宝的爬虫  #初知爬虫 ##网络分层：我们打开网页结果是：HTML、CSS、JavaScript，这些是前端页面。 ###原理：  从A机到B机一次对话。 B发送一">
+<meta name="keywords">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python_Crawler">
+<meta property="og:url" content="http://vanxv.github.io/2017/04/26/Python-Crawler/index.html">
+<meta property="og:site_name" content="vanxvBlog">
+<meta property="og:description" content="#架构：1.phanmjs读取数据2.selenium 自动化点击3.selenium下.find_element可读取页面数据4.页面数据拿到后可往下一步读取5.正则可以洗数据 #目标：  写出一本教材（给6个月之前的自己） 写出爬淘宝的爬虫  #初知爬虫 ##网络分层：我们打开网页结果是：HTML、CSS、JavaScript，这些是前端页面。 ###原理：  从A机到B机一次对话。 B发送一">
+<meta property="og:image" content="http://olsv0lzsv.bkt.clouddn.com/20170426149319554978913.png">
+<meta property="og:image" content="http://olsv0lzsv.bkt.clouddn.com/20170426149319963014053.png">
+<meta property="og:image" content="http://olsv0lzsv.bkt.clouddn.com/20170426149319976073266.png">
+<meta property="og:updated_time" content="2017-04-26T10:17:41.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python_Crawler">
+<meta name="twitter:description" content="#架构：1.phanmjs读取数据2.selenium 自动化点击3.selenium下.find_element可读取页面数据4.页面数据拿到后可往下一步读取5.正则可以洗数据 #目标：  写出一本教材（给6个月之前的自己） 写出爬淘宝的爬虫  #初知爬虫 ##网络分层：我们打开网页结果是：HTML、CSS、JavaScript，这些是前端页面。 ###原理：  从A机到B机一次对话。 B发送一">
+<meta name="twitter:image" content="http://olsv0lzsv.bkt.clouddn.com/20170426149319554978913.png">
+  
+    <link rel="alternate" href="/atom.xml" title="vanxvBlog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">vanxvBlog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://vanxv.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Python-Crawler" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/26/Python-Crawler/" class="article-date">
+  <time datetime="2017-04-26T07:59:20.000Z" itemprop="datePublished">2017-04-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Python_Crawler
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#架构：<br>1.phanmjs读取数据<br>2.selenium 自动化点击<br>3.selenium下.find_element<br>可读取页面数据<br>4.页面数据拿到后可往下一步读取<br>5.正则可以洗数据</p>
+<p>#目标：</p>
+<ol>
+<li>写出一本教材（给6个月之前的自己）</li>
+<li>写出爬淘宝的爬虫</li>
+</ol>
+<p>#初知爬虫</p>
+<p>##网络分层：我们打开网页结果是：HTML、CSS、JavaScript，这些是前端页面。</p>
+<p>###原理：</p>
+<ol>
+<li>从A机到B机一次对话。</li>
+<li>B发送一串1和0的比特值，电路上的高低电压，构成一个信息：<ol>
+<li>请求头：B本地的路由器A的mac地址和A的ip服务器</li>
+<li>信息体：发一次请求服务器的应用请求</li>
+</ol>
+</li>
+<li>B家路由器收到1和0的比特质，把它理解成数据包（packet）寄到A的ip地址（盖上自己的ip）</li>
+<li>B的数据包游了很多的中介路由器，沿着物理／电路路径前进到A服务器</li>
+<li>A服务器读取数据包请求头里的目标端口（80）然后把它传递对应的应用-网络服务器应用上<pre><code>如果是网站的话，就是GET请求，然后返回一个index.html文件
+</code></pre></li>
+<li>网络对应给Bob返回一个HTML文件<br><img src="http://olsv0lzsv.bkt.clouddn.com/20170426149319554978913.png" alt="img"></li>
+</ol>
+<p>alice收到封包后</p>
+<p>#BeautifulSoup<br>什么是Beautifulsoup？<br>一个读取读取html页面的框架</p>
+<p>下面执行一下代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">from urllib.request import urlopen</div><div class="line">html = urlopen(&quot;http://pythonscraping.com/pages/page1.html&quot;)</div><div class="line">print(html.read())</div></pre></td></tr></table></figure></p>
+<p>可以在里面换html的数据值<br>urlopen：读取页面的html。<br>发送GET到网站，然后返回html代码</p>
+<p>安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip3 install beautifulsoup4</div></pre></td></tr></table></figure></p>
+<p>运行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">from urllib.request import urlopen</div><div class="line">from bs4 import BeautifulSoup</div><div class="line">html = urlopen(&quot;http://www.pythonscraping.com/pages/page1.html&quot;) bsObj = BeautifulSoup(html.read())</div><div class="line">print(bsObj.h1)</div></pre></td></tr></table></figure></p>
+<p><img src="http://olsv0lzsv.bkt.clouddn.com/20170426149319963014053.png" alt="img"><br>可以读取到h1的主题</p>
+<p>还可以print其他的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">from urllib.request import urlopen</div><div class="line">from bs4 import BeautifulSoup</div><div class="line">html = urlopen(&quot;http://www.pythonscraping.com/pages/page1.html&quot;) bsObj = BeautifulSoup(html.read())</div><div class="line">print(bsObj.body)</div><div class="line">print(bsObj.html)</div></pre></td></tr></table></figure></p>
+<p><img src="http://olsv0lzsv.bkt.clouddn.com/20170426149319976073266.png" alt="img"></p>
+<p>原理：BeautifulSoup是读取关键字段标签符</p>
+<p>如果网络不太好，请加判断语句：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> urllib.request <span class="keyword">import</span> urlopen</div><div class="line"><span class="keyword">from</span> urllib.error <span class="keyword">import</span> HTTPError</div><div class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getTitle</span><span class="params">(url)</span>:</span></div><div class="line">        <span class="keyword">try</span>:</div><div class="line">            html = urlopen(url)</div><div class="line">             HTTPError <span class="keyword">as</span> e:</div><div class="line">            <span class="keyword">return</span> <span class="keyword">None</span></div><div class="line">        <span class="keyword">try</span>:</div><div class="line">            bsObj = BeautifulSoup(html.read())</div><div class="line">            title = bsObj.body.h1</div><div class="line">        <span class="keyword">except</span> AttributeError <span class="keyword">as</span> e:</div><div class="line">            <span class="keyword">return</span> <span class="keyword">None</span></div><div class="line">        <span class="keyword">return</span> title</div><div class="line">title = getTitle(<span class="string">"http://www.pythonscraping.com/pages/page1.html"</span>)</div><div class="line"><span class="keyword">if</span> title == <span class="keyword">None</span>:</div><div class="line">    print(<span class="string">"Title could not be found"</span>)</div><div class="line"><span class="keyword">else</span>:</div><div class="line">    print(title)</div></pre></td></tr></table></figure></p>
+<h1 id="BeautifulSoup的find-和findAll"><a href="#BeautifulSoup的find-和findAll" class="headerlink" title="BeautifulSoup的find()和findAll()"></a>BeautifulSoup的find()和findAll()</h1><p>测试下下面的代码<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> urllib.request <span class="keyword">import</span> urlopen</div><div class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</div><div class="line">html = urlopen(<span class="string">"http://www.pythonscraping.com/pages/page3.html"</span>)</div><div class="line">bsObj = BeautifulSoup(html)</div><div class="line"><span class="keyword">for</span> child <span class="keyword">in</span> bsObj.find(<span class="string">"table"</span>,&#123;<span class="string">"id"</span>:<span class="string">"giftList"</span>&#125;).children:</div><div class="line">    print(child)</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://vanxv.github.io/2017/04/26/Python-Crawler/" data-id="cj25x679m00011bm627w41dtg" class="article-share-link">Delen</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/04/26/qqmarktting/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Nieuwer</strong>
+      <div class="article-nav-title">
+        
+          qqmarktting
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categorieën</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Google-Analytics/">Google-Analytics</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/bug/">bug</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/docker/">docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/github/">github</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/maketting/">maketting</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Labels</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google-Analytics/">Google-Analytics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bug/">bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maketting/">maketting</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Google-Analytics/" style="font-size: 20px;">Google-Analytics</a> <a href="/tags/bug/" style="font-size: 20px;">bug</a> <a href="/tags/maketting/" style="font-size: 10px;">maketting</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archieven</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recente berichten</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/04/26/Python-Crawler/">Python_Crawler</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/26/qqmarktting/">qqmarktting</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/26/fbmarktting-auto-ad/">fbmarktting_auto_ad</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/26/markdown/">markdown</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/25/crawler/">crawler</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
