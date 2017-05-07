@@ -3,19 +3,23 @@
 <head>
   <meta charset="utf-8">
   
-  <title>git pull 强制覆盖本地文件 | vanxvBlog</title>
+  <title>winxp-git | vanxvBlog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="先说说原理： 123456git statusgit fetch --allgit reset --hard origin/mastergit loggit reset --（数字）git pull git status查看最新的状态 git fetch –all获取网上的最新的版本git reset –hard origin/master切换到最新的版本git log查看下载的日志 git re">
-<meta name="keywords" content="bug">
+  <meta name="description" content="1什么是github与git    GIT是一个分布式的版本控制系统，最初由linux负责任编写。说白了是一个代码托管器    GIThub给予Rails的git库托管  先下载软件 Git-1.7.7-preview20111012.exe TortoiseGit （我到现在也没弄明白干吗用的）下载地址：在csdn上下载    安装xp版本 ##Git-1.7.7-preview20111012">
+<meta name="keywords" content="github">
 <meta property="og:type" content="article">
-<meta property="og:title" content="git pull 强制覆盖本地文件">
-<meta property="og:url" content="http://vanxv.github.io/2017/04/24/git_pull_Mandatory_local/index.html">
+<meta property="og:title" content="winxp-git">
+<meta property="og:url" content="http://vanxv.github.io/2017/05/01/winxp-git/index.html">
 <meta property="og:site_name" content="vanxvBlog">
-<meta property="og:description" content="先说说原理： 123456git statusgit fetch --allgit reset --hard origin/mastergit loggit reset --（数字）git pull git status查看最新的状态 git fetch –all获取网上的最新的版本git reset –hard origin/master切换到最新的版本git log查看下载的日志 git re">
-<meta property="og:updated_time" content="2017-04-24T02:49:49.000Z">
+<meta property="og:description" content="1什么是github与git    GIT是一个分布式的版本控制系统，最初由linux负责任编写。说白了是一个代码托管器    GIThub给予Rails的git库托管  先下载软件 Git-1.7.7-preview20111012.exe TortoiseGit （我到现在也没弄明白干吗用的）下载地址：在csdn上下载    安装xp版本 ##Git-1.7.7-preview20111012">
+<meta property="og:image" content="http://olsv0lzsv.bkt.clouddn.com/2017050114936294735656.png">
+<meta property="og:image" content="http://olsv0lzsv.bkt.clouddn.com/20170501149362951063955.png">
+<meta property="og:image" content="http://olsv0lzsv.bkt.clouddn.com/20170501149362996384429.png">
+<meta property="og:updated_time" content="2017-05-07T04:40:37.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="git pull 强制覆盖本地文件">
-<meta name="twitter:description" content="先说说原理： 123456git statusgit fetch --allgit reset --hard origin/mastergit loggit reset --（数字）git pull git status查看最新的状态 git fetch –all获取网上的最新的版本git reset –hard origin/master切换到最新的版本git log查看下载的日志 git re">
+<meta name="twitter:title" content="winxp-git">
+<meta name="twitter:description" content="1什么是github与git    GIT是一个分布式的版本控制系统，最初由linux负责任编写。说白了是一个代码托管器    GIThub给予Rails的git库托管  先下载软件 Git-1.7.7-preview20111012.exe TortoiseGit （我到现在也没弄明白干吗用的）下载地址：在csdn上下载    安装xp版本 ##Git-1.7.7-preview20111012">
+<meta name="twitter:image" content="http://olsv0lzsv.bkt.clouddn.com/2017050114936294735656.png">
   
     <link rel="alternate" href="/atom.xml" title="vanxvBlog" type="application/atom+xml">
   
@@ -64,16 +68,12 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-git_pull_Mandatory_local" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-winxp-git" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/04/24/git_pull_Mandatory_local/" class="article-date">
-  <time datetime="2017-04-24T02:45:45.000Z" itemprop="datePublished">2017-04-24</time>
+    <a href="/2017/05/01/winxp-git/" class="article-date">
+  <time datetime="2017-05-01T08:56:35.000Z" itemprop="datePublished">2017-05-01</time>
 </a>
     
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/github/">github</a>
-  </div>
-
   </div>
   <div class="article-inner">
     
@@ -82,7 +82,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      git pull 强制覆盖本地文件
+      winxp-git
     </h1>
   
 
@@ -90,20 +90,27 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>先说说原理：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">git status</div><div class="line">git fetch --all</div><div class="line">git reset --hard origin/master</div><div class="line">git log</div><div class="line">git reset --（数字）</div><div class="line">git pull</div></pre></td></tr></table></figure>
-<p><strong>git status</strong><br>查看最新的状态</p>
-<p><strong>git fetch –all</strong><br>获取网上的最新的版本<br><strong>git reset –hard origin/master</strong><br>切换到最新的版本<br><strong>git log</strong><br>查看下载的日志</p>
-<p><strong>git reset –（数字）</strong><br>恢复最新版本</p>
-<p><strong>git pull</strong><br>拉下来</p>
+        <p>1什么是github与git<br>    GIT是一个分布式的版本控制系统，最初由linux负责任编写。说白了是一个代码托管器<br>    GIThub给予Rails的git库托管</p>
+<ol>
+<li>先下载软件<ol>
+<li>Git-1.7.7-preview20111012.exe</li>
+<li>TortoiseGit （我到现在也没弄明白干吗用的）<br>下载地址：<br><a href="http://download.csdn.net/download/u013142781/9369785" target="_blank" rel="external">在csdn上下载</a></li>
+</ol>
+</li>
+</ol>
+<p>安装xp版本 ##Git-1.7.7-preview20111012.exe##<br>这个版本可以在xp下安装的。<br><img src="http://olsv0lzsv.bkt.clouddn.com/2017050114936294735656.png" alt="img"><br><img src="http://olsv0lzsv.bkt.clouddn.com/20170501149362951063955.png" alt="img"></p>
+<p>安装完后：运行Git Bash<br>然后生成<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh-keygen -t -rsa -C &quot;x@gmail.com&quot;</div></pre></td></tr></table></figure></p>
+<p>一只按回车即可<br>绑定keygen<br><img src="http://olsv0lzsv.bkt.clouddn.com/20170501149362996384429.png" alt="img"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone &apos;项目地址&apos;</div></pre></td></tr></table></figure>
+<p>我这边成功了。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vanxv.github.io/2017/04/24/git_pull_Mandatory_local/" data-id="cj2egbwxo000223m67lp8cpim" class="article-share-link">Share</a>
+      <a data-url="http://vanxv.github.io/2017/05/01/winxp-git/" data-id="cj2eagtnw000lm3m625rfyk5h" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bug/">bug</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github/">github</a></li></ul>
 
     </footer>
   </div>
@@ -111,19 +118,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2017/04/24/python/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/04/27/bug/mysql/MySQL-ERROR-1045-28000-Access-denied-for-user-root-localhost-using-password/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          python
+          MySQL ERROR1045(28000)Access denied for user root@localhost
         
       </div>
     </a>
   
   
-    <a href="/2017/04/24/googleAnalytice/GoogleAnalytics/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2017/05/04/vmware/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">GoogleAnalytics原理</div>
+      <div class="article-nav-title">vmware</div>
     </a>
   
 </nav>

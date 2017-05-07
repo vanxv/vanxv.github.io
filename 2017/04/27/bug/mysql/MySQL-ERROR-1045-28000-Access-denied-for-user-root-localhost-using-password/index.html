@@ -3,19 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>git pull 强制覆盖本地文件 | vanxvBlog</title>
+  <title>MySQL ERROR1045(28000)Access denied for user root@localhost | vanxvBlog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="先说说原理： 123456git statusgit fetch --allgit reset --hard origin/mastergit loggit reset --（数字）git pull git status查看最新的状态 git fetch –all获取网上的最新的版本git reset –hard origin/master切换到最新的版本git log查看下载的日志 git re">
+  <meta name="description" content="解决url%3AAccessdeniedforuser%27r…_%E5%8D%9A%E5%AE%A2%E5%9B%AD&amp;amp;dict=30&amp;amp;w_qd=IlPT2AEptyoA_yiU0jGC_WFdbt_C1en5TcLFBWU3Mlexnkioa0DbJNhjZzOvNnSIY6DawXD3xbd5jlzB3FY6lMsMf4AwfChbzG86sLulrM_OXMK&amp;amp;se">
 <meta name="keywords" content="bug">
 <meta property="og:type" content="article">
-<meta property="og:title" content="git pull 强制覆盖本地文件">
-<meta property="og:url" content="http://vanxv.github.io/2017/04/24/git_pull_Mandatory_local/index.html">
+<meta property="og:title" content="MySQL ERROR1045(28000)Access denied for user root@localhost">
+<meta property="og:url" content="http://vanxv.github.io/2017/04/27/bug/mysql/MySQL-ERROR-1045-28000-Access-denied-for-user-root-localhost-using-password/index.html">
 <meta property="og:site_name" content="vanxvBlog">
-<meta property="og:description" content="先说说原理： 123456git statusgit fetch --allgit reset --hard origin/mastergit loggit reset --（数字）git pull git status查看最新的状态 git fetch –all获取网上的最新的版本git reset –hard origin/master切换到最新的版本git log查看下载的日志 git re">
-<meta property="og:updated_time" content="2017-04-24T02:49:49.000Z">
+<meta property="og:description" content="解决url%3AAccessdeniedforuser%27r…_%E5%8D%9A%E5%AE%A2%E5%9B%AD&amp;amp;dict=30&amp;amp;w_qd=IlPT2AEptyoA_yiU0jGC_WFdbt_C1en5TcLFBWU3Mlexnkioa0DbJNhjZzOvNnSIY6DawXD3xbd5jlzB3FY6lMsMf4AwfChbzG86sLulrM_OXMK&amp;amp;se">
+<meta property="og:updated_time" content="2017-05-07T04:39:41.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="git pull 强制覆盖本地文件">
-<meta name="twitter:description" content="先说说原理： 123456git statusgit fetch --allgit reset --hard origin/mastergit loggit reset --（数字）git pull git status查看最新的状态 git fetch –all获取网上的最新的版本git reset –hard origin/master切换到最新的版本git log查看下载的日志 git re">
+<meta name="twitter:title" content="MySQL ERROR1045(28000)Access denied for user root@localhost">
+<meta name="twitter:description" content="解决url%3AAccessdeniedforuser%27r…_%E5%8D%9A%E5%AE%A2%E5%9B%AD&amp;amp;dict=30&amp;amp;w_qd=IlPT2AEptyoA_yiU0jGC_WFdbt_C1en5TcLFBWU3Mlexnkioa0DbJNhjZzOvNnSIY6DawXD3xbd5jlzB3FY6lMsMf4AwfChbzG86sLulrM_OXMK&amp;amp;se">
   
     <link rel="alternate" href="/atom.xml" title="vanxvBlog" type="application/atom+xml">
   
@@ -64,16 +64,12 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-git_pull_Mandatory_local" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-bug/mysql/MySQL-ERROR-1045-28000-Access-denied-for-user-root-localhost-using-password" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/04/24/git_pull_Mandatory_local/" class="article-date">
-  <time datetime="2017-04-24T02:45:45.000Z" itemprop="datePublished">2017-04-24</time>
+    <a href="/2017/04/27/bug/mysql/MySQL-ERROR-1045-28000-Access-denied-for-user-root-localhost-using-password/" class="article-date">
+  <time datetime="2017-04-27T04:18:07.000Z" itemprop="datePublished">2017-04-27</time>
 </a>
     
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/github/">github</a>
-  </div>
-
   </div>
   <div class="article-inner">
     
@@ -82,7 +78,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      git pull 强制覆盖本地文件
+      MySQL ERROR1045(28000)Access denied for user root@localhost
     </h1>
   
 
@@ -90,17 +86,14 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>先说说原理：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">git status</div><div class="line">git fetch --all</div><div class="line">git reset --hard origin/master</div><div class="line">git log</div><div class="line">git reset --（数字）</div><div class="line">git pull</div></pre></td></tr></table></figure>
-<p><strong>git status</strong><br>查看最新的状态</p>
-<p><strong>git fetch –all</strong><br>获取网上的最新的版本<br><strong>git reset –hard origin/master</strong><br>切换到最新的版本<br><strong>git log</strong><br>查看下载的日志</p>
-<p><strong>git reset –（数字）</strong><br>恢复最新版本</p>
-<p><strong>git pull</strong><br>拉下来</p>
+        <p><a href="https://m.baidu.com/from=844b/bd_page_type=1/ssid=0/uid=0/pu=usm%401%2Csz%401320_2001%2Cta%40iphone_1_10.2_3_602/baiduid=31A0680C87BC3F9BBFBD7DF28BAC24DB/w=0_10_/t=iphone/l=3/tc?ref=www_iphone&amp;lid=8003251329777045578&amp;order=8&amp;fm=alop&amp;tj=www_normal_8_0_10_title&amp;vit=osres&amp;m=8&amp;srd=1&amp;cltj=cloud_title&amp;asres=1&amp;nt=wnor&amp;title=...1045(28000" target="_blank" rel="external">解决url</a>%3AAccessdeniedforuser%27r…_%E5%8D%9A%E5%AE%A2%E5%9B%AD&amp;dict=30&amp;w_qd=IlPT2AEptyoA_yiU0jGC_WFdbt_C1en5TcLFBWU3Mlexnkioa0DbJNhjZzOvNnSIY6DawXD3xbd5jlzB3FY6lMsMf4AwfChbzG86sLulrM_OXMK&amp;sec=20596&amp;di=15872d1542177dea&amp;bdenc=1&amp;tch=124.284.38.1580.1.147&amp;nsrc=IlPT2AEptyoA_yixCFOxXnANedT62v3IEQGG_ytK1DK6mlrte4viZQRAWTLhQm_ZHEHwgTCccQoDlnCc_W9p7BBZhOgtfq&amp;eqid=6f1142ae6f8890001000000559016e99&amp;wd=&amp;clk_info=%7B%22srcid%22%3A%221599%22%2C%22tplname%22%3A%22www_normal%22%2C%22t%22%3A1493266323475%2C%22xpath%22%3A%22div-a-h3%22%7D)<br>解决办法：mysql -u root -p 输入密码登陆。</p>
+<p>在博客Linux mysql 5.6： ERROR 1045 (28000): Access denied for user ‘root’@’localhost’ (using password: NO)里面，我介绍了一下安装MySQL后登陆MySQL时会遇到ERROR 1045 (28000): Access denied for user ‘root’@’localhost’ (using password: NO) 这个错误，当时不知道真正的原因，搜索了一些网上的资料，测试验证了如何解决这个问题，但是一直不知道具体的原因。今天终于把这个问题给彻底搞清楚了。<br>下面我以MySQL 5.6.20为例子，刨析一下这个错误的真正原因，如下所示<br>[root@DB-Server tmp]# rpm -ivh MySQL-server-advanced-5.6.20-1.rhel5.x86_64.rpm</p>
+<p>MySQL的安装日志信息中，你会看到MySQL生成了root用户的随机密码（如下截图所示），并将这个随机密码放置在/root/.mysql_secret中。并且强制在第一次登陆时修改root用户的密码。Mysql 5.6及以后版本出处于安全考虑，root密码不为空。所以在MySQL的安装过程中，会生成一个随机密码，但是对于我们这样的初学者，不了解情况，于是便从网上搜索如何解决问题的资料，而问题关键在此，很多做技术的人，了解不够深入，又喜欢随波逐流，停留在问题的表层，并未深入研究。而高手又不屑于这类简单的问题。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vanxv.github.io/2017/04/24/git_pull_Mandatory_local/" data-id="cj2egbwxo000223m67lp8cpim" class="article-share-link">Share</a>
+      <a data-url="http://vanxv.github.io/2017/04/27/bug/mysql/MySQL-ERROR-1045-28000-Access-denied-for-user-root-localhost-using-password/" data-id="cj2egarnp000d0xm6jmjewpfk" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bug/">bug</a></li></ul>
@@ -111,19 +104,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2017/04/24/python/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/04/26/Python-Crawler/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          python
+          Python_Crawler
         
       </div>
     </a>
   
   
-    <a href="/2017/04/24/googleAnalytice/GoogleAnalytics/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2017/05/01/winxp-git/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">GoogleAnalytics原理</div>
+      <div class="article-nav-title">winxp-git</div>
     </a>
   
 </nav>

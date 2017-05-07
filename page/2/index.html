@@ -48,9 +48,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://vanxv.github.io"></form>
@@ -60,6 +60,72 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-googleAnalytice/GoogleAnalytics" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/24/googleAnalytice/GoogleAnalytics/" class="article-date">
+  <time datetime="2017-04-24T04:36:22.000Z" itemprop="datePublished">2017-04-24</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Google-Analytics/">Google-Analytics</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/24/googleAnalytice/GoogleAnalytics/">GoogleAnalytics原理</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#关于GA的学习</p>
+<p>##工作原理：<br>执行JS：analytics.js，向google GA传值。</p>
+<p>下面是GA的代码：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;!-- Google Analytics --&gt;</div><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params">i,s,o,g,r,a,m</span>)</span>&#123;i[<span class="string">'GoogleAnalyticsObject'</span>]=r;i[r]=i[r]||<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">(i[r].q=i[r].q||[]).push(<span class="built_in">arguments</span>)&#125;,i[r].l=<span class="number">1</span>*<span class="keyword">new</span> <span class="built_in">Date</span>();a=s.createElement(o),</div><div class="line">m=s.getElementsByTagName(o)[<span class="number">0</span>];a.async=<span class="number">1</span>;a.src=g;m.parentNode.insertBefore(a,m)</div><div class="line">&#125;)(<span class="built_in">window</span>,<span class="built_in">document</span>,<span class="string">'script'</span>,<span class="string">'https://www.google-analytics.com/analytics.js'</span>,<span class="string">'ga'</span>);</div><div class="line"></div><div class="line">ga(<span class="string">'create'</span>, <span class="string">'UA-XXXXX-Y'</span>, <span class="string">'auto'</span>);</div></pre></td></tr></table></figure></p>
+<p>##跟踪代码可以获得什么数据：</p>
+<ol>
+<li>用户总共在您网站上停留了多少时间。</li>
+<li>用户在每个网页上停留的时间以及用户查看这些网页的次序。</li>
+<li>用户点击了哪些内部链接（根据下一个网页浏览的网址得到）。</li>
+<li>此外，IP 地址、用户代理字符串以及 analytics.js </li>
+<li>在创建新跟踪器时查看的初始网页可用于确定以下这类信息：<ol>
+<li>用户的地理位置。</li>
+<li>用户使用的浏览器和操作系统。</li>
+<li>屏幕尺寸以给跟踪器命名：</li>
+</ol>
+</li>
+</ol>
+<p>##创建跟踪器<br>什么是跟踪器？<br>顾名思义：跟踪代码。告诉GA的值。</p>
+<p>###创建跟踪器的方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ga(&apos;create&apos;, &apos;UA-XXXXX-Y&apos;, &apos;auto&apos;);</div></pre></td></tr></table></figure></p>
+<p>这里的意思是<br>第一个值是创建<br>第二个值是网页代码<br>第三个值不知。</p>
+<p>###给跟踪器命名：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ga(&apos;create&apos;, &apos;UA-XXXXX-Y&apos;, &apos;auto&apos;, &apos;myTracker&apos;);</div></pre></td></tr></table></figure></p>
+<p>myTracker是自定义的名字</p>
+<p>###自定义字段值<br>意思：自己再写一些值传给GA<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ga(&apos;create&apos;, &apos;UA-XXXXX-Y&apos;, &apos;auto&apos;, &apos;myTracker&apos;, &#123;</div><div class="line">  userId: &apos;12345&apos;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>  <strong>userId: ‘12345’</strong> 给ga传值userID：12345<br>  和元组是一个原理。</p>
+<p>##自定义多字段值<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">ga(&apos;create&apos;, &#123;</div><div class="line">  trackingId: &apos;UA-XXXXX-Y&apos;,</div><div class="line">  cookieDomain: &apos;auto&apos;,</div><div class="line">  name: &apos;myTracker&apos;,</div><div class="line">  userId: &apos;12345&apos;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://vanxv.github.io/2017/04/24/googleAnalytice/GoogleAnalytics/" data-id="cj2egarn800050xm6v3s8703d" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Google-Analytics/">Google-Analytics</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-git_pull_Mandatory_local" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -97,11 +163,47 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vanxv.github.io/2017/04/24/git_pull_Mandatory_local/" data-id="cj2c05uj2000cqtm6hebqq85n" class="article-share-link">Partager</a>
+      <a data-url="http://vanxv.github.io/2017/04/24/git_pull_Mandatory_local/" data-id="cj2egbwxo000223m67lp8cpim" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bug/">bug</a></li></ul>
 
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-python" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/24/python/" class="article-date">
+  <time datetime="2017-04-24T00:48:35.000Z" itemprop="datePublished">2017-04-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/24/python/">python</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://vanxv.github.io/2017/04/24/python/" data-id="cj2egbwxt000523m6on76lwym" class="article-share-link">Share</a>
+      
+      
     </footer>
   </div>
   
@@ -184,43 +286,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vanxv.github.io/2017/04/24/docker/" data-id="cj2c05uil0006qtm6y52ztn4o" class="article-share-link">Partager</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-python" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/04/24/python/" class="article-date">
-  <time datetime="2017-04-24T00:48:35.000Z" itemprop="datePublished">2017-04-24</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/24/python/">python</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://vanxv.github.io/2017/04/24/python/" data-id="cj2c05uj8000gqtm64cz4e32p" class="article-share-link">Partager</a>
+      <a data-url="http://vanxv.github.io/2017/04/24/docker/" data-id="cj2egdjnv00003lm61qpvuctb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -264,7 +330,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vanxv.github.io/2014/03/03/bug/" data-id="cj2c05uih0004qtm6lefonrij" class="article-share-link">Partager</a>
+      <a data-url="http://vanxv.github.io/2014/03/03/bug/" data-id="cj2eg9cz70000yem6ee92t622" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bug/">bug</a></li></ul>
@@ -287,9 +353,9 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Catégories</h3>
+    <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Google-Analytics/">Google-Analytics</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/bug/">bug</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/docker/">docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/github/">github</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/maketting/">maketting</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Google-Analytics/">Google-Analytics</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/bug/">bug</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/docker/">docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/github/">github</a></li></ul>
     </div>
   </div>
 
@@ -297,9 +363,9 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Mot-clés</h3>
+    <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google-Analytics/">Google-Analytics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bug/">bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maketting/">maketting</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google-Analytics/">Google-Analytics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bug/">bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a></li></ul>
     </div>
   </div>
 
@@ -307,9 +373,9 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Google-Analytics/" style="font-size: 20px;">Google-Analytics</a> <a href="/tags/bug/" style="font-size: 20px;">bug</a> <a href="/tags/maketting/" style="font-size: 10px;">maketting</a>
+      <a href="/tags/Google-Analytics/" style="font-size: 15px;">Google-Analytics</a> <a href="/tags/bug/" style="font-size: 20px;">bug</a> <a href="/tags/github/" style="font-size: 10px;">github</a>
     </div>
   </div>
 
@@ -326,7 +392,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
@@ -339,15 +405,15 @@
           </li>
         
           <li>
+            <a href="/2017/05/01/winxp-git/">winxp-git</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/27/bug/mysql/MySQL-ERROR-1045-28000-Access-denied-for-user-root-localhost-using-password/">MySQL ERROR1045(28000)Access denied for user root@localhost</a>
+          </li>
+        
+          <li>
             <a href="/2017/04/26/Python-Crawler/">Python_Crawler</a>
-          </li>
-        
-          <li>
-            <a href="/2017/04/26/qqmarktting/">qqmarktting</a>
-          </li>
-        
-          <li>
-            <a href="/2017/04/26/fbmarktting-auto-ad/">fbmarktting_auto_ad</a>
           </li>
         
       </ul>
@@ -363,7 +429,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 John Doe<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
