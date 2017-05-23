@@ -12,10 +12,12 @@
 <meta property="og:url" content="http://vanxv.github.io/2017/04/27/bug/mysql/MySQL-ERROR-1045-28000-Access-denied-for-user-root-localhost-using-password/index.html">
 <meta property="og:site_name" content="vanxvBlog">
 <meta property="og:description" content="解决url%3AAccessdeniedforuser%27r…_%E5%8D%9A%E5%AE%A2%E5%9B%AD&amp;amp;dict=30&amp;amp;w_qd=IlPT2AEptyoA_yiU0jGC_WFdbt_C1en5TcLFBWU3Mlexnkioa0DbJNhjZzOvNnSIY6DawXD3xbd5jlzB3FY6lMsMf4AwfChbzG86sLulrM_OXMK&amp;amp;se">
-<meta property="og:updated_time" content="2017-05-07T04:39:41.000Z">
+<meta property="og:image" content="http://vanxv.github.io/2017/04/27/bug/mysql/MySQL-ERROR-1045-28000-Access-denied-for-user-root-localhost-using-password/img/pyCharmbug.png">
+<meta property="og:updated_time" content="2017-05-18T08:04:22.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL ERROR1045(28000)Access denied for user root@localhost">
 <meta name="twitter:description" content="解决url%3AAccessdeniedforuser%27r…_%E5%8D%9A%E5%AE%A2%E5%9B%AD&amp;amp;dict=30&amp;amp;w_qd=IlPT2AEptyoA_yiU0jGC_WFdbt_C1en5TcLFBWU3Mlexnkioa0DbJNhjZzOvNnSIY6DawXD3xbd5jlzB3FY6lMsMf4AwfChbzG86sLulrM_OXMK&amp;amp;se">
+<meta name="twitter:image" content="http://vanxv.github.io/2017/04/27/bug/mysql/MySQL-ERROR-1045-28000-Access-denied-for-user-root-localhost-using-password/img/pyCharmbug.png">
   
     <link rel="alternate" href="/atom.xml" title="vanxvBlog" type="application/atom+xml">
   
@@ -89,11 +91,50 @@
         <p><a href="https://m.baidu.com/from=844b/bd_page_type=1/ssid=0/uid=0/pu=usm%401%2Csz%401320_2001%2Cta%40iphone_1_10.2_3_602/baiduid=31A0680C87BC3F9BBFBD7DF28BAC24DB/w=0_10_/t=iphone/l=3/tc?ref=www_iphone&amp;lid=8003251329777045578&amp;order=8&amp;fm=alop&amp;tj=www_normal_8_0_10_title&amp;vit=osres&amp;m=8&amp;srd=1&amp;cltj=cloud_title&amp;asres=1&amp;nt=wnor&amp;title=...1045(28000" target="_blank" rel="external">解决url</a>%3AAccessdeniedforuser%27r…_%E5%8D%9A%E5%AE%A2%E5%9B%AD&amp;dict=30&amp;w_qd=IlPT2AEptyoA_yiU0jGC_WFdbt_C1en5TcLFBWU3Mlexnkioa0DbJNhjZzOvNnSIY6DawXD3xbd5jlzB3FY6lMsMf4AwfChbzG86sLulrM_OXMK&amp;sec=20596&amp;di=15872d1542177dea&amp;bdenc=1&amp;tch=124.284.38.1580.1.147&amp;nsrc=IlPT2AEptyoA_yixCFOxXnANedT62v3IEQGG_ytK1DK6mlrte4viZQRAWTLhQm_ZHEHwgTCccQoDlnCc_W9p7BBZhOgtfq&amp;eqid=6f1142ae6f8890001000000559016e99&amp;wd=&amp;clk_info=%7B%22srcid%22%3A%221599%22%2C%22tplname%22%3A%22www_normal%22%2C%22t%22%3A1493266323475%2C%22xpath%22%3A%22div-a-h3%22%7D)<br>解决办法：mysql -u root -p 输入密码登陆。</p>
 <p>在博客Linux mysql 5.6： ERROR 1045 (28000): Access denied for user ‘root’@’localhost’ (using password: NO)里面，我介绍了一下安装MySQL后登陆MySQL时会遇到ERROR 1045 (28000): Access denied for user ‘root’@’localhost’ (using password: NO) 这个错误，当时不知道真正的原因，搜索了一些网上的资料，测试验证了如何解决这个问题，但是一直不知道具体的原因。今天终于把这个问题给彻底搞清楚了。<br>下面我以MySQL 5.6.20为例子，刨析一下这个错误的真正原因，如下所示<br>[root@DB-Server tmp]# rpm -ivh MySQL-server-advanced-5.6.20-1.rhel5.x86_64.rpm</p>
 <p>MySQL的安装日志信息中，你会看到MySQL生成了root用户的随机密码（如下截图所示），并将这个随机密码放置在/root/.mysql_secret中。并且强制在第一次登陆时修改root用户的密码。Mysql 5.6及以后版本出处于安全考虑，root密码不为空。所以在MySQL的安装过程中，会生成一个随机密码，但是对于我们这样的初学者，不了解情况，于是便从网上搜索如何解决问题的资料，而问题关键在此，很多做技术的人，了解不够深入，又喜欢随波逐流，停留在问题的表层，并未深入研究。而高手又不屑于这类简单的问题。</p>
+<p>##msysqlbug<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">export PATH=$&#123;PATH&#125;:/usr/local/mysql/bin</div></pre></td></tr></table></figure></p>
+<p>##如何在pycharm中使用配置好的virtualenv环境<br>打开setting添加本地python环境 add venv<br>如果以前有venv直接覆盖过去。</p>
+<p>##不能连接<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ERROR 1045 (28000): Access denied for user 'VANXV'@'localhost' (using password: NO)</div></pre></td></tr></table></figure></p>
+<p>关闭mysql，运行下面的代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">sudo mysqld_safe --skip-grant-tables &amp;</div></pre></td></tr></table></figure>
+<p>七牛图床：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">AK:</div><div class="line">Hu0eHzTU3Pr48biJeFEJ17jZ-ccX-zWUr5BnCVFS</div><div class="line">SK:</div><div class="line">e1JmynKt3ya4-kVeucC8bIVRuNERDC5suXWmyKJo</div><div class="line">Name:</div><div class="line">vanxv</div><div class="line">URL:</div><div class="line">http://olsv0lzsv.bkt.clouddn.com/</div></pre></td></tr></table></figure></p>
+<p>####Pycharm 断点失败的解决办法</p>
+<p>1.参考下面的设置</p>
+<p>2.重启一下。（对Pycharm很坑）</p>
+<p>设置: <img src="img/pyCharmbug.png" alt="gras"></p>
+<p>####python request.POST.has_key 没有值bug<br>不知什么原因request.POST.has_key找不到值了。<br>现在找的办法<br>        if ‘post1’ in request.POST:<br>        在POST中找是否包含post1，如果包含则执行。<br><em>views.py:*</em><br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">(request)</span>:</span></div><div class="line">    <span class="keyword">if</span> request.method == <span class="string">'POST'</span>:<span class="comment"># 当提交表单时</span></div><div class="line">        <span class="keyword">if</span> <span class="string">'post1'</span> <span class="keyword">in</span> request.POST:</div><div class="line"><span class="comment">#        if request.POST.has_key('post1'):</span></div><div class="line">            form = AddForm(request.POST) <span class="comment"># form 包含提交的数据</span></div><div class="line"></div><div class="line">            <span class="keyword">if</span> form.is_valid():<span class="comment"># 如果提交的数据合法</span></div><div class="line">                a = form.cleaned_data[<span class="string">'a'</span>]</div><div class="line">                b = form.cleaned_data[<span class="string">'b'</span>]</div><div class="line">                <span class="keyword">return</span> HttpResponse(str(int(a) + int(b)))</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            form = AddForm(request.POST) <span class="comment"># form 包含提交的数据</span></div><div class="line"></div><div class="line">            <span class="keyword">if</span> form.is_valid():<span class="comment"># 如果提交的数据合法</span></div><div class="line">                a = form.cleaned_data[<span class="string">'a'</span>]</div><div class="line">                b = form.cleaned_data[<span class="string">'b'</span>]</div><div class="line">                <span class="keyword">return</span> HttpResponse(str(int(a) - int(b)))</div><div class="line">    <span class="keyword">else</span>:<span class="comment"># 当正常访问时</span></div><div class="line">        form = AddForm()</div><div class="line">    <span class="keyword">return</span> render(request, <span class="string">'index.html'</span>, &#123;<span class="string">'form'</span>: form&#125;)</div></pre></td></tr></table></figure></p>
+<p><strong>index.html</strong><br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">method</span>=<span class="string">'post'</span>&gt;</span></div><div class="line">&#123;% csrf_token %&#125;</div><div class="line">&#123;&#123; form &#125;&#125;</div><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">name</span>=<span class="string">"post1"</span><span class="attr">value</span>=<span class="string">"+"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">name</span>=<span class="string">"post2"</span><span class="attr">value</span>=<span class="string">"-"</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p><strong>urls.py</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">(request)</span>:</span></div><div class="line">    <span class="keyword">if</span> request.method == <span class="string">'POST'</span>:<span class="comment"># 当提交表单时</span></div><div class="line">        <span class="keyword">if</span> <span class="string">'post1'</span> <span class="keyword">in</span> request.POST:</div><div class="line"><span class="comment">#        if request.POST.has_key('post1'):</span></div><div class="line">            form = AddForm(request.POST) <span class="comment"># form 包含提交的数据</span></div><div class="line"></div><div class="line">            <span class="keyword">if</span> form.is_valid():<span class="comment"># 如果提交的数据合法</span></div><div class="line">                a = form.cleaned_data[<span class="string">'a'</span>]</div><div class="line">                b = form.cleaned_data[<span class="string">'b'</span>]</div><div class="line">                <span class="keyword">return</span> HttpResponse(str(int(a) + int(b)))</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            form = AddForm(request.POST) <span class="comment"># form 包含提交的数据</span></div><div class="line"></div><div class="line">            <span class="keyword">if</span> form.is_valid():<span class="comment"># 如果提交的数据合法</span></div><div class="line">                a = form.cleaned_data[<span class="string">'a'</span>]</div><div class="line">                b = form.cleaned_data[<span class="string">'b'</span>]</div><div class="line">                <span class="keyword">return</span> HttpResponse(str(int(a) - int(b)))</div><div class="line">    <span class="keyword">else</span>:<span class="comment"># 当正常访问时</span></div><div class="line">        form = AddForm()</div><div class="line">    <span class="keyword">return</span> render(request, <span class="string">'index.html'</span>, &#123;<span class="string">'form'</span>: form&#125;)</div></pre></td></tr></table></figure></p>
+<p>BUG:<br>OperationalError at /weather/<br>(1366, “Incorrect string value: ‘\xE7\x94\xB5\xE5\xBD\xB1’ for column ‘name’ at row 1”)</p>
+<p>数据库没有设置成utf-8不支持中文。<br>用mysql软件设置字段成为utf-8就可以</p>
+<p>###3.6不支持mysqldb无法链接<br>学习python 连接mysql数据库的时候遇到了问题</p>
+<p>首先安装mysql:</p>
+<p>工具栏 ===&gt;file ==&gt; default settings==&gt;Project Interpreter ==&gt; 点击右侧的+ 号==》pymysql==&gt;OK</p>
+<p>(1) 进入 settings.py==&gt;</p>
+<p>DATABASES = {<br>‘default’: {<br>‘ENGINE’: ‘django.db.backends.mysql’,<br>‘NAME’: ‘pymysql_test’,<br>‘USER’: ‘root’,<br>‘PASSWORD’: ‘123456’,<br>‘HOST’: ‘localhost’,<br>‘PORT’: ‘3306’,<br>}<br>}</p>
+<p>然后错误提示：ModuleNotFoundError: No module named ‘MySQLdb’</p>
+<p>(2) 查看 博客： <a href="http://www.cnblogs.com/zqifa/p/python-3.html" target="_blank" rel="external">http://www.cnblogs.com/zqifa/p/python-3.html</a></p>
+<p>原来是不兼容的问题：</p>
+<p>1、在项目文件夹下的<em>init</em>.py中导入pymysq包</p>
+<p>import pymysql<br>pymysql.install_as_MySQLdb()</p>
+<p>2、在settings.py设置数据库<br>DATABASES = {<br>‘default’: {<br>‘ENGINE’: ‘django.db.backends.mysql’,<br>‘NAME’: ‘dbname’,<br>‘USER’:’dbUser’,<br>‘PASSWORD’:’dbPwd’,<br>‘HOST’:’’,#默认本地<br>‘PORT’:’’<br>}<br>}</p>
+<p>##django bug dependency users.0001_initial on database ‘default’.</p>
+<p>你是migrate的中间做了自己的操作引起了错误， 你把所有表除了auth_user 表全部删了 然后把所有migration下面的文件全部删了 然后重新migrate试试”<br>我不明白，“你是migrate的中间做了自己的操作引起了错误” 这句话什么意思？ 我写完代码就运行migrate 了啊</p>
+<h1 id="Django-static-bug"><a href="#Django-static-bug" class="headerlink" title="Django static bug"></a>Django static bug</h1><p>STATIC_URL = ‘/static/‘<br>STATICFILES_DIRS = (<br>    os.path.join(BASE_DIR, “static”),<br>)<br>不能少点</p>
+<h2 id="Django-改变和增加表单bug"><a href="#Django-改变和增加表单bug" class="headerlink" title="Django 改变和增加表单bug"></a>Django 改变和增加表单bug</h2><p>You are trying to add a non-nullable field ‘version_birth_date’ to assessment without a default; we can’t do that (the database needs something to populate existing rows).<br>Please select a fix:<br> 1) Provide a one-off default now (will be set on all existing rows)<br> 2) Quit, and let me add a default in models.py<br>Select an option: 1<br>Please enter the default value now, as valid Python<br>The datetime and django.utils.timezone modules are available, so you can do e.g. timezone.now()</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>timezone.now()</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<h2 id="1054-Unknown-column-goods-taobaoshop-add-time-in-field-list"><a href="#1054-Unknown-column-goods-taobaoshop-add-time-in-field-list" class="headerlink" title="1054, Unknown column goods_taobaoshop.add_time in field list"></a>1054, Unknown column goods_taobaoshop.add_time in field list</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">migrations</div><div class="line">migrate</div></pre></td></tr></table></figure>
+<p>###DJANGO 返回数据富文本返回html<br><a href="https://docs.djangoproject.com/en/1.11/ref/templates/builtins/" target="_blank" rel="external">官方链接</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;% autoescape off %&#125;</div><div class="line">    &#123;&#123; body &#125;&#125;</div><div class="line">&#123;% endautoescape %&#125;</div></pre></td></tr></table></figure></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://vanxv.github.io/2017/04/27/bug/mysql/MySQL-ERROR-1045-28000-Access-denied-for-user-root-localhost-using-password/" data-id="cj2nfju4t001ix6m6ep0m2i7c" class="article-share-link">Share</a>
+      <a data-url="http://vanxv.github.io/2017/04/27/bug/mysql/MySQL-ERROR-1045-28000-Access-denied-for-user-root-localhost-using-password/" data-id="cj31b2b55001t1nm6u7cekxsp" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bug/">bug</a></li></ul>
@@ -142,7 +183,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google-Analytics/">Google-Analytics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ORID/">ORID</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bug/">bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maketting/">maketting</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/office/">office</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google-Analytics/">Google-Analytics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ORID/">ORID</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bug/">bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maketting/">maketting</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/office/">office</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shadowsocks/">shadowsocks</a></li></ul>
     </div>
   </div>
 
@@ -152,7 +193,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Google-Analytics/" style="font-size: 15px;">Google-Analytics</a> <a href="/tags/ORID/" style="font-size: 15px;">ORID</a> <a href="/tags/bug/" style="font-size: 20px;">bug</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/maketting/" style="font-size: 10px;">maketting</a> <a href="/tags/office/" style="font-size: 10px;">office</a>
+      <a href="/tags/Google-Analytics/" style="font-size: 15px;">Google-Analytics</a> <a href="/tags/ORID/" style="font-size: 20px;">ORID</a> <a href="/tags/bug/" style="font-size: 20px;">bug</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/maketting/" style="font-size: 10px;">maketting</a> <a href="/tags/office/" style="font-size: 10px;">office</a> <a href="/tags/shadowsocks/" style="font-size: 10px;">shadowsocks</a>
     </div>
   </div>
 
@@ -174,23 +215,23 @@
       <ul>
         
           <li>
+            <a href="/2017/05/23/shadowsocks/">shadowsocks</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/15/ORID/ORID20170516/">ORID20170515</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/15/ORID/ORID20170515/">ORID20170515</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/14/ORID/ORID20170514/">ORID20170513</a>
+          </li>
+        
+          <li>
             <a href="/2017/05/14/ORID/ORID20170513/">ORID20170513</a>
-          </li>
-        
-          <li>
-            <a href="/2017/05/13/ORID/ORID20170512/">ORID20170512</a>
-          </li>
-        
-          <li>
-            <a href="/2017/05/12/bug/Django/input-Unable-to-read/">input Unable to read</a>
-          </li>
-        
-          <li>
-            <a href="/2017/05/09/officeMemory-with-anxiety/">officeMemory_with_anxiety</a>
-          </li>
-        
-          <li>
-            <a href="/2017/05/09/debugDay2017-05-09/">debugDay2017-05-09</a>
           </li>
         
       </ul>
