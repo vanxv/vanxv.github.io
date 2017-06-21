@@ -253,6 +253,371 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://vanxv.github.io/2017/06/21/python-mysql-cursor-execute-using-variable/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vanxvBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/06/21/python-mysql-cursor-execute-using-variable/" itemprop="url">python mysql cursor.execute__using_variable</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-21T13:20:05+08:00">
+                2017-06-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> pymysql</div><div class="line"><span class="comment"># 创建连接</span></div><div class="line">conn = pymysql.connect(host=<span class="string">'127.0.0.1'</span>, port=<span class="number">3306</span>, user=<span class="string">'root'</span>, passwd=<span class="string">'1q2w3e4r'</span>, db=<span class="string">'zss'</span>, charset=<span class="string">'utf8'</span>)</div><div class="line"><span class="comment"># 创建游标</span></div><div class="line">cursor = conn.cursor()</div><div class="line"><span class="comment"># 执行SQL，并返回收影响行数</span></div><div class="line">valueNone = <span class="keyword">None</span></div><div class="line">sql = <span class="string">"INSERT INTO financial_alipaydetail VALUES (%s,%s,%s,%s,%s,%s,%s)"</span></div><div class="line">cmd = (cursor.lastrowid,res[<span class="number">1</span>], res[<span class="number">0</span>], res[<span class="number">2</span>], datetime.now(), self.alipayusername, valueNone)</div><div class="line">effect_row = cursor.execute(sql,cmd)</div><div class="line">conn.commit()</div></pre></td></tr></table></figure>
+<p>valueNone = None<br>插入控制<br>cursor.lastrowid<br>自动生成id<br>effect_row = cursor.execute(sql,cmd)<br>执行语句<br>保存</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://vanxv.github.io/2017/06/21/cursor-execute-not-using-variable/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vanxvBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/06/21/cursor-execute-not-using-variable/" itemprop="url">cursor.execute_not_using_variable</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-21T09:29:27+08:00">
+                2017-06-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>bug<br><img src="http://olsv0lzsv.bkt.clouddn.com/20170621284673016A986-11E3-4BD8-9328-557C52E37C1E.png" alt="20170621284673016A986-11E3-4BD8-9328-557C52E37C1E.png"><br>原代码<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">selectalipayid4 = cursor.execute(<span class="string">"select * from financial_alipaydetail WHERE alipayid=testres1;"</span>)</div></pre></td></tr></table></figure></p>
+<p>修改后的代码<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">selectalipayid4 = cursor.execute(<span class="string">"select * from financial_alipaydetail WHERE alipayid='"</span> +  testres1 + <span class="string">"';"</span>)</div></pre></td></tr></table></figure></p>
+<p>因为cursor.execute不能直接传值过去，所以有这个问题<br>debug的办法：</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://vanxv.github.io/2017/06/18/Python-object-oriented/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vanxvBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/06/18/Python-object-oriented/" itemprop="url">Python_object_oriented</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-18T14:41:13+08:00">
+                2017-06-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>#概述</p>
+<ol>
+<li>面向过程： 根据业务逻辑从上到下写代码</li>
+<li>函数式： 将某功能代码封装到函数中，日后无需重复写</li>
+<li>面向对象： 对函数进行分类和封装，让开发“更快更好更强“</li>
+</ol>
+<p>面向过程编程最容易接受，往往用一段代码来实现指定功能，<br>开发过程最常见的操作就是复制粘贴，</p>
+<ol>
+<li>面向过程编程：<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">    <span class="keyword">if</span> cpu usage &gt; <span class="number">90</span>%:</div><div class="line">        connetion email server</div><div class="line">        send email</div><div class="line">        close connetion</div><div class="line"></div><div class="line">    <span class="keyword">if</span> disk usage &gt; <span class="number">90</span>%:</div><div class="line">        connetion email server</div><div class="line">        send email</div><div class="line">        close connetion</div><div class="line">    <span class="keyword">if</span> memory usage &gt; <span class="number">90</span>%</div><div class="line">        connetion email server</div><div class="line">        send email</div><div class="line">        close connetion</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>2.面向对象编程（Object Oriented Programming，OOP，面向对象程序设计）<br>先<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 创建类</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span>:</span></div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">Bar</span><span class="params">(self)</span>:</span></div><div class="line">        print(<span class="string">'Bar'</span>)</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">Hello</span><span class="params">(self, name)</span>:</span></div><div class="line">        print(<span class="string">'i am %s'</span> %name)</div><div class="line"> </div><div class="line"><span class="comment"># 根据类Foo创建对象obj</span></div><div class="line">obj = Foo()</div><div class="line">obj.Bar()            <span class="comment">#执行Bar方法</span></div><div class="line">obj.Hello(<span class="string">'vanxv'</span>) <span class="comment">#执行Hello方法</span></div></pre></td></tr></table></figure></p>
+<p>让理解代替看懂。</p>
+<ol>
+<li>面向对象： 【创建对象】 【通过对象执行方法】</li>
+<li>函数编程： 【执行函数】</li>
+</ol>
+<p>类别：一个信息处理中心，丢进去完成了拿回来用。</p>
+<p>面向对象三大特性：</p>
+<ol>
+<li>封装<br>封装， 顾名思义就是将内容封装到某个地方， 以后在区调用他，被称为封装。<br>所以，在使用面向对象的封装特性时， 需要：<ol>
+<li>将内容封装到某处</li>
+<li>从某处调用被封装的内容</li>
+</ol>
+</li>
+</ol>
+<p>第一步： 将内容封装到某处<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">#创建类</div><div class="line">class Foo:</div><div class="line">    #自动执行 init</div><div class="line">    #self </div><div class="line">    def __init__(self, name, age):</div><div class="line">        self.name = name</div><div class="line">        self.age = age</div><div class="line"></div><div class="line">obj1 = Foo(&apos;vanxv&apos;, 18)</div><div class="line">obj2 = Foo(&apos;alex&apos;, 73)</div></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://vanxv.github.io/2017/06/05/popfiledupdata-product/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -325,11 +690,21 @@
 <p>我们的系统从自主开发的系统，<br>改成用 shopify.com  的系统，所以现在所有的流程爆款产品都从新上。</p>
 <h3 id="上产品的流程："><a href="#上产品的流程：" class="headerlink" title="上产品的流程："></a>上产品的流程：</h3><hr>
 <ol>
-<li><p>登录<a href="https://www.shopify.com/" target="_blank" rel="external">https://www.shopify.com/</a><br> <a href="https://www.shopify.com/login" target="_blank" rel="external">点击打开</a><br> 网址：popfield<br> 账号：wayne.lu@orderplus.com<br> 密码：orderplus2017</p>
+<li><p>登录<a href="https://www.shopify.com/" target="_blank" rel="external">https://www.shopify.com/</a><br> <a href="https://www.shopify.com/login" target="_blank" rel="external">点击打开</a><br> 网址：popfield</p>
+<pre><code>账号：wayne.lu@orderplus.com
+</code></pre><p> 密码：orderplus2017</p>
 </li>
 <li><p>我们用了一个新的chrome oberlo插件这个插件可以提高上产品的速度<br> 登录shopify后，再按照下面的说明安装<br> 按照说明安装这个插件：<br> <a href="http://support.oberlo.com/article/80-what-is-oberlo-chrome-extension-how-can-i-use-it" target="_blank" rel="external">插件说明和下载地址</a></p>
 <p> <a href="https://chrome.google.com/webstore/detail/oberlo-aliexpresscom-prod/hmanipjnbjnhoicdnooapcnfonebefel" target="_blank" rel="external">chrome安装地址点击打开</a></p>
 </li>
+<li><p>用速卖通上产品<br> 1.1 打开速卖通<a href="https://www.aliexpress.com/" target="_blank" rel="external">https://www.aliexpress.com/</a><br> 1.2 输入关键词</p>
+<pre><code>![20170605149662898461148.png](http://olsv0lzsv.bkt.clouddn.com/20170605149662898461148.png)
+</code></pre><p> 1.3 卡价格选排名：</p>
+<pre><code>![201706051508322222.gif](http://olsv0lzsv.bkt.clouddn.com/201706051508322222.gif)
+</code></pre><p> 1.4 用插件上产品</p>
+<pre><code>安装好后会有一个oberlo的插件
+![2017060514966291321895.png](http://olsv0lzsv.bkt.clouddn.com/2017060514966291321895.png)
+</code></pre></li>
 </ol>
 
           
@@ -1160,443 +1535,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://vanxv.github.io/2017/05/15/ORID/ORID20170516/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="vanxvBlog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/05/15/ORID/ORID20170516/" itemprop="url">ORID20170515</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-15T01:28:27+08:00">
-                2017-05-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>##Objective</p>
-<p>####完成了什么?</p>
-<ul>
-<li>[x]卢威的项目量化,文档</li>
-<li>[x]打坐</li>
-<li>[x]orid</li>
-<li>[x]django：任务流程开写，完成20%</li>
-<li>[x]anki</li>
-<li>[x]去图书馆，用番茄钟</li>
-<li>[ ]写woop，看看每天写，每天读是什么体验</li>
-</ul>
-<p>关于今天的课程, 你记得什么?</p>
-<ol>
-<li>番茄有用</li>
-<li>聚焦自己喜欢的事</li>
-</ol>
-<hr>
-<p>##Reflective</p>
-<p>####你要如何形容今天的情绪<br>琐碎的事情太多太乱。</p>
-<p>####今天的高峰是什么?<br>上午7-16</p>
-<p>##低点是什么?<br>下午17-24</p>
-<hr>
-<p>##Interpretive</p>
-<p>####我们今天学到了什么?<br>聚焦用番茄钟。<br>聚焦，多休息</p>
-<p>####今天一个重要的领悟是什么?<br>番茄钟<br>打坐。<br>神经元</p>
-<p>##Decisional</p>
-<p>####我们会如何用一句话形容今天的工作<br>抄中学，抄中复盘。<br>少做，聚焦的做</p>
-<p>##有哪些工作需要明天继续努力?</p>
-<ul>
-<li>[ ]打坐</li>
-<li>[ ]orid</li>
-<li>[ ]django：任务流程开写，完成50%</li>
-<li>[ ]anki</li>
-<li>[ ]写woop，看看每天写，每天读是什么体验</li>
-<li>[ ]php bug</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://vanxv.github.io/2017/05/15/ORID/ORID20170515/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="vanxvBlog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/05/15/ORID/ORID20170515/" itemprop="url">ORID20170515</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-15T01:28:27+08:00">
-                2017-05-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>##Objective</p>
-<p>####完成了什么?</p>
-<ul>
-<li>[x]anki</li>
-<li>[x]打坐</li>
-<li>[x]orid</li>
-<li>[x]django：任务流程开写，完成25%</li>
-<li>[x]跟进订单页面转化数据</li>
-<li>[x]沟通卢威项目的事</li>
-</ul>
-<p>关于今天的课程, 你记得什么?</p>
-<ol>
-<li>番茄有用</li>
-<li>去图书馆可以增加元镜像</li>
-<li>数据波动很厉害</li>
-</ol>
-<hr>
-<p>##Reflective</p>
-<p>####你要如何形容今天的情绪<br>还可以，了解到了</p>
-<p>####今天的高峰是什么?<br>上午7-17</p>
-<p>##低点是什么?<br>下午17-24</p>
-<hr>
-<p>##Interpretive</p>
-<p>####我们今天学到了什么?<br>聚焦用番茄钟。</p>
-<p>####今天一个重要的领悟是什么?<br>番茄钟<br>打坐。<br>神经元</p>
-<p>##Decisional</p>
-<p>####我们会如何用一句话形容今天的工作<br>抄中学，抄中复盘。</p>
-<p>##有哪些工作需要明天继续努力?</p>
-<ul>
-<li>[ ]卢威的项目量化,文档</li>
-<li>[x]打坐</li>
-<li>[ ]orid</li>
-<li>[ ]django：任务流程开写，完成50%</li>
-<li>[x]anki</li>
-<li>[x]去图书馆，用番茄钟</li>
-<li>[ ]写woop，看看每天写，每天读是什么体验</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://vanxv.github.io/2017/05/14/ORID/ORID20170513/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="vanxvBlog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/05/14/ORID/ORID20170513/" itemprop="url">ORID20170513</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-14T01:28:27+08:00">
-                2017-05-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>##Objective</p>
-<p>####完成了什么?</p>
-<ul>
-<li>[x]anki</li>
-<li>[x]打坐</li>
-<li>[ ]orid</li>
-<li>[ ]django黑名单</li>
-<li>[x]安排任务</li>
-<li>[ ]爬虫任务</li>
-</ul>
-<p>关于今天的课程, 你记得什么?</p>
-<h2 id="1-赢的原因根本不在局内，而在局外。"><a href="#1-赢的原因根本不在局内，而在局外。" class="headerlink" title="1. 赢的原因根本不在局内，而在局外。"></a>1. 赢的原因根本不在局内，而在局外。</h2><p>##Reflective</p>
-<p>####你要如何形容今天的情绪<br>还可以</p>
-<p>####今天的高峰是什么?<br>上午7-4<br>晚上21-24</p>
-<p>##低点是什么?</p>
-<h2 id="下午4-8"><a href="#下午4-8" class="headerlink" title="下午4-8"></a>下午4-8</h2><p>##Interpretive</p>
-<p>####我们今天学到了什么?<br>打坐有效<br>番茄工作法有效<br>打坐有效。<br>写代码有效。</p>
-<p>####今天一个重要的领悟是什么?<br>打坐<br>写代码。</p>
-<p>##Decisional</p>
-<p>####我们会如何用一句话形容今天的工作<br>做中❄学，不懂的google</p>
-<p>##有哪些工作需要明天继续努力?</p>
-<ul>
-<li>[ ]anki</li>
-<li>[ ]打坐</li>
-<li>[ ]orid</li>
-<li>[ ]django：任务流程开写，完成50%</li>
-<li>[ ]跟进订单页面转化数据</li>
-<li>[ ]写woop，看看每天写，每天读是什么体验</li>
-<li></li>
-<li></li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1646,7 +1584,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-count">34</span>
                 <span class="site-state-item-name">Artikel</span>
               </a>
             </div>
@@ -1668,7 +1606,7 @@
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">Tags</span>
               
             </div>

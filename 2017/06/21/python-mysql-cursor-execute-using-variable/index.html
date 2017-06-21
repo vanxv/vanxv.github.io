@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="mysql," />
 
 
 
@@ -92,13 +92,17 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="github">
-<meta property="og:url" content="http://vanxv.github.io/github/index.html">
+<meta name="description" content="1234567891011import pymysql# 创建连接conn = pymysql.connect(host=&apos;127.0.0.1&apos;, port=3306, user=&apos;root&apos;, passwd=&apos;1q2w3e4r&apos;, db=&apos;zss&apos;, charset=&apos;utf8&apos;)# 创建游标cursor = conn.cursor()# 执行SQL，并返回收影响行数valueNone = No">
+<meta name="keywords" content="mysql">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python mysql cursor.execute__using_variable">
+<meta property="og:url" content="http://vanxv.github.io/2017/06/21/python-mysql-cursor-execute-using-variable/index.html">
 <meta property="og:site_name" content="vanxvBlog">
-<meta property="og:updated_time" content="2017-04-24T01:05:05.000Z">
+<meta property="og:description" content="1234567891011import pymysql# 创建连接conn = pymysql.connect(host=&apos;127.0.0.1&apos;, port=3306, user=&apos;root&apos;, passwd=&apos;1q2w3e4r&apos;, db=&apos;zss&apos;, charset=&apos;utf8&apos;)# 创建游标cursor = conn.cursor()# 执行SQL，并返回收影响行数valueNone = No">
+<meta property="og:updated_time" content="2017-06-21T05:22:41.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="github">
+<meta name="twitter:title" content="python mysql cursor.execute__using_variable">
+<meta name="twitter:description" content="1234567891011import pymysql# 创建连接conn = pymysql.connect(host=&apos;127.0.0.1&apos;, port=3306, user=&apos;root&apos;, passwd=&apos;1q2w3e4r&apos;, db=&apos;zss&apos;, charset=&apos;utf8&apos;)# 创建游标cursor = conn.cursor()# 执行SQL，并返回收影响行数valueNone = No">
 
 
 
@@ -126,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="http://vanxv.github.io/github/"/>
+  <link rel="canonical" href="http://vanxv.github.io/2017/06/21/python-mysql-cursor-execute-using-variable/"/>
 
 
 
 
 
-  <title>github | vanxvBlog</title>
+  <title>python mysql cursor.execute__using_variable | vanxvBlog</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="">
@@ -158,7 +162,7 @@
     
   
 
-  <div class="container sidebar-position-left  ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -243,18 +247,147 @@
             
 
   <div id="posts" class="posts-expand">
-  <header class="post-header">
+    
 
-	<h1 class="post-title" itemprop="name headline">github</h1>
+  
 
+  
+  
+  
 
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://vanxv.github.io/2017/06/21/python-mysql-cursor-execute-using-variable/">
 
-</header>
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vanxvBlog">
+    </span>
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python mysql cursor.execute__using_variable</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-21T13:20:05+08:00">
+                2017-06-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
     
+
+    <div class="post-body" itemprop="articleBody">
+
       
-    
+      
+
+      
+        <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> pymysql</div><div class="line"><span class="comment"># 创建连接</span></div><div class="line">conn = pymysql.connect(host=<span class="string">'127.0.0.1'</span>, port=<span class="number">3306</span>, user=<span class="string">'root'</span>, passwd=<span class="string">'1q2w3e4r'</span>, db=<span class="string">'zss'</span>, charset=<span class="string">'utf8'</span>)</div><div class="line"><span class="comment"># 创建游标</span></div><div class="line">cursor = conn.cursor()</div><div class="line"><span class="comment"># 执行SQL，并返回收影响行数</span></div><div class="line">valueNone = <span class="keyword">None</span></div><div class="line">sql = <span class="string">"INSERT INTO financial_alipaydetail VALUES (%s,%s,%s,%s,%s,%s,%s)"</span></div><div class="line">cmd = (cursor.lastrowid,res[<span class="number">1</span>], res[<span class="number">0</span>], res[<span class="number">2</span>], datetime.now(), self.alipayusername, valueNone)</div><div class="line">effect_row = cursor.execute(sql,cmd)</div><div class="line">conn.commit()</div></pre></td></tr></table></figure>
+<p>valueNone = None<br>插入控制<br>cursor.lastrowid<br>自动生成id<br>effect_row = cursor.execute(sql,cmd)<br>执行语句<br>保存</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/mysql/" rel="tag"># mysql</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/21/cursor-execute-not-using-variable/" rel="prev" title="cursor.execute_not_using_variable">
+                cursor.execute_not_using_variable <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -469,6 +602,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
 
   
 
