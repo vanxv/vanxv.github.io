@@ -253,7 +253,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://vanxv.github.io/2017/04/24/googleAnalytice/GoogleAnalytics_E_Business/">
+    <link itemprop="mainEntityOfPage" href="http://vanxv.github.io/2017/04/24/googleAnalytice/GoogleAnalytics/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -272,7 +272,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/04/24/googleAnalytice/GoogleAnalytics_E_Business/" itemprop="url">GoogleAnalytics电子商务</a></h1>
+                <a class="post-title-link" href="/2017/04/24/googleAnalytice/GoogleAnalytics/" itemprop="url">GoogleAnalytics原理</a></h1>
         
 
         <div class="post-meta">
@@ -343,7 +343,30 @@
       
         
           
-            <p>##</p>
+            <p>#关于GA的学习</p>
+<p>##工作原理：<br>执行JS：analytics.js，向google GA传值。</p>
+<p>下面是GA的代码：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;!-- Google Analytics --&gt;</div><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params">i,s,o,g,r,a,m</span>)</span>&#123;i[<span class="string">'GoogleAnalyticsObject'</span>]=r;i[r]=i[r]||<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">(i[r].q=i[r].q||[]).push(<span class="built_in">arguments</span>)&#125;,i[r].l=<span class="number">1</span>*<span class="keyword">new</span> <span class="built_in">Date</span>();a=s.createElement(o),</div><div class="line">m=s.getElementsByTagName(o)[<span class="number">0</span>];a.async=<span class="number">1</span>;a.src=g;m.parentNode.insertBefore(a,m)</div><div class="line">&#125;)(<span class="built_in">window</span>,<span class="built_in">document</span>,<span class="string">'script'</span>,<span class="string">'https://www.google-analytics.com/analytics.js'</span>,<span class="string">'ga'</span>);</div><div class="line"></div><div class="line">ga(<span class="string">'create'</span>, <span class="string">'UA-XXXXX-Y'</span>, <span class="string">'auto'</span>);</div></pre></td></tr></table></figure></p>
+<p>##跟踪代码可以获得什么数据：</p>
+<ol>
+<li>用户总共在您网站上停留了多少时间。</li>
+<li>用户在每个网页上停留的时间以及用户查看这些网页的次序。</li>
+<li>用户点击了哪些内部链接（根据下一个网页浏览的网址得到）。</li>
+<li>此外，IP 地址、用户代理字符串以及 analytics.js </li>
+<li>在创建新跟踪器时查看的初始网页可用于确定以下这类信息：<ol>
+<li>用户的地理位置。</li>
+<li>用户使用的浏览器和操作系统。</li>
+<li>屏幕尺寸以给跟踪器命名：</li>
+</ol>
+</li>
+</ol>
+<p>##创建跟踪器<br>什么是跟踪器？<br>顾名思义：跟踪代码。告诉GA的值。</p>
+<p>###创建跟踪器的方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ga(&apos;create&apos;, &apos;UA-XXXXX-Y&apos;, &apos;auto&apos;);</div></pre></td></tr></table></figure></p>
+<p>这里的意思是<br>第一个值是创建<br>第二个值是网页代码<br>第三个值不知。</p>
+<p>###给跟踪器命名：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ga(&apos;create&apos;, &apos;UA-XXXXX-Y&apos;, &apos;auto&apos;, &apos;myTracker&apos;);</div></pre></td></tr></table></figure></p>
+<p>myTracker是自定义的名字</p>
+<p>###自定义字段值<br>意思：自己再写一些值传给GA<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ga(&apos;create&apos;, &apos;UA-XXXXX-Y&apos;, &apos;auto&apos;, &apos;myTracker&apos;, &#123;</div><div class="line">  userId: &apos;12345&apos;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>  <strong>userId: ‘12345’</strong> 给ga传值userID：12345<br>  和元组是一个原理。</p>
+<p>##自定义多字段值<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">ga(&apos;create&apos;, &#123;</div><div class="line">  trackingId: &apos;UA-XXXXX-Y&apos;,</div><div class="line">  cookieDomain: &apos;auto&apos;,</div><div class="line">  name: &apos;myTracker&apos;,</div><div class="line">  userId: &apos;12345&apos;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
 
           
         
