@@ -200,7 +200,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            Home
           </a>
         </li>
       
@@ -210,7 +210,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            Archives
           </a>
         </li>
       
@@ -253,6 +253,122 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://vanxv.github.io/2017/06/21/ubuntu-install-django-mysql-nginx-uwsgi/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vanxvBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/06/21/ubuntu-install-django-mysql-nginx-uwsgi/" itemprop="url">ubuntu_install_django_mysql_nginx_uwsgi</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-21T23:38:25+08:00">
+                2017-06-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>#安装mysql<br>sudo apt-get update<br>sudo apt-get install mysql-server<br>sudo mysql_secure_installation</p>
+<p>测试：<br>systemctl status mysql.service</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">mysql.service - MySQL Community Server</div><div class="line">Loaded: loaded (/lib/systemd/system/mysql.service; enabled; vendor preset: en</div><div class="line">Active: active (running) since Wed 2016-11-23 21:21:25 UTC; 30min ago</div><div class="line">Main PID: 3754 (mysqld)</div><div class="line">    Tasks: 28</div><div class="line">   Memory: 142.3M</div><div class="line">      CPU: 1.994s</div><div class="line">   CGroup: /system.slice/mysql.service</div><div class="line">           └─3754 /usr/sbin/mysqld</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql -u root -p</div></pre></td></tr></table></figure>
+<p>#安装nginx<br>sudo apt-get install nginx</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://vanxv.github.io/2017/06/21/python-mysql-cursor-execute-using-variable/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -282,7 +398,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-21T13:20:05+08:00">
                 2017-06-21
@@ -395,7 +511,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-21T09:29:27+08:00">
                 2017-06-21
@@ -509,7 +625,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-18T14:41:13+08:00">
                 2017-06-18
@@ -647,7 +763,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-05T09:53:39+08:00">
                 2017-06-05
@@ -686,8 +802,29 @@
       
         
           
-            <h2 id="关于最新的上货流程："><a href="#关于最新的上货流程：" class="headerlink" title="关于最新的上货流程："></a>关于最新的上货流程：</h2><hr>
-<p>我们的系统从自主开发的系统，<br>改成用 shopify.com  的系统，所以现在所有的流程爆款产品都从新上。</p>
+            <h2 id="上产品的标准"><a href="#上产品的标准" class="headerlink" title="上产品的标准"></a>上产品的标准</h2><hr>
+<p>###图片权重：</p>
+<pre><code>1. aliexpress 速卖通图为主
+2. 另外为速卖通的图片。去淘宝找优质的图片
+3. 复制淘宝的连接，从1688找货源
+</code></pre><p>###产品图片筛选要求<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">找到所有的产品以后（淘宝、1688、速卖通）</div><div class="line">按照自己的逻辑选最简洁直观质量最好的图片，最少15张，</div><div class="line"></div><div class="line">1. 产品全景图：各角度的图片，产品直观，图片清晰，</div><div class="line">2. 模特实拍图：优先选有国外模特的图</div><div class="line">3. 筛选视觉质量好的，删除杂乱无章的图片，</div><div class="line">4. 图片另存为，然后选图片质量最好的</div></pre></td></tr></table></figure></p>
+<p>###参考图片标准：<br>手表参考标准<br><a href="https://callalike.com/collections/watch" target="_blank" rel="external">https://callalike.com/collections/watch</a><br>参考箱包的网址：<br><a href="https://callalike.com/collections/all" target="_blank" rel="external">https://callalike.com/collections/all</a></p>
+<p>###发布后邮件：<br>1.发邮件ironvanxv#gmail.com 邮件地址（每日一封）</p>
+<ol>
+<li>csv或xls格式</li>
+<li>列：1.日期、2、独立站(我们站的网址)</li>
+<li>淘宝产品网址（最热卖和价格最低）3.1688产品网址</li>
+<li>发布完后，每天会回一封邮件修改地方和内容，隔日修改后，也务必回复邮件。</li>
+</ol>
+<p>###下面是产品照图步骤<br><em>先找到全部的图，然后按照审美筛选最好看的top图片，在10-20张之间</em></p>
+<p><img src="http://olsv0lzsv.bkt.clouddn.com/20170625149837981774445.png" alt="20170625149837981774445.png"></p>
+<p>产品主图<br><img src="http://olsv0lzsv.bkt.clouddn.com/20170625149838019534777.png" alt="20170625149838019534777.png"></p>
+<p>在淘宝搜索产品主图<br><img src="http://olsv0lzsv.bkt.clouddn.com/20170625149838004837203.png" alt="20170625149838004837203.png"></p>
+<p>复制url<br><img src="http://olsv0lzsv.bkt.clouddn.com/20170625149838031217426.png" alt="20170625149838031217426.png"></p>
+<p>1688<br><img src="http://olsv0lzsv.bkt.clouddn.com/20170625149838033080163.png" alt="20170625149838033080163.png"><br><img src="http://olsv0lzsv.bkt.clouddn.com/20170625149838038973179.png" alt="20170625149838038973179.png"></p>
+<p>###产品属性：<br>必带属性：<br>基础属性必全翻译<br><img src="http://olsv0lzsv.bkt.clouddn.com/20170625149838086789303.png" alt="20170625149838086789303.png"></p>
+<p>卖家自写的属性也得翻译<br><img src="http://olsv0lzsv.bkt.clouddn.com/2017062514983809071992.png" alt="2017062514983809071992.png"></p>
+<h2 id="关于最新的上货流程："><a href="#关于最新的上货流程：" class="headerlink" title="关于最新的上货流程："></a>关于最新的上货流程：</h2><hr>
 <h3 id="上产品的流程："><a href="#上产品的流程：" class="headerlink" title="上产品的流程："></a>上产品的流程：</h3><hr>
 <ol>
 <li><p>登录<a href="https://www.shopify.com/" target="_blank" rel="external">https://www.shopify.com/</a><br> <a href="https://www.shopify.com/login" target="_blank" rel="external">点击打开</a><br> 网址：popfield</p>
@@ -697,12 +834,11 @@
 <li><p>我们用了一个新的chrome oberlo插件这个插件可以提高上产品的速度<br> 登录shopify后，再按照下面的说明安装<br> 按照说明安装这个插件：<br> <a href="http://support.oberlo.com/article/80-what-is-oberlo-chrome-extension-how-can-i-use-it" target="_blank" rel="external">插件说明和下载地址</a></p>
 <p> <a href="https://chrome.google.com/webstore/detail/oberlo-aliexpresscom-prod/hmanipjnbjnhoicdnooapcnfonebefel" target="_blank" rel="external">chrome安装地址点击打开</a></p>
 </li>
-<li><p>用速卖通上产品<br> 1.1 打开速卖通<a href="https://www.aliexpress.com/" target="_blank" rel="external">https://www.aliexpress.com/</a><br> 1.2 输入关键词</p>
-<pre><code>![20170605149662898461148.png](http://olsv0lzsv.bkt.clouddn.com/20170605149662898461148.png)
-</code></pre><p> 1.3 卡价格选排名：</p>
-<pre><code>![201706051508322222.gif](http://olsv0lzsv.bkt.clouddn.com/201706051508322222.gif)
-</code></pre><p> 1.4 用插件上产品</p>
-<pre><code>安装好后会有一个oberlo的插件
+</ol>
+<ol>
+<li>用速卖通上产品<br> 1.1 打开速卖通<a href="https://www.aliexpress.com/" target="_blank" rel="external">https://www.aliexpress.com/</a><br> 1.2 输入关键词<pre><code>![20170605149662898461148.png](http://olsv0lzsv.bkt.clouddn.com/20170605149662898461148.png)
+</code></pre> 1.3 卡价格选排名：<pre><code>![201706051508322222.gif](http://olsv0lzsv.bkt.clouddn.com/201706051508322222.gif)
+</code></pre> 1.4 用插件上产品<pre><code>安装好后会有一个oberlo的插件
 ![2017060514966291321895.png](http://olsv0lzsv.bkt.clouddn.com/2017060514966291321895.png)
 </code></pre></li>
 </ol>
@@ -778,7 +914,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-02T17:21:34+08:00">
                 2017-06-02
@@ -897,7 +1033,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-02T16:58:10+08:00">
                 2017-06-02
@@ -1053,7 +1189,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-31T12:46:25+08:00">
                 2017-05-31
@@ -1183,7 +1319,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-26T17:00:24+08:00">
                 2017-05-26
@@ -1322,7 +1458,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-26T11:07:10+08:00">
                 2017-05-26
@@ -1408,133 +1544,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://vanxv.github.io/2017/05/23/shadowsocks/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="vanxvBlog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/05/23/shadowsocks/" itemprop="url">shadowsocks</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-23T16:24:15+08:00">
-                2017-05-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><strong>shadowsocks</strong>是一个科学上网的工具<br>下载地址：<br><a href="http://www.uudaili.org/windows-shadowsocks.html" target="_blank" rel="external">http://www.uudaili.org/windows-shadowsocks.html</a></p>
-<p><a href="http://ossfiles.fyvps.com/ssclient/Shadowsocks-win-2.5.zip" target="_blank" rel="external">http://ossfiles.fyvps.com/ssclient/Shadowsocks-win-2.5.zip</a><br>需要安装 .NET Framework 3.5 版本,推荐 win7 和 XP 客户使用<br><a href="http://ossfiles.fyvps.com/ssclient/Shadowsocks-win-dotnet4.0-2.5.zip" target="_blank" rel="external">http://ossfiles.fyvps.com/ssclient/Shadowsocks-win-dotnet4.0-2.5.zip</a><br>需要安装 .NET Framework 4.0 版本,推荐 win8 和 win10 客户使用<br><a href="http://ossfiles.fyvps.com/ssclient/ShadowsocksR-win-3.8.9.0e.7z" target="_blank" rel="external">http://ossfiles.fyvps.com/ssclient/ShadowsocksR-win-3.8.9.0e.7z</a><br>ShadowsocksR 版本支持 混淆和自定义参数</p>
-<p>下载完成后，解压,就一个文件,很简单：</p>
-<p>shadowsocks</p>
-<p><img src="http://www.uudaili.org/usr/uploads/2014/11/98898180.jpg" alt="img"></p>
-<p>双击这个文件，然后在你的任务栏右下角就会有个白色的小飞机。</p>
-<p><img src="http://www.uudaili.org/usr/uploads/2014/11/3628917924.jpg" alt="img"></p>
-<p>shadowsocks任务栏</p>
-<p><img src="http://www.uudaili.org/usr/uploads/2015/02/1646217930.png" alt="img"></p>
-<p>注意看任务栏右下角，不用一直双击，要不会打开很多个。<br>右击，然后选择服务器 –编辑服务器.如图：</p>
-<p><img src="http://www.uudaili.org/usr/uploads/2015/02/2649610814.png" alt="img"></p>
-<p>编辑Shadowsocks信息</p>
-<p>IP:119.28.69.81</p>
-<p>加密：aes-256-cfb</p>
-<p>端口：8388</p>
-<p>密码找我要<br>加密</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1584,8 +1593,8 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">34</span>
-                <span class="site-state-item-name">Artikel</span>
+                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-name">posts</span>
               </a>
             </div>
           
@@ -1596,7 +1605,7 @@
             <div class="site-state-item site-state-categories">
               
                 <span class="site-state-item-count">4</span>
-                <span class="site-state-item-name">Kategorien</span>
+                <span class="site-state-item-name">categories</span>
               
             </div>
           
@@ -1606,8 +1615,8 @@
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">10</span>
-                <span class="site-state-item-name">Tags</span>
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">tags</span>
               
             </div>
           
@@ -1664,7 +1673,7 @@
 
 
 <div class="powered-by">
-  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">
