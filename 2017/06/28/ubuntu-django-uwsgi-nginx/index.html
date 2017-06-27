@@ -1,0 +1,697 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="ubuntu,django,nginx,uwsgi," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="vanxvBlog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="nginx 是一个免费的开源的http服务器，支持反向代理，以及支持IMAP/POP3代理服务器下面是原理：1the web client &amp;lt;-&amp;gt; the web server &amp;lt;-&amp;gt; the socket &amp;lt;-&amp;gt; uwsgi &amp;lt;-&amp;gt; Django 开始，首先安装uwsgi、nginx123pip install uwsgisudo apt-get">
+<meta name="keywords" content="ubuntu,django,nginx,uwsgi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="setup ubuntu_django_uwsgi_nginx">
+<meta property="og:url" content="http://vanxv.github.io/2017/06/28/ubuntu-django-uwsgi-nginx/index.html">
+<meta property="og:site_name" content="vanxvBlog">
+<meta property="og:description" content="nginx 是一个免费的开源的http服务器，支持反向代理，以及支持IMAP/POP3代理服务器下面是原理：1the web client &amp;lt;-&amp;gt; the web server &amp;lt;-&amp;gt; the socket &amp;lt;-&amp;gt; uwsgi &amp;lt;-&amp;gt; Django 开始，首先安装uwsgi、nginx123pip install uwsgisudo apt-get">
+<meta property="og:updated_time" content="2017-06-27T23:44:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="setup ubuntu_django_uwsgi_nginx">
+<meta name="twitter:description" content="nginx 是一个免费的开源的http服务器，支持反向代理，以及支持IMAP/POP3代理服务器下面是原理：1the web client &amp;lt;-&amp;gt; the web server &amp;lt;-&amp;gt; the socket &amp;lt;-&amp;gt; uwsgi &amp;lt;-&amp;gt; Django 开始，首先安装uwsgi、nginx123pip install uwsgisudo apt-get">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://vanxv.github.io/2017/06/28/ubuntu-django-uwsgi-nginx/"/>
+
+
+
+
+
+  <title>setup ubuntu_django_uwsgi_nginx | vanxvBlog</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">vanxvBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://vanxv.github.io/2017/06/28/ubuntu-django-uwsgi-nginx/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vanxvBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">setup ubuntu_django_uwsgi_nginx</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-28T00:03:47+08:00">
+                2017-06-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><a href="http://nginx.org/" target="_blank" rel="external">nginx</a> 是一个免费的开源的http服务器，支持反向代理，以及支持IMAP/POP3代理服务器<br>下面是原理：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">the web client &lt;-&gt; the web server &lt;-&gt; the socket &lt;-&gt; uwsgi &lt;-&gt; Django</div></pre></td></tr></table></figure></p>
+<p>开始，首先安装uwsgi、nginx<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">pip install uwsgi</div><div class="line">sudo apt-get install nginx</div><div class="line">sudo /etc/init.d/nginx start</div></pre></td></tr></table></figure></p>
+<p>安装django和启动项目</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">pip install Django</div><div class="line">django-admin.py startproject mysite</div><div class="line">cd mysite</div></pre></td></tr></table></figure>
+<p>在django根目录下创建一个test.py<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># test.py</div><div class="line">def application(env, start_response):</div><div class="line">    start_response(&apos;200 OK&apos;, [(&apos;Content-Type&apos;,&apos;text/html&apos;)])</div><div class="line">    return [b&quot;Hello World&quot;] # python3</div><div class="line">    #return [&quot;Hello World&quot;] # python2</div></pre></td></tr></table></figure></p>
+<p>运行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">uwsgi --http :8000 --wsgi-file test.py</div></pre></td></tr></table></figure></p>
+<p><em>http :8000</em>：是服务器端口<br><em>wsgi-file test.py</em>： 载入的文件</p>
+<p>下载<em>uwsgi_params</em><br><a href="https://github.com/nginx/nginx/blob/master/conf/uwsgi_params" target="_blank" rel="external">下载网址</a><br>uwsgi_params是nginx需要用到的文件，<br>创建一个<em>website_nginx.conf</em>文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo vim nginx_zss.conf</div></pre></td></tr></table></figure>
+<p>下面是nginx_zss.conf代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"># mysite_nginx.conf</div><div class="line"></div><div class="line"># the upstream component nginx needs to connect to</div><div class="line">upstream django &#123;</div><div class="line">    server unix:///path/to/your/mysite/mysite.sock; # for a file socket</div><div class="line">    #server 127.0.0.1:8001; # for a web port socket (we&apos;ll use this first)</div><div class="line">&#125;</div><div class="line"></div><div class="line"># configuration of the server</div><div class="line">server &#123;</div><div class="line">    # the port your site will be served on</div><div class="line">    listen      8000;</div><div class="line">    # the domain name it will serve for</div><div class="line">    server_name .example.com; # substitute your machine&apos;s IP address or FQDN</div><div class="line">    charset     utf-8;</div><div class="line"></div><div class="line">    # max upload size</div><div class="line">    client_max_body_size 75M;   # adjust to taste</div><div class="line"></div><div class="line">    # Django media</div><div class="line">    location /media  &#123;</div><div class="line">        alias /path/to/your/mysite/media;  # your Django project&apos;s media files - amend as required</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    location /static &#123;</div><div class="line">        alias /path/to/your/mysite/static; # your Django project&apos;s static files - amend as required</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    # Finally, send all non-media requests to the Django server.</div><div class="line">    location / &#123;</div><div class="line">        uwsgi_pass  django;</div><div class="line">        include     /path/to/your/mysite/uwsgi_params; # the uwsgi_params file you installed</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>下面是我的配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">upstream zss &#123;</div><div class="line">    server unix:///home/zss/zss.sock; # 设置sock文件,用sock模式访问，</div><div class="line">   # server 127.0.0.1:8002; # 用tcp/ip访问，2种模式都可以，我用的是上面的。</div><div class="line">&#125;</div><div class="line"># configuration of the server</div><div class="line">server &#123;</div><div class="line">    # the port your site will be served on</div><div class="line">    listen      80;</div><div class="line">    # the domain name it will serve for</div><div class="line">    server_name vanxv.vicp.net; # 域名</div><div class="line">    charset     utf-8;</div><div class="line"></div><div class="line">    # max upload size</div><div class="line">    client_max_body_size 75M;   # adjust to taste</div><div class="line"></div><div class="line">    # Django media</div><div class="line">    location /media  &#123;</div><div class="line">        alias /home/zss/media;  # 静态文件</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    location /static &#123;</div><div class="line">        alias /home/zss/static; # static文件</div><div class="line">    &#125;</div><div class="line">    location / &#123;</div><div class="line">        uwsgi_pass  zss;</div><div class="line">        include     /home/zss/uwsgi_params; # 指定params文件位置</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这个配置文件告诉nginx提供媒体和静态文件的文件系统,以及处理请求,要求Django的设置。对于大型部署它是一种不错的做法让一台服务器处理静态/媒体文件,另一个处理Django应用程序</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo ln -s /home/zss/zss_nginx.conf /etc/nginx/sites-enabled/</div></pre></td></tr></table></figure>
+<p>连接 nginx/sites-enabled/ 让nginx可以看到这个文件</p>
+<p>重启nginx</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo nginx -s reload</div></pre></td></tr></table></figure>
+<p>创建 <em>mysite_uwsgi.ini</em> django 下面<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"># mysite_uwsgi.ini file</div><div class="line">[uwsgi]</div><div class="line"></div><div class="line"># Django-related settings</div><div class="line"># the base directory (full path)</div><div class="line">chdir           = /path/to/your/project</div><div class="line"># Django&apos;s wsgi file</div><div class="line">module          = project.wsgi</div><div class="line"># the virtualenv (full path)</div><div class="line">#home            = /path/to/virtualenv</div><div class="line"></div><div class="line"># process-related settings</div><div class="line"># master</div><div class="line">master          = true</div><div class="line"># maximum number of worker processes</div><div class="line">processes       = 10</div><div class="line"># the socket (use the full path to be safe</div><div class="line">socket          = /path/to/your/project/mysite.sock</div><div class="line"># ... with appropriate permissions - may be needed</div><div class="line"># chmod-socket    = 664</div><div class="line"># clear environment on exit</div><div class="line">vacuum          = true</div></pre></td></tr></table></figure></p>
+<p>下面是我的配置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">#ite_uwsgi.ini file</div><div class="line">[uwsgi]</div><div class="line">chdir           = /home/zss/</div><div class="line">module          = zhess103.wsgi</div><div class="line"></div><div class="line"># process-related settings</div><div class="line"># master</div><div class="line">master          = true</div><div class="line"># maximum number of worker processes</div><div class="line">processes       = 6</div><div class="line"># the socket (use the full path to be safe</div><div class="line">socket          = /home/zss/zss.sock</div><div class="line"># ... with appropriate permissions - may be needed</div><div class="line">chmod-socket    = 666</div><div class="line"># clear environment on exit</div><div class="line">vacuum          = true</div><div class="line">pidfile = /home/zss/zss.pid</div><div class="line">disable-logging = true</div><div class="line">daemonize = /var/log/zss_uwsgi.log</div></pre></td></tr></table></figure></p>
+<p><em>home  = /path/to/virtualenv</em> 模拟环境的网址，我的没用所以直接删了<br>chdir= /home/zss/      项目网址<br>module= zhess103.wsgi  django默认自带的wsgi配置文件<br>master 主线程<br>processes = 6 进程数，<br>socket的地址<br>chmod-socket socket的权限</p>
+<p>disable-logging = true<br>daemonize = /var/log/zss_uwsgi.log<br>log日志</p>
+<p>pidfile = /home/zss/zss.pid 进程文件</p>
+<p>测试与载入配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo uwsgi --ini uwsgi_zss.ini</div><div class="line">sudo uwsgi -d uwsgi_zss.ini</div></pre></td></tr></table></figure></p>
+<p>sudo uwsgi –ini uwsgi_zss.ini<br>sudo vim uwsgi_zss.ini</p>
+<p>关闭进程和重啓的方法<br>sudo uwsgi –stop zss.pid<br>sudo uwsgi –ini uwsgi_zss.ini</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ubuntu/" rel="tag"># ubuntu</a>
+          
+            <a href="/tags/django/" rel="tag"># django</a>
+          
+            <a href="/tags/nginx/" rel="tag"># nginx</a>
+          
+            <a href="/tags/uwsgi/" rel="tag"># uwsgi</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/26/please-start-google-chrome-as-a-normal-user-ubuntu-chrome/" rel="prev" title="please start google chrome as a normal user ubuntu chrome">
+                please start google chrome as a normal user ubuntu chrome <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="John Doe" />
+          <p class="site-author-name" itemprop="name">John Doe</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">36</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">categories</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

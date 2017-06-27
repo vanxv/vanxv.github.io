@@ -200,7 +200,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            Home
           </a>
         </li>
       
@@ -210,7 +210,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            Archives
           </a>
         </li>
       
@@ -252,6 +252,143 @@
   
   
 
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://vanxv.github.io/2017/06/28/ubuntu-django-uwsgi-nginx/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vanxvBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/06/28/ubuntu-django-uwsgi-nginx/" itemprop="url">setup ubuntu_django_uwsgi_nginx</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-28T00:03:47+08:00">
+                2017-06-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><a href="http://nginx.org/" target="_blank" rel="external">nginx</a> 是一个免费的开源的http服务器，支持反向代理，以及支持IMAP/POP3代理服务器<br>下面是原理：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">the web client &lt;-&gt; the web server &lt;-&gt; the socket &lt;-&gt; uwsgi &lt;-&gt; Django</div></pre></td></tr></table></figure></p>
+<p>开始，首先安装uwsgi、nginx<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">pip install uwsgi</div><div class="line">sudo apt-get install nginx</div><div class="line">sudo /etc/init.d/nginx start</div></pre></td></tr></table></figure></p>
+<p>安装django和启动项目</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">pip install Django</div><div class="line">django-admin.py startproject mysite</div><div class="line">cd mysite</div></pre></td></tr></table></figure>
+<p>在django根目录下创建一个test.py<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># test.py</div><div class="line">def application(env, start_response):</div><div class="line">    start_response(&apos;200 OK&apos;, [(&apos;Content-Type&apos;,&apos;text/html&apos;)])</div><div class="line">    return [b&quot;Hello World&quot;] # python3</div><div class="line">    #return [&quot;Hello World&quot;] # python2</div></pre></td></tr></table></figure></p>
+<p>运行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">uwsgi --http :8000 --wsgi-file test.py</div></pre></td></tr></table></figure></p>
+<p><em>http :8000</em>：是服务器端口<br><em>wsgi-file test.py</em>： 载入的文件</p>
+<p>下载<em>uwsgi_params</em><br><a href="https://github.com/nginx/nginx/blob/master/conf/uwsgi_params" target="_blank" rel="external">下载网址</a><br>uwsgi_params是nginx需要用到的文件，<br>创建一个<em>website_nginx.conf</em>文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo vim nginx_zss.conf</div></pre></td></tr></table></figure>
+<p>下面是nginx_zss.conf代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"># mysite_nginx.conf</div><div class="line"></div><div class="line"># the upstream component nginx needs to connect to</div><div class="line">upstream django &#123;</div><div class="line">    server unix:///path/to/your/mysite/mysite.sock; # for a file socket</div><div class="line">    #server 127.0.0.1:8001; # for a web port socket (we&apos;ll use this first)</div><div class="line">&#125;</div><div class="line"></div><div class="line"># configuration of the server</div><div class="line">server &#123;</div><div class="line">    # the port your site will be served on</div><div class="line">    listen      8000;</div><div class="line">    # the domain name it will serve for</div><div class="line">    server_name .example.com; # substitute your machine&apos;s IP address or FQDN</div><div class="line">    charset     utf-8;</div><div class="line"></div><div class="line">    # max upload size</div><div class="line">    client_max_body_size 75M;   # adjust to taste</div><div class="line"></div><div class="line">    # Django media</div><div class="line">    location /media  &#123;</div><div class="line">        alias /path/to/your/mysite/media;  # your Django project&apos;s media files - amend as required</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    location /static &#123;</div><div class="line">        alias /path/to/your/mysite/static; # your Django project&apos;s static files - amend as required</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    # Finally, send all non-media requests to the Django server.</div><div class="line">    location / &#123;</div><div class="line">        uwsgi_pass  django;</div><div class="line">        include     /path/to/your/mysite/uwsgi_params; # the uwsgi_params file you installed</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>下面是我的配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">upstream zss &#123;</div><div class="line">    server unix:///home/zss/zss.sock; # 设置sock文件,用sock模式访问，</div><div class="line">   # server 127.0.0.1:8002; # 用tcp/ip访问，2种模式都可以，我用的是上面的。</div><div class="line">&#125;</div><div class="line"># configuration of the server</div><div class="line">server &#123;</div><div class="line">    # the port your site will be served on</div><div class="line">    listen      80;</div><div class="line">    # the domain name it will serve for</div><div class="line">    server_name vanxv.vicp.net; # 域名</div><div class="line">    charset     utf-8;</div><div class="line"></div><div class="line">    # max upload size</div><div class="line">    client_max_body_size 75M;   # adjust to taste</div><div class="line"></div><div class="line">    # Django media</div><div class="line">    location /media  &#123;</div><div class="line">        alias /home/zss/media;  # 静态文件</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    location /static &#123;</div><div class="line">        alias /home/zss/static; # static文件</div><div class="line">    &#125;</div><div class="line">    location / &#123;</div><div class="line">        uwsgi_pass  zss;</div><div class="line">        include     /home/zss/uwsgi_params; # 指定params文件位置</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这个配置文件告诉nginx提供媒体和静态文件的文件系统,以及处理请求,要求Django的设置。对于大型部署它是一种不错的做法让一台服务器处理静态/媒体文件,另一个处理Django应用程序</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo ln -s /home/zss/zss_nginx.conf /etc/nginx/sites-enabled/</div></pre></td></tr></table></figure>
+<p>连接 nginx/sites-enabled/ 让nginx可以看到这个文件</p>
+<p>重启nginx</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo nginx -s reload</div></pre></td></tr></table></figure>
+<p>创建 <em>mysite_uwsgi.ini</em> django 下面<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"># mysite_uwsgi.ini file</div><div class="line">[uwsgi]</div><div class="line"></div><div class="line"># Django-related settings</div><div class="line"># the base directory (full path)</div><div class="line">chdir           = /path/to/your/project</div><div class="line"># Django&apos;s wsgi file</div><div class="line">module          = project.wsgi</div><div class="line"># the virtualenv (full path)</div><div class="line">#home            = /path/to/virtualenv</div><div class="line"></div><div class="line"># process-related settings</div><div class="line"># master</div><div class="line">master          = true</div><div class="line"># maximum number of worker processes</div><div class="line">processes       = 10</div><div class="line"># the socket (use the full path to be safe</div><div class="line">socket          = /path/to/your/project/mysite.sock</div><div class="line"># ... with appropriate permissions - may be needed</div><div class="line"># chmod-socket    = 664</div><div class="line"># clear environment on exit</div><div class="line">vacuum          = true</div></pre></td></tr></table></figure></p>
+<p>下面是我的配置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">#ite_uwsgi.ini file</div><div class="line">[uwsgi]</div><div class="line">chdir           = /home/zss/</div><div class="line">module          = zhess103.wsgi</div><div class="line"></div><div class="line"># process-related settings</div><div class="line"># master</div><div class="line">master          = true</div><div class="line"># maximum number of worker processes</div><div class="line">processes       = 6</div><div class="line"># the socket (use the full path to be safe</div><div class="line">socket          = /home/zss/zss.sock</div><div class="line"># ... with appropriate permissions - may be needed</div><div class="line">chmod-socket    = 666</div><div class="line"># clear environment on exit</div><div class="line">vacuum          = true</div><div class="line">pidfile = /home/zss/zss.pid</div><div class="line">disable-logging = true</div><div class="line">daemonize = /var/log/zss_uwsgi.log</div></pre></td></tr></table></figure></p>
+<p><em>home  = /path/to/virtualenv</em> 模拟环境的网址，我的没用所以直接删了<br>chdir= /home/zss/      项目网址<br>module= zhess103.wsgi  django默认自带的wsgi配置文件<br>master 主线程<br>processes = 6 进程数，<br>socket的地址<br>chmod-socket socket的权限</p>
+<p>disable-logging = true<br>daemonize = /var/log/zss_uwsgi.log<br>log日志</p>
+<p>pidfile = /home/zss/zss.pid 进程文件</p>
+<p>测试与载入配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo uwsgi --ini uwsgi_zss.ini</div><div class="line">sudo uwsgi -d uwsgi_zss.ini</div></pre></td></tr></table></figure></p>
+<p>sudo uwsgi –ini uwsgi_zss.ini<br>sudo vim uwsgi_zss.ini</p>
+<p>关闭进程和重啓的方法<br>sudo uwsgi –stop zss.pid<br>sudo uwsgi –ini uwsgi_zss.ini</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
   <article class="post post-type-bug " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://vanxv.github.io/2017/06/26/please-start-google-chrome-as-a-normal-user-ubuntu-chrome/">
 
@@ -282,7 +419,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-26T07:52:05+08:00">
                 2017-06-26
@@ -397,7 +534,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-21T23:38:25+08:00">
                 2017-06-21
@@ -513,7 +650,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-21T13:20:05+08:00">
                 2017-06-21
@@ -626,7 +763,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-21T09:29:27+08:00">
                 2017-06-21
@@ -740,7 +877,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-18T14:41:13+08:00">
                 2017-06-18
@@ -878,7 +1015,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-05T09:53:39+08:00">
                 2017-06-05
@@ -1029,7 +1166,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-02T17:21:34+08:00">
                 2017-06-02
@@ -1148,7 +1285,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-02T16:58:10+08:00">
                 2017-06-02
@@ -1304,7 +1441,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-31T12:46:25+08:00">
                 2017-05-31
@@ -1396,145 +1533,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://vanxv.github.io/2017/05/26/django-rest-freamwork-Tutorial/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="vanxvBlog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/05/26/django-rest-freamwork-Tutorial/" itemprop="url">django-rest-freamwork-Tutorial</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-26T17:00:24+08:00">
-                2017-05-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><a href="http://www.django-rest-framework.org/" target="_blank" rel="external">djangoRestFramwork-Url</a><br>djangoRestFramwork是一个非常强大的灵活的工具包对于绑定在网页的APIS</p>
-<p>一些原因你将要可以使用RestFramework：</p>
-<ol>
-<li>这个网页浏览是 一个巨大的可用的开发者工具</li>
-<li>验证策略包括OAuth1a和OAuth2的包。</li>
-<li>支持ORM和非ORM数据源的序列化。</li>
-<li>如果不需要功能更强大的功能，可以自定义一切 - 只需使用基于功能的常规视图。</li>
-<li>广泛的文档和极好的社区支持。</li>
-</ol>
-<p>##环境要求：</p>
-<ol>
-<li>python（2.7 3.*)</li>
-<li>Django(1.8+)</li>
-</ol>
-<p>##需要的安装包:</p>
-<ol>
-<li>coreapi(1.32.0)模式生成支持。</li>
-<li>markdown(2.1.0+)Markable支持可浏览的API。</li>
-<li>django-filter(1.0.1+)搜索支持</li>
-<li>django-crispy-forms 修改显示</li>
-<li>django-guardian(1.1.1+)对象级权限支持。</li>
-</ol>
-<p>##安装方式：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">pip install djangorestframework</div><div class="line">pip install markdown</div><div class="line">pip install django-filter</div></pre></td></tr></table></figure></p>
-<p>###安装方式2<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone git@github.com:encode/django-rest-framework.git</div></pre></td></tr></table></figure></p>
-<p>把文件复制过去。</p>
-<p>在setting.py中增加<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">INSTALLED_APPS = (</div><div class="line">    ...</div><div class="line">    &apos;rest_framework&apos;,</div><div class="line">)</div></pre></td></tr></table></figure></p>
-<p>在<strong>urls.py</strong>中增加<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">urlpatterns = [</div><div class="line">    ...</div><div class="line">    url(<span class="string">r'^api-auth/'</span>, include(<span class="string">'rest_framework.urls'</span>, namespace=<span class="string">'rest_framework'</span>))</div><div class="line">]</div></pre></td></tr></table></figure></p>
-<p>然后运行访问 <a href="http://127.0.0.1:8000/api-auth/" target="_blank" rel="external">http://127.0.0.1:8000/api-auth/</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1585,7 +1583,7 @@
             <div class="site-state-item site-state-posts">
               <a href="/archives">
                 <span class="site-state-item-count">36</span>
-                <span class="site-state-item-name">Artikel</span>
+                <span class="site-state-item-name">posts</span>
               </a>
             </div>
           
@@ -1596,7 +1594,7 @@
             <div class="site-state-item site-state-categories">
               
                 <span class="site-state-item-count">4</span>
-                <span class="site-state-item-name">Kategorien</span>
+                <span class="site-state-item-name">categories</span>
               
             </div>
           
@@ -1606,8 +1604,8 @@
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">13</span>
-                <span class="site-state-item-name">Tags</span>
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">tags</span>
               
             </div>
           
@@ -1664,7 +1662,7 @@
 
 
 <div class="powered-by">
-  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">
