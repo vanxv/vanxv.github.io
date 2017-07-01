@@ -253,6 +253,125 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://vanxv.github.io/2017/06/02/bootstrap-tutorial/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vanxvBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/06/02/bootstrap-tutorial/" itemprop="url">bootstrap-tutorial</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-02T17:21:34+08:00">
+                2017-06-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="1-what-is-Bootstrap"><a href="#1-what-is-Bootstrap" class="headerlink" title="1. what is Bootstrap?"></a>1. what is Bootstrap?</h2><p>wel come to bootstrap<br>Bootstrap is Twitter create web tools<br>下拉菜单、按钮组、按钮下拉菜单、导航、导航条、面包屑、分页、排版、缩略图、警告对话框、进度条、媒体对象等。Bootstrap 自带了 13 个 jQuery 插件，这些插件为 Bootstrap 中的组件赋予了“生命”。其中包括：</p>
+<p>课程前最好具备技能：<br>html\css\javaScript</p>
+<p>先下载bootstrap.com, 我是从官方下载的。<br>打开dist文件<br>减压后可以看见<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">dist</div><div class="line">├── css</div><div class="line">│   ├── bootstrap.css</div><div class="line">│   ├── bootstrap.css.map</div><div class="line">│   ├── bootstrap.min.css</div><div class="line">│   ├── bootstrap-theme.css</div><div class="line">│   ├── bootstrap-theme.css.map</div><div class="line">│   └── bootstrap-theme.min.css</div><div class="line">├── fonts</div><div class="line">│   ├── glyphicons-halflings-regular.eot</div><div class="line">│   ├── glyphicons-halflings-regular.svg</div><div class="line">│   ├── glyphicons-halflings-regular.ttf</div><div class="line">│   └── glyphicons-halflings-regular.woff</div><div class="line">└── js</div><div class="line">    ├── bootstrap.js</div><div class="line">    ├── bootstrap.min.js</div><div class="line">    └── npm.js</div></pre></td></tr></table></figure></p>
+<p>打开 bower.json 查看 支持的JQuery版本<br>下载<br><a href="http://labfile.oss.aliyuncs.com/jquery-2.0.3.js" target="_blank" rel="external">http://labfile.oss.aliyuncs.com/jquery-2.0.3.js</a></p>
+<p>#hello world &amp; bootstrap One more time 2.1 栅格系统（布局）</p>
+<hr>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span></div><div class="line">            Bootstrap</div><div class="line">        <span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></div><div class="line">        <span class="comment">&lt;!-- Bootstrap --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">"css/bootstrap.min.css"</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">media</span>=<span class="string">"screen"</span>&gt;</span></div><div class="line">        <span class="comment">&lt;!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media</span></div><div class="line">        queries --&gt;</div><div class="line">        <span class="comment">&lt;!-- WARNING: Respond.js doesn't work if you view the page via file://</span></div><div class="line">        --&gt;</div><div class="line">        <span class="comment">&lt;!--[if lt IE 9]&gt;</span></div><div class="line">            &lt;script src="http://labfile.oss.aliyuncs.com/html5shiv/3.7.0/html5shiv.js"&gt;</div><div class="line">            &lt;/script&gt;</div><div class="line">            &lt;script src="http://labfile.oss.aliyuncs.com/respond.js/1.3.0/respond.min.js"&gt;</div><div class="line">            &lt;/script&gt;</div><div class="line">        &lt;![endif]--&gt;</div><div class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span></div><div class="line">            Hello, world!</div><div class="line">        <span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">h2</span> <span class="attr">class</span>=<span class="string">"page-header"</span>&gt;</span></div><div class="line">            区域一</div><div class="line">        <span class="tag">&lt;/<span class="name">h2</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span></div><div class="line">            Bootstrap has a few easy ways to quickly get started, each one appealing</div><div class="line">            to a different skill level and use case. Read through to see what suits</div><div class="line">            your particular needs.</div><div class="line">        <span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">h2</span> <span class="attr">class</span>=<span class="string">"page-header"</span>&gt;</span></div><div class="line">            区域二</div><div class="line">        <span class="tag">&lt;/<span class="name">h2</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span></div><div class="line">            If you work with Bootstrap's uncompiled source code, you need to compile</div><div class="line">            the LESS files to produce usable CSS files. For compiling LESS files into</div><div class="line">            CSS, we only officially support Recess, which is Twitter's CSS hinter based</div><div class="line">            on less.js.</div><div class="line">        <span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">h2</span> <span class="attr">class</span>=<span class="string">"page-header"</span>&gt;</span></div><div class="line">            区域三</div><div class="line">        <span class="tag">&lt;/<span class="name">h2</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span></div><div class="line">            Within the download you'll find the following directories and files, logically</div><div class="line">            grouping common resources and providing both compiled and minified variations.</div><div class="line">        <span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"js/jquery-2.0.3.js"</span>&gt;</span><span class="undefined"></span></div><div class="line">        <span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"js/bootstrap.min.js"</span>&gt;</span><span class="undefined"></span></div><div class="line">        <span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><img src="http://olsv0lzsv.bkt.clouddn.com/20170602149639630035748.png" alt="20170602149639630035748.png"></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span></div><div class="line">        Hello, world!</div><div class="line">    <span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"row"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-xs-4"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">h2</span> <span class="attr">class</span>=<span class="string">"page-header"</span>&gt;</span></div><div class="line">                区域一</div><div class="line">            <span class="tag">&lt;/<span class="name">h2</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">p</span>&gt;</span></div><div class="line">                Bootstrap has a few easy ways to quickly get started, each one appealing</div><div class="line">                to a different skill level and use case. Read through to see what suits</div><div class="line">                your particular needs.</div><div class="line">            <span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-xs-4"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">h2</span> <span class="attr">class</span>=<span class="string">"page-header"</span>&gt;</span></div><div class="line">                区域二</div><div class="line">            <span class="tag">&lt;/<span class="name">h2</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">p</span>&gt;</span></div><div class="line">                If you work with Bootstrap's uncompiled source code, you need to compile</div><div class="line">                the LESS files to produce usable CSS files. For compiling LESS files into</div><div class="line">                CSS, we only officially support Recess, which is Twitter's CSS hinter based</div><div class="line">                on less.js.</div><div class="line">            <span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-xs-4"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">h2</span> <span class="attr">class</span>=<span class="string">"page-header"</span>&gt;</span></div><div class="line">                区域三</div><div class="line">            <span class="tag">&lt;/<span class="name">h2</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">p</span>&gt;</span></div><div class="line">                Within the download you'll find the following directories and files, logically</div><div class="line">                grouping common resources and providing both compiled and minified variations.</div><div class="line">            <span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://vanxv.github.io/2017/06/02/Javascript-tutorial/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -929,6 +1048,153 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://vanxv.github.io/2017/05/15/ORID/ORID20170516/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vanxvBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/05/15/ORID/ORID20170516/" itemprop="url">ORID20170515</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-15T01:28:27+08:00">
+                2017-05-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>##Objective</p>
+<p>####完成了什么?</p>
+<ul>
+<li>[x]卢威的项目量化,文档</li>
+<li>[x]打坐</li>
+<li>[x]orid</li>
+<li>[x]django：任务流程开写，完成20%</li>
+<li>[x]anki</li>
+<li>[x]去图书馆，用番茄钟</li>
+<li>[ ]写woop，看看每天写，每天读是什么体验</li>
+</ul>
+<p>关于今天的课程, 你记得什么?</p>
+<ol>
+<li>番茄有用</li>
+<li>聚焦自己喜欢的事</li>
+</ol>
+<hr>
+<p>##Reflective</p>
+<p>####你要如何形容今天的情绪<br>琐碎的事情太多太乱。</p>
+<p>####今天的高峰是什么?<br>上午7-16</p>
+<p>##低点是什么?<br>下午17-24</p>
+<hr>
+<p>##Interpretive</p>
+<p>####我们今天学到了什么?<br>聚焦用番茄钟。<br>聚焦，多休息</p>
+<p>####今天一个重要的领悟是什么?<br>番茄钟<br>打坐。<br>神经元</p>
+<p>##Decisional</p>
+<p>####我们会如何用一句话形容今天的工作<br>抄中学，抄中复盘。<br>少做，聚焦的做</p>
+<p>##有哪些工作需要明天继续努力?</p>
+<ul>
+<li>[ ]打坐</li>
+<li>[ ]orid</li>
+<li>[ ]django：任务流程开写，完成50%</li>
+<li>[ ]anki</li>
+<li>[ ]写woop，看看每天写，每天读是什么体验</li>
+<li>[ ]php bug</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://vanxv.github.io/2017/05/15/ORID/ORID20170515/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1033,153 +1299,6 @@
 <li>[x]anki</li>
 <li>[x]去图书馆，用番茄钟</li>
 <li>[ ]写woop，看看每天写，每天读是什么体验</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://vanxv.github.io/2017/05/15/ORID/ORID20170516/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="vanxvBlog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/05/15/ORID/ORID20170516/" itemprop="url">ORID20170515</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-15T01:28:27+08:00">
-                2017-05-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>##Objective</p>
-<p>####完成了什么?</p>
-<ul>
-<li>[x]卢威的项目量化,文档</li>
-<li>[x]打坐</li>
-<li>[x]orid</li>
-<li>[x]django：任务流程开写，完成20%</li>
-<li>[x]anki</li>
-<li>[x]去图书馆，用番茄钟</li>
-<li>[ ]写woop，看看每天写，每天读是什么体验</li>
-</ul>
-<p>关于今天的课程, 你记得什么?</p>
-<ol>
-<li>番茄有用</li>
-<li>聚焦自己喜欢的事</li>
-</ol>
-<hr>
-<p>##Reflective</p>
-<p>####你要如何形容今天的情绪<br>琐碎的事情太多太乱。</p>
-<p>####今天的高峰是什么?<br>上午7-16</p>
-<p>##低点是什么?<br>下午17-24</p>
-<hr>
-<p>##Interpretive</p>
-<p>####我们今天学到了什么?<br>聚焦用番茄钟。<br>聚焦，多休息</p>
-<p>####今天一个重要的领悟是什么?<br>番茄钟<br>打坐。<br>神经元</p>
-<p>##Decisional</p>
-<p>####我们会如何用一句话形容今天的工作<br>抄中学，抄中复盘。<br>少做，聚焦的做</p>
-<p>##有哪些工作需要明天继续努力?</p>
-<ul>
-<li>[ ]打坐</li>
-<li>[ ]orid</li>
-<li>[ ]django：任务流程开写，完成50%</li>
-<li>[ ]anki</li>
-<li>[ ]写woop，看看每天写，每天读是什么体验</li>
-<li>[ ]php bug</li>
 </ul>
 
           
@@ -1503,147 +1622,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://vanxv.github.io/2017/05/13/ORID/ORID20170512/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="vanxvBlog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/05/13/ORID/ORID20170512/" itemprop="url">ORID20170512</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-13T01:28:27+08:00">
-                2017-05-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>##Objective</p>
-<p>####完成了什么?</p>
-<ul>
-<li>[x]anki</li>
-<li>[x]打坐</li>
-<li>[x]muse</li>
-<li>[x]阅读django</li>
-<li>[x]写好了一个django需求</li>
-<li>[x]发工资</li>
-</ul>
-<p>关于今天的课程, 你记得什么?<br>数据存储</p>
-<h2 id="写一个个人的视频教材。"><a href="#写一个个人的视频教材。" class="headerlink" title="写一个个人的视频教材。"></a>写一个个人的视频教材。</h2><p>##Reflective</p>
-<p>####你要如何形容今天的情绪<br>还可以</p>
-<p>####今天的高峰是什么?<br>7-12<br>下午4-5<br>20-24</p>
-<p>##低点是什么?<br>下午2-4</p>
-<h2 id="下午6-8"><a href="#下午6-8" class="headerlink" title="下午6-8"></a>下午6-8</h2><p>##Interpretive</p>
-<p>####我们今天学到了什么?<br>打坐有效<br>自己可以干一个项目了。</p>
-<p>打坐：静坐是最快得到沟通的办法，测试10分钟有效，写woop静坐的。</p>
-<p>####今天一个重要的领悟是什么?<br>DJango<br>打坐</p>
-<p>##Decisional</p>
-<p>####我们会如何用一句话形容今天的工作<br>学习</p>
-<p>##有哪些工作需要明天继续努力?</p>
-<ul>
-<li>[ ]anki</li>
-<li>[ ]打坐</li>
-<li>[ ]orid</li>
-<li>[ ]django继续写</li>
-<li>[ ]安排任务</li>
-<li>[ ]爬虫任务</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1693,7 +1671,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-count">38</span>
                 <span class="site-state-item-name">Artikel</span>
               </a>
             </div>
