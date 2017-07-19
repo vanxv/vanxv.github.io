@@ -253,6 +253,739 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://vanxv.github.io/2017/06/28/ubuntu-django-uwsgi-nginx/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vanxvBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/06/28/ubuntu-django-uwsgi-nginx/" itemprop="url">setup ubuntu_django_uwsgi_nginx</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-28T00:03:47+08:00">
+                2017-06-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><a href="http://nginx.org/" target="_blank" rel="external">nginx</a> 是一个免费的开源的http服务器，支持反向代理，以及支持IMAP/POP3代理服务器<br>下面是原理：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">the web client &lt;-&gt; the web server &lt;-&gt; the socket &lt;-&gt; uwsgi &lt;-&gt; Django</div></pre></td></tr></table></figure></p>
+<p>开始，首先安装uwsgi、nginx<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">pip install uwsgi</div><div class="line">sudo apt-get install nginx</div><div class="line">sudo /etc/init.d/nginx start</div></pre></td></tr></table></figure></p>
+<p>安装django和启动项目</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">pip install Django</div><div class="line">django-admin.py startproject mysite</div><div class="line">cd mysite</div></pre></td></tr></table></figure>
+<p>在django根目录下创建一个test.py<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># test.py</div><div class="line">def application(env, start_response):</div><div class="line">    start_response(&apos;200 OK&apos;, [(&apos;Content-Type&apos;,&apos;text/html&apos;)])</div><div class="line">    return [b&quot;Hello World&quot;] # python3</div><div class="line">    #return [&quot;Hello World&quot;] # python2</div></pre></td></tr></table></figure></p>
+<p>运行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">uwsgi --http :8000 --wsgi-file test.py</div></pre></td></tr></table></figure></p>
+<p><em>http :8000</em>：是服务器端口<br><em>wsgi-file test.py</em>： 载入的文件</p>
+<p>下载<em>uwsgi_params</em><br><a href="https://github.com/nginx/nginx/blob/master/conf/uwsgi_params" target="_blank" rel="external">下载网址</a><br>uwsgi_params是nginx需要用到的文件，<br>创建一个<em>website_nginx.conf</em>文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo vim nginx_zss.conf</div></pre></td></tr></table></figure>
+<p>下面是nginx_zss.conf代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"># mysite_nginx.conf</div><div class="line"></div><div class="line"># the upstream component nginx needs to connect to</div><div class="line">upstream django &#123;</div><div class="line">    server unix:///path/to/your/mysite/mysite.sock; # for a file socket</div><div class="line">    #server 127.0.0.1:8001; # for a web port socket (we&apos;ll use this first)</div><div class="line">&#125;</div><div class="line"></div><div class="line"># configuration of the server</div><div class="line">server &#123;</div><div class="line">    # the port your site will be served on</div><div class="line">    listen      8000;</div><div class="line">    # the domain name it will serve for</div><div class="line">    server_name .example.com; # substitute your machine&apos;s IP address or FQDN</div><div class="line">    charset     utf-8;</div><div class="line"></div><div class="line">    # max upload size</div><div class="line">    client_max_body_size 75M;   # adjust to taste</div><div class="line"></div><div class="line">    # Django media</div><div class="line">    location /media  &#123;</div><div class="line">        alias /path/to/your/mysite/media;  # your Django project&apos;s media files - amend as required</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    location /static &#123;</div><div class="line">        alias /path/to/your/mysite/static; # your Django project&apos;s static files - amend as required</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    # Finally, send all non-media requests to the Django server.</div><div class="line">    location / &#123;</div><div class="line">        uwsgi_pass  django;</div><div class="line">        include     /path/to/your/mysite/uwsgi_params; # the uwsgi_params file you installed</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>下面是我的配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">upstream zss &#123;</div><div class="line">    server unix:///home/zss/zss.sock; # 设置sock文件,用sock模式访问，</div><div class="line">   # server 127.0.0.1:8002; # 用tcp/ip访问，2种模式都可以，我用的是上面的。</div><div class="line">&#125;</div><div class="line"># configuration of the server</div><div class="line">server &#123;</div><div class="line">    # the port your site will be served on</div><div class="line">    listen      80;</div><div class="line">    # the domain name it will serve for</div><div class="line">    server_name vanxv.vicp.net; # 域名</div><div class="line">    charset     utf-8;</div><div class="line"></div><div class="line">    # max upload size</div><div class="line">    client_max_body_size 75M;   # adjust to taste</div><div class="line"></div><div class="line">    # Django media</div><div class="line">    location /media  &#123;</div><div class="line">        alias /home/zss/media;  # 静态文件</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    location /static &#123;</div><div class="line">        alias /home/zss/static; # static文件</div><div class="line">    &#125;</div><div class="line">    location / &#123;</div><div class="line">        uwsgi_pass  zss;</div><div class="line">        include     /home/zss/uwsgi_params; # 指定params文件位置</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这个配置文件告诉nginx提供媒体和静态文件的文件系统,以及处理请求,要求Django的设置。对于大型部署它是一种不错的做法让一台服务器处理静态/媒体文件,另一个处理Django应用程序</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo ln -s /home/zss/zss_nginx.conf /etc/nginx/sites-enabled/</div></pre></td></tr></table></figure>
+<p>连接 nginx/sites-enabled/ 让nginx可以看到这个文件</p>
+<p>重启nginx</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo nginx -s reload</div></pre></td></tr></table></figure>
+<p>创建 <em>mysite_uwsgi.ini</em> django 下面<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"># mysite_uwsgi.ini file</div><div class="line">[uwsgi]</div><div class="line"></div><div class="line"># Django-related settings</div><div class="line"># the base directory (full path)</div><div class="line">chdir           = /path/to/your/project</div><div class="line"># Django&apos;s wsgi file</div><div class="line">module          = project.wsgi</div><div class="line"># the virtualenv (full path)</div><div class="line">#home            = /path/to/virtualenv</div><div class="line"></div><div class="line"># process-related settings</div><div class="line"># master</div><div class="line">master          = true</div><div class="line"># maximum number of worker processes</div><div class="line">processes       = 10</div><div class="line"># the socket (use the full path to be safe</div><div class="line">socket          = /path/to/your/project/mysite.sock</div><div class="line"># ... with appropriate permissions - may be needed</div><div class="line"># chmod-socket    = 664</div><div class="line"># clear environment on exit</div><div class="line">vacuum          = true</div></pre></td></tr></table></figure></p>
+<p>下面是我的配置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">#ite_uwsgi.ini file</div><div class="line">[uwsgi]</div><div class="line">chdir           = /home/zss/</div><div class="line">module          = zhess103.wsgi</div><div class="line"></div><div class="line"># process-related settings</div><div class="line"># master</div><div class="line">master          = true</div><div class="line"># maximum number of worker processes</div><div class="line">processes       = 6</div><div class="line"># the socket (use the full path to be safe</div><div class="line">socket          = /home/zss/zss.sock</div><div class="line"># ... with appropriate permissions - may be needed</div><div class="line">chmod-socket    = 666</div><div class="line"># clear environment on exit</div><div class="line">vacuum          = true</div><div class="line">pidfile = /home/zss/zss.pid</div><div class="line">disable-logging = true</div><div class="line">daemonize = /var/log/zss_uwsgi.log</div></pre></td></tr></table></figure></p>
+<p><em>home  = /path/to/virtualenv</em> 模拟环境的网址，我的没用所以直接删了<br>chdir= /home/zss/      项目网址<br>module= zhess103.wsgi  django默认自带的wsgi配置文件<br>master 主线程<br>processes = 6 进程数，<br>socket的地址<br>chmod-socket socket的权限</p>
+<p>disable-logging = true<br>daemonize = /var/log/zss_uwsgi.log<br>log日志</p>
+<p>pidfile = /home/zss/zss.pid 进程文件</p>
+<p>测试与载入配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo uwsgi --ini uwsgi_zss.ini</div><div class="line">sudo uwsgi -d uwsgi_zss.ini</div></pre></td></tr></table></figure></p>
+<p>sudo uwsgi –ini uwsgi_zss.ini<br>sudo vim uwsgi_zss.ini</p>
+<p>关闭进程和重啓的方法<br>sudo uwsgi –stop zss.pid<br>sudo uwsgi –ini uwsgi_zss.ini</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-bug " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://vanxv.github.io/2017/06/26/please-start-google-chrome-as-a-normal-user-ubuntu-chrome/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vanxvBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/06/26/please-start-google-chrome-as-a-normal-user-ubuntu-chrome/" itemprop="url">please start google chrome as a normal user ubuntu chrome</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-26T07:52:05+08:00">
+                2017-06-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><img src="http://olsv0lzsv.bkt.clouddn.com/2017062668405B00AEC24-1733-4705-ABFC-83B655B46F5B.png" alt="2017062668405B00AEC24-1733-4705-ABFC-83B655B46F5B.png"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo vim /opt/google/chrome/google-chrome</div></pre></td></tr></table></figure>
+<p>找到最后一行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">exec -a &quot;$0&quot; &quot;$HERE/chrome&quot; &quot;$@&quot;</div></pre></td></tr></table></figure></p>
+<p>修改为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">exec -a &quot;$0&quot; &quot;$HERE/chrome&quot; &quot;$@&quot; --user-data-dir --no-sandbox</div></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://vanxv.github.io/2017/06/21/ubuntu-install-django-mysql-nginx-uwsgi/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vanxvBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/06/21/ubuntu-install-django-mysql-nginx-uwsgi/" itemprop="url">ubuntu_install_django_mysql_nginx_uwsgi</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-21T23:38:25+08:00">
+                2017-06-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>#安装mysql<br>sudo apt-get update<br>sudo apt-get install mysql-server<br>sudo mysql_secure_installation</p>
+<p>测试：<br>systemctl status mysql.service</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">mysql.service - MySQL Community Server</div><div class="line">Loaded: loaded (/lib/systemd/system/mysql.service; enabled; vendor preset: en</div><div class="line">Active: active (running) since Wed 2016-11-23 21:21:25 UTC; 30min ago</div><div class="line">Main PID: 3754 (mysqld)</div><div class="line">    Tasks: 28</div><div class="line">   Memory: 142.3M</div><div class="line">      CPU: 1.994s</div><div class="line">   CGroup: /system.slice/mysql.service</div><div class="line">           └─3754 /usr/sbin/mysqld</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql -u root -p</div></pre></td></tr></table></figure>
+<p>#安装nginx<br>sudo apt-get install nginx</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://vanxv.github.io/2017/06/21/python-mysql-cursor-execute-using-variable/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vanxvBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/06/21/python-mysql-cursor-execute-using-variable/" itemprop="url">python mysql cursor.execute__using_variable</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-21T13:20:05+08:00">
+                2017-06-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> pymysql</div><div class="line"><span class="comment"># 创建连接</span></div><div class="line">conn = pymysql.connect(host=<span class="string">'127.0.0.1'</span>, port=<span class="number">3306</span>, user=<span class="string">'root'</span>, passwd=<span class="string">'1q2w3e4r'</span>, db=<span class="string">'zss'</span>, charset=<span class="string">'utf8'</span>)</div><div class="line"><span class="comment"># 创建游标</span></div><div class="line">cursor = conn.cursor()</div><div class="line"><span class="comment"># 执行SQL，并返回收影响行数</span></div><div class="line">valueNone = <span class="keyword">None</span></div><div class="line">sql = <span class="string">"INSERT INTO financial_alipaydetail VALUES (%s,%s,%s,%s,%s,%s,%s)"</span></div><div class="line">cmd = (cursor.lastrowid,res[<span class="number">1</span>], res[<span class="number">0</span>], res[<span class="number">2</span>], datetime.now(), self.alipayusername, valueNone)</div><div class="line">effect_row = cursor.execute(sql,cmd)</div><div class="line">conn.commit()</div></pre></td></tr></table></figure>
+<p>valueNone = None<br>插入控制<br>cursor.lastrowid<br>自动生成id<br>effect_row = cursor.execute(sql,cmd)<br>执行语句<br>保存</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://vanxv.github.io/2017/06/21/cursor-execute-not-using-variable/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vanxvBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/06/21/cursor-execute-not-using-variable/" itemprop="url">cursor.execute_not_using_variable</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-21T09:29:27+08:00">
+                2017-06-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>bug<br><img src="http://olsv0lzsv.bkt.clouddn.com/20170621284673016A986-11E3-4BD8-9328-557C52E37C1E.png" alt="20170621284673016A986-11E3-4BD8-9328-557C52E37C1E.png"><br>原代码<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">selectalipayid4 = cursor.execute(<span class="string">"select * from financial_alipaydetail WHERE alipayid=testres1;"</span>)</div></pre></td></tr></table></figure></p>
+<p>修改后的代码<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">selectalipayid4 = cursor.execute(<span class="string">"select * from financial_alipaydetail WHERE alipayid='"</span> +  testres1 + <span class="string">"';"</span>)</div></pre></td></tr></table></figure></p>
+<p>因为cursor.execute不能直接传值过去，所以有这个问题<br>debug的办法：</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://vanxv.github.io/2017/06/18/Python-object-oriented/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vanxvBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/06/18/Python-object-oriented/" itemprop="url">Python_object_oriented</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-18T14:41:13+08:00">
+                2017-06-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>#概述</p>
+<ol>
+<li>面向过程： 根据业务逻辑从上到下写代码</li>
+<li>函数式： 将某功能代码封装到函数中，日后无需重复写</li>
+<li>面向对象： 对函数进行分类和封装，让开发“更快更好更强“</li>
+</ol>
+<p>面向过程编程最容易接受，往往用一段代码来实现指定功能，<br>开发过程最常见的操作就是复制粘贴，</p>
+<ol>
+<li>面向过程编程：<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">    <span class="keyword">if</span> cpu usage &gt; <span class="number">90</span>%:</div><div class="line">        connetion email server</div><div class="line">        send email</div><div class="line">        close connetion</div><div class="line"></div><div class="line">    <span class="keyword">if</span> disk usage &gt; <span class="number">90</span>%:</div><div class="line">        connetion email server</div><div class="line">        send email</div><div class="line">        close connetion</div><div class="line">    <span class="keyword">if</span> memory usage &gt; <span class="number">90</span>%</div><div class="line">        connetion email server</div><div class="line">        send email</div><div class="line">        close connetion</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>2.面向对象编程（Object Oriented Programming，OOP，面向对象程序设计）<br>先<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 创建类</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span>:</span></div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">Bar</span><span class="params">(self)</span>:</span></div><div class="line">        print(<span class="string">'Bar'</span>)</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">Hello</span><span class="params">(self, name)</span>:</span></div><div class="line">        print(<span class="string">'i am %s'</span> %name)</div><div class="line"> </div><div class="line"><span class="comment"># 根据类Foo创建对象obj</span></div><div class="line">obj = Foo()</div><div class="line">obj.Bar()            <span class="comment">#执行Bar方法</span></div><div class="line">obj.Hello(<span class="string">'vanxv'</span>) <span class="comment">#执行Hello方法</span></div></pre></td></tr></table></figure></p>
+<p>让理解代替看懂。</p>
+<ol>
+<li>面向对象： 【创建对象】 【通过对象执行方法】</li>
+<li>函数编程： 【执行函数】</li>
+</ol>
+<p>类别：一个信息处理中心，丢进去完成了拿回来用。</p>
+<p>面向对象三大特性：</p>
+<ol>
+<li>封装<br>封装， 顾名思义就是将内容封装到某个地方， 以后在区调用他，被称为封装。<br>所以，在使用面向对象的封装特性时， 需要：<ol>
+<li>将内容封装到某处</li>
+<li>从某处调用被封装的内容</li>
+</ol>
+</li>
+</ol>
+<p>第一步： 将内容封装到某处<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">#创建类</div><div class="line">class Foo:</div><div class="line">    #自动执行 init</div><div class="line">    #self </div><div class="line">    def __init__(self, name, age):</div><div class="line">        self.name = name</div><div class="line">        self.age = age</div><div class="line"></div><div class="line">obj1 = Foo(&apos;vanxv&apos;, 18)</div><div class="line">obj2 = Foo(&apos;alex&apos;, 73)</div></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://vanxv.github.io/2017/06/05/popfiledupdata-product/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -800,842 +1533,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://vanxv.github.io/2017/05/26/django/django-rest-freamwork-Tutorial/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="vanxvBlog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/05/26/django/django-rest-freamwork-Tutorial/" itemprop="url">django-rest-freamwork-Tutorial</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-26T17:00:24+08:00">
-                2017-05-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><a href="http://www.django-rest-framework.org/" target="_blank" rel="external">djangoRestFramwork-Url</a><br>djangoRestFramwork是一个非常强大的灵活的工具包对于绑定在网页的APIS</p>
-<p>一些原因你将要可以使用RestFramework：</p>
-<ol>
-<li>这个网页浏览是 一个巨大的可用的开发者工具</li>
-<li>验证策略包括OAuth1a和OAuth2的包。</li>
-<li>支持ORM和非ORM数据源的序列化。</li>
-<li>如果不需要功能更强大的功能，可以自定义一切 - 只需使用基于功能的常规视图。</li>
-<li>广泛的文档和极好的社区支持。</li>
-</ol>
-<p>##环境要求：</p>
-<ol>
-<li>python（2.7 3.*)</li>
-<li>Django(1.8+)</li>
-</ol>
-<p>##需要的安装包:</p>
-<ol>
-<li>coreapi(1.32.0)模式生成支持。</li>
-<li>markdown(2.1.0+)Markable支持可浏览的API。</li>
-<li>django-filter(1.0.1+)搜索支持</li>
-<li>django-crispy-forms 修改显示</li>
-<li>django-guardian(1.1.1+)对象级权限支持。</li>
-</ol>
-<p>##安装方式：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">pip install djangorestframework</div><div class="line">pip install markdown</div><div class="line">pip install django-filter</div></pre></td></tr></table></figure></p>
-<p>###安装方式2<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone git@github.com:encode/django-rest-framework.git</div></pre></td></tr></table></figure></p>
-<p>把文件复制过去。</p>
-<p>在setting.py中增加<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">INSTALLED_APPS = (</div><div class="line">    ...</div><div class="line">    &apos;rest_framework&apos;,</div><div class="line">)</div></pre></td></tr></table></figure></p>
-<p>在<strong>urls.py</strong>中增加<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">urlpatterns = [</div><div class="line">    ...</div><div class="line">    url(<span class="string">r'^api-auth/'</span>, include(<span class="string">'rest_framework.urls'</span>, namespace=<span class="string">'rest_framework'</span>))</div><div class="line">]</div></pre></td></tr></table></figure></p>
-<p>然后运行访问 <a href="http://127.0.0.1:8000/api-auth/" target="_blank" rel="external">http://127.0.0.1:8000/api-auth/</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://vanxv.github.io/2017/05/26/brain/Brain-ware-to-status-mind/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="vanxvBlog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/05/26/brain/Brain-ware-to-status-mind/" itemprop="url">脑电波对心情的影响状态Brain-ware-to-status-mind</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-26T11:07:10+08:00">
-                2017-05-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>#前言<br>了解大脑更好的帮助我们调节状态，了解自己，也了解他人。<br>大多数人一直很关心自己的心情状态，而大脑脑波对我们的状态影响至关重要。<br>在这篇文章中，我们将看看我们的五个脑波频率以及它们如何影响我们的心态。</p>
-<p>#我们是自己的控制者吗？🐘<br>我们很容易忘记我们是我们的控制者，<br>我们不想受外界影响，但实际上是由我们的想法，信念和心态组成。<br>因此，通过了解更深层次的意识状态，您可以打开潜意识，并随心所欲地创造出现实。<br>要做到这一点，第一步是理解你的不同的大脑频率。<br>难道你知道我们一共拥有5个波（Beta, Alpha, Theta, Delta and Gamma)<br>并且每个频率以每秒周期（Hz）测量，<br>并且具有表示特定水平的大脑活动和独特的意识状态的自己的一组特征？</p>
-<p>##1. Beta (14-40Hz) — 这唤醒意识和推理的波段<br>Beta大脑电波是关联唤醒意识和提高警觉状态逻辑和批判推理。<br>虽然Beta脑波对于全天的有效功能很重要，但也可以转化为压力，焦虑和不安。</p>
-<p>这个声音来至Beta能描述作为要这个唠叨，Beta波越高越焦虑。</p>
-<p>##2. Alpha (7.5-14Hz) — the deep relaxation wave</p>
-<p>##2. Alpha (7.5-14Hz) — 深度放松的波段<br>Alpha脑电波是在放松状态和闭眼状态，<br>什么时候你是在做这个可爱的白日梦和冥想时<br>这个波段可以提交你的成功率<br>可以提高您的想象力，可视化，记忆力，学习和集中度。<br>这个关口是通往你的潜意识大门和最基础的意识。</p>
-<p>所以在做瑜伽冥想心理治疗的时候需要降Alpha波以进入你的潜意识。</p>
-<p>##3. Theta (4-7.5Hz) —  the light meditation and sleeping wave</p>
-<p>##3. Theta (4-7.5Hz) —  这个冥想和睡眠的波段<br>Theta脑波在深冥想和轻松睡眠期间存在，包括重要的REM梦想状态，<br>它是你潜意识的领域,只有经验丰富的瞬间</p>
-<p>Theta可以体验到与宇宙深度的精神联系和团结的感觉。</p>
-<p>##4. Delta (0.5-4Hz) — the deep sleep wave深度睡眠波<br>三角洲频率是最慢的频率，在深度，梦幻般的睡眠以及非常深刻的超验冥想中体验到了认知完全脱离。<br>三角洲是你无意识心灵的境界，也是通往普遍思想和集体无意识的门户，其中收到的信息在意识层面上是不可用的。<br>在许多事情中，深度睡眠对于愈合过程很重要 - 因为它与深层愈合和再生有关。因此，没有足够的深度睡眠会对您的健康造成不利影响。</p>
-<p>##5. Gamma (above 40Hz) – The Insight Wave洞察波<br>这个范围是最近发现的，是40Hz以上最快的频率。<br>虽然对这种心态很少了解，但初步研究表明，伽马波与洞察力和高级别信息处理突发有关。</p>
-<p><a href="http://www.mindvalleyacademy.com/blog/mind/brain-waves" target="_blank" rel="external">原文url点击跳过去</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://vanxv.github.io/2017/05/23/shadowsocks/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="vanxvBlog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/05/23/shadowsocks/" itemprop="url">shadowsocks</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-23T16:24:15+08:00">
-                2017-05-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><strong>shadowsocks</strong>是一个科学上网的工具<br>下载地址：<br><a href="http://www.uudaili.org/windows-shadowsocks.html" target="_blank" rel="external">http://www.uudaili.org/windows-shadowsocks.html</a></p>
-<p><a href="http://ossfiles.fyvps.com/ssclient/Shadowsocks-win-2.5.zip" target="_blank" rel="external">http://ossfiles.fyvps.com/ssclient/Shadowsocks-win-2.5.zip</a><br>需要安装 .NET Framework 3.5 版本,推荐 win7 和 XP 客户使用<br><a href="http://ossfiles.fyvps.com/ssclient/Shadowsocks-win-dotnet4.0-2.5.zip" target="_blank" rel="external">http://ossfiles.fyvps.com/ssclient/Shadowsocks-win-dotnet4.0-2.5.zip</a><br>需要安装 .NET Framework 4.0 版本,推荐 win8 和 win10 客户使用<br><a href="http://ossfiles.fyvps.com/ssclient/ShadowsocksR-win-3.8.9.0e.7z" target="_blank" rel="external">http://ossfiles.fyvps.com/ssclient/ShadowsocksR-win-3.8.9.0e.7z</a><br>ShadowsocksR 版本支持 混淆和自定义参数</p>
-<p>下载完成后，解压,就一个文件,很简单：</p>
-<p>shadowsocks</p>
-<p><img src="http://www.uudaili.org/usr/uploads/2014/11/98898180.jpg" alt="img"></p>
-<p>双击这个文件，然后在你的任务栏右下角就会有个白色的小飞机。</p>
-<p><img src="http://www.uudaili.org/usr/uploads/2014/11/3628917924.jpg" alt="img"></p>
-<p>shadowsocks任务栏</p>
-<p><img src="http://www.uudaili.org/usr/uploads/2015/02/1646217930.png" alt="img"></p>
-<p>注意看任务栏右下角，不用一直双击，要不会打开很多个。<br>右击，然后选择服务器 –编辑服务器.如图：</p>
-<p><img src="http://www.uudaili.org/usr/uploads/2015/02/2649610814.png" alt="img"></p>
-<p>编辑Shadowsocks信息</p>
-<p>IP:119.28.69.81</p>
-<p>加密：aes-256-cfb</p>
-<p>端口：8388</p>
-<p>密码找我要<br>加密</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://vanxv.github.io/2017/05/15/ORID/ORID20170515/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="vanxvBlog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/05/15/ORID/ORID20170515/" itemprop="url">ORID20170515</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-15T01:28:27+08:00">
-                2017-05-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>##Objective</p>
-<p>####完成了什么?</p>
-<ul>
-<li>[x]anki</li>
-<li>[x]打坐</li>
-<li>[x]orid</li>
-<li>[x]django：任务流程开写，完成25%</li>
-<li>[x]跟进订单页面转化数据</li>
-<li>[x]沟通卢威项目的事</li>
-</ul>
-<p>关于今天的课程, 你记得什么?</p>
-<ol>
-<li>番茄有用</li>
-<li>去图书馆可以增加元镜像</li>
-<li>数据波动很厉害</li>
-</ol>
-<hr>
-<p>##Reflective</p>
-<p>####你要如何形容今天的情绪<br>还可以，了解到了</p>
-<p>####今天的高峰是什么?<br>上午7-17</p>
-<p>##低点是什么?<br>下午17-24</p>
-<hr>
-<p>##Interpretive</p>
-<p>####我们今天学到了什么?<br>聚焦用番茄钟。</p>
-<p>####今天一个重要的领悟是什么?<br>番茄钟<br>打坐。<br>神经元</p>
-<p>##Decisional</p>
-<p>####我们会如何用一句话形容今天的工作<br>抄中学，抄中复盘。</p>
-<p>##有哪些工作需要明天继续努力?</p>
-<ul>
-<li>[ ]卢威的项目量化,文档</li>
-<li>[x]打坐</li>
-<li>[ ]orid</li>
-<li>[ ]django：任务流程开写，完成50%</li>
-<li>[x]anki</li>
-<li>[x]去图书馆，用番茄钟</li>
-<li>[ ]写woop，看看每天写，每天读是什么体验</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://vanxv.github.io/2017/05/15/ORID/ORID20170516/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="vanxvBlog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/05/15/ORID/ORID20170516/" itemprop="url">ORID20170515</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-15T01:28:27+08:00">
-                2017-05-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>##Objective</p>
-<p>####完成了什么?</p>
-<ul>
-<li>[x]卢威的项目量化,文档</li>
-<li>[x]打坐</li>
-<li>[x]orid</li>
-<li>[x]django：任务流程开写，完成20%</li>
-<li>[x]anki</li>
-<li>[x]去图书馆，用番茄钟</li>
-<li>[ ]写woop，看看每天写，每天读是什么体验</li>
-</ul>
-<p>关于今天的课程, 你记得什么?</p>
-<ol>
-<li>番茄有用</li>
-<li>聚焦自己喜欢的事</li>
-</ol>
-<hr>
-<p>##Reflective</p>
-<p>####你要如何形容今天的情绪<br>琐碎的事情太多太乱。</p>
-<p>####今天的高峰是什么?<br>上午7-16</p>
-<p>##低点是什么?<br>下午17-24</p>
-<hr>
-<p>##Interpretive</p>
-<p>####我们今天学到了什么?<br>聚焦用番茄钟。<br>聚焦，多休息</p>
-<p>####今天一个重要的领悟是什么?<br>番茄钟<br>打坐。<br>神经元</p>
-<p>##Decisional</p>
-<p>####我们会如何用一句话形容今天的工作<br>抄中学，抄中复盘。<br>少做，聚焦的做</p>
-<p>##有哪些工作需要明天继续努力?</p>
-<ul>
-<li>[ ]打坐</li>
-<li>[ ]orid</li>
-<li>[ ]django：任务流程开写，完成50%</li>
-<li>[ ]anki</li>
-<li>[ ]写woop，看看每天写，每天读是什么体验</li>
-<li>[ ]php bug</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://vanxv.github.io/2017/05/14/ORID/ORID20170514/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="vanxvBlog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/05/14/ORID/ORID20170514/" itemprop="url">ORID20170513</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-14T01:28:27+08:00">
-                2017-05-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>##Objective</p>
-<p>####完成了什么?</p>
-<ul>
-<li>[x]anki</li>
-<li>[x]打坐</li>
-<li>[x]orid</li>
-<li>[x]django 查看源码 2小时</li>
-<li>[x]买癌症书</li>
-<li>[ ]爬虫任务</li>
-</ul>
-<p>关于今天的课程, 你记得什么?</p>
-<ol>
-<li>沟通有问题</li>
-<li>番茄有用</li>
-<li>任务系统，其实就是流程+表单</li>
-</ol>
-<hr>
-<p>##Reflective</p>
-<p>####你要如何形容今天的情绪<br>还可以</p>
-<p>####今天的高峰是什么?<br>上午7-11<br>下午2-3</p>
-<p>##低点是什么?</p>
-<h2 id="下午都是"><a href="#下午都是" class="headerlink" title="下午都是"></a>下午都是</h2><p>##Interpretive</p>
-<p>####我们今天学到了什么?<br>看源码写教程</p>
-<p>####今天一个重要的领悟是什么?<br>没有看不懂的源码。</p>
-<p>##Decisional</p>
-<p>####我们会如何用一句话形容今天的工作<br>做中❄学，不懂的google</p>
-<p>##有哪些工作需要明天继续努力?</p>
-<ul>
-<li>[ ]anki</li>
-<li>[ ]打坐</li>
-<li>[ ]orid</li>
-<li>[ ]django：任务流程开写，完成50%</li>
-<li>[ ]跟进订单页面转化数据</li>
-<li>[ ]写woop，看看每天写，每天读是什么体验</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1680,7 +1582,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-count">45</span>
                 <span class="site-state-item-name">Artikel</span>
               </a>
             </div>
@@ -1702,7 +1604,7 @@
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-count">21</span>
                 <span class="site-state-item-name">Tags</span>
               
             </div>
