@@ -253,6 +253,127 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://vanxv.github.io/2017/07/19/python-chinese-OCR-tesseract/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vanxvBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/19/python-chinese-OCR-tesseract/" itemprop="url">python_chinese_OCR_tesseract利用Tesseract图片文字识别</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-19T16:12:08+08:00">
+                2017-07-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="关于esseract"><a href="#关于esseract" class="headerlink" title="##关于esseract"></a>##关于esseract</h2><p>这个词的意思是”超立方体”，指的是几何学里的四维标准方体，又称”正八胞体”，是一款被广泛使用的开源 OCR 工具。<br>Tesseract 已经有 30 年历史，开始它是惠普实验室于1985年开始研发的一款专利软件，到1995年一件成为OCR业界内最准确的识别引擎之一。然而，HP不久便决定放弃OCR业务，Tesseract从此尘封。数年之后，HP意识到与其将Tesseract束之高阁，还不如贡献给开源，让其重焕新生。在 2005 年，Tesseract由美国内华达州信息技术研究所获得，并求助于Google对Tesseract进行改进、消除Bug、优化工作，并开源，其后一直由 Google 赞助进行后续的开发和维护。因为其免费与较好的效果，许多的个人开发者以及一些较小的团队在使用着 Tesseract ，诸如验证码识别、车牌号识别等应用中，不难见到 Tesseract 的身影。<br>现在Tesseract托管在Github上，大家有兴趣可以上Github上Star或Frok该项目。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="##安装"></a>##安装</h2><h2 id="MAC环境下安装"><a href="#MAC环境下安装" class="headerlink" title="###MAC环境下安装"></a>###MAC环境下安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install tesseract</div></pre></td></tr></table></figure>
+<p><a href="https://github.com/tesseract-ocr/tesseract/wiki/Compiling" target="_blank" rel="external">其他平台安装的办法</a><br>默认的情况下只安装了英文的，中文的得自己安装</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">brew intsall tesseract</div><div class="line">cd /usr/local/Cellar/tesseract/&#123;version&#125;/share/tessdata</div><div class="line">wget https://github.com/tesseract-ocr/tessdata/raw/master/chi_sim.traineddata</div></pre></td></tr></table></figure>
+<h2 id="全语言安装"><a href="#全语言安装" class="headerlink" title="##全语言安装"></a>##全语言安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install tesseract --all-languages</div></pre></td></tr></table></figure>
+<h2 id="查看所有语言"><a href="#查看所有语言" class="headerlink" title="查看所有语言"></a>查看所有语言</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tesseract --list-langs</div></pre></td></tr></table></figure>
+<h2 id="语言生成文件"><a href="#语言生成文件" class="headerlink" title="语言生成文件"></a>语言生成文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tesseract pyocr.png paper -l chi_sim</div></pre></td></tr></table></figure>
+<p>pyocr.png图片<br>paper生成的文本名<br>-l chi_sim 指定的语言<br>然后可以在目录下找到paper.txt里面有生成的文本</p>
+<p><a href="http://tesseract-ocr.github.io/index.html" target="_blank" rel="external">参考tesseract博客</a></p>
+<h2 id="python如何使用tesseract"><a href="#python如何使用tesseract" class="headerlink" title="##python如何使用tesseract"></a>##python如何使用tesseract</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> os</div><div class="line"><span class="keyword">import</span> subprocess</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">image_to_string</span><span class="params">(img, cleanup=True, plus=<span class="string">''</span>)</span>:</span></div><div class="line">    <span class="comment"># cleanup为True则识别完成后删除生成的文本文件</span></div><div class="line">    <span class="comment"># plus参数为给tesseract的附加高级参数</span></div><div class="line">    subprocess.check_output(<span class="string">'tesseract '</span> + img + <span class="string">' '</span> +</div><div class="line">                            img + <span class="string">' '</span> + plus, shell=<span class="keyword">True</span>)  <span class="comment"># 生成同名txt文件</span></div><div class="line">    text = <span class="string">''</span></div><div class="line">    <span class="keyword">with</span> open(img + <span class="string">'.txt'</span>, <span class="string">'r'</span>) <span class="keyword">as</span> f:</div><div class="line">        text = f.read().strip()</div><div class="line">    <span class="keyword">if</span> cleanup:</div><div class="line">        os.remove(img + <span class="string">'.txt'</span>)</div><div class="line">    <span class="keyword">return</span> text</div><div class="line"></div><div class="line">print(image_to_string(<span class="string">'/Users/VANXV/Downloads/pyocr.png'</span>, <span class="keyword">False</span>, <span class="string">'-l chi_sim'</span>))<span class="comment">#打印中文</span></div><div class="line">print(image_to_string(<span class="string">'./phototest.tif'</span>))  <span class="comment"># 打印识别出的文本，删除txt文件</span></div><div class="line">print(image_to_string(<span class="string">'./phototest.tif'</span>, <span class="keyword">False</span>))  <span class="comment"># 打印识别出的文本，不删除txt文件</span></div><div class="line">print(image_to_string(<span class="string">'./phototest.tif'</span>, <span class="keyword">False</span>, <span class="string">'-l eng'</span>))  </div><div class="line"><span class="comment"># 打印识别出的文本，不删除txt文件，同时提供高级参数</span></div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://vanxv.github.io/2017/07/19/python-multiprocessing/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1348,120 +1469,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://vanxv.github.io/2017/07/02/django/django-mysql-distinct/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="vanxvBlog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/07/02/django/django-mysql-distinct/" itemprop="url">django_mysql_distinct</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-02T06:59:29+08:00">
-                2017-07-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><img src="http://olsv0lzsv.bkt.clouddn.com/201707026036410A59F713BA348D7BF7655E9C812644F.jpg" alt="img"></p>
-<p>mysql不支持检索<br>该用raw语句查询</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">buyerIndexSql = <span class="string">'SELECT *  FROM cryapp_cryorder WHERE ShopId_id &lt;&gt; '</span>+ str(lockOrderlist[<span class="number">0</span>].id) + buyerIndexSqlMove + <span class="string">' GROUP BY GoodId_id'</span></div><div class="line">orderdict = CryOrder.objects.raw(buyerIndexSql)</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1511,7 +1518,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">47</span>
+                <span class="site-state-item-count">48</span>
                 <span class="site-state-item-name">Artikel</span>
               </a>
             </div>
@@ -1533,7 +1540,7 @@
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-count">22</span>
                 <span class="site-state-item-name">Tags</span>
               
             </div>
