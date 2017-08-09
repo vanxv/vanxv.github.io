@@ -253,6 +253,127 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://vanxv.github.io/2017/07/12/appium/appium-python-running-bug-driver-webdriver-Remote-http-127-0-0-1-4723-wd-hub-desired-caps/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vanxvBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/12/appium/appium-python-running-bug-driver-webdriver-Remote-http-127-0-0-1-4723-wd-hub-desired-caps/" itemprop="url">appium python running bug-driver webdriver.Remote(http://127.0.0.1:4723/wd/hub, desired_caps)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-12T16:10:19+08:00">
+                2017-07-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>bug coding:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">Traceback (most recent call last):</div><div class="line">  File <span class="string">"first_appium.py"</span>, line <span class="number">51</span>, <span class="keyword">in</span> &lt;module&gt;</div><div class="line">    driver = webdriver.Remote(<span class="string">'http://127.0.0.1:4723/wd/hub'</span>, desired_caps)</div><div class="line">  File <span class="string">"/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/appium/webdriver/webdriver.py"</span>, line <span class="number">36</span>, <span class="keyword">in</span> __init__</div><div class="line">    super(WebDriver, self).__init__(command_executor, desired_capabilities, browser_profile, proxy, keep_alive)</div><div class="line">  File <span class="string">"/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/selenium/webdriver/remote/webdriver.py"</span>, line <span class="number">98</span>, <span class="keyword">in</span> __init__</div><div class="line">    self.start_session(desired_capabilities, browser_profile)</div><div class="line">  File <span class="string">"/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/selenium/webdriver/remote/webdriver.py"</span>, line <span class="number">188</span>, <span class="keyword">in</span> start_session</div><div class="line">    response = self.execute(Command.NEW_SESSION, parameters)</div><div class="line">  File <span class="string">"/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/selenium/webdriver/remote/webdriver.py"</span>, line <span class="number">256</span>, <span class="keyword">in</span> execute</div><div class="line">    self.error_handler.check_response(response)</div><div class="line">  File <span class="string">"/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/selenium/webdriver/remote/errorhandler.py"</span>, line <span class="number">165</span>, <span class="keyword">in</span> check_response</div><div class="line">    <span class="keyword">raise</span> exception_class(value)</div><div class="line">selenium.common.exceptions.WebDriverException: Message: Parameters were incorrect. We wanted &#123;<span class="string">"required"</span>:[<span class="string">"desiredCapabilities"</span>],<span class="string">"optional"</span>:[<span class="string">"requiredCapabilities"</span>,<span class="string">"sessionId"</span>,<span class="string">"id"</span>,<span class="string">"sessionId"</span>,<span class="string">"id"</span>]&#125; <span class="keyword">and</span> you sent [<span class="string">"capabilities"</span>,<span class="string">"desiredCapabilities"</span>]</div></pre></td></tr></table></figure>
+<p>原因：<br>因为用了python2.7<br>这个系统得用python3.7的</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">下面ip的意思：</div><div class="line">![img](http://images2015.cnblogs.com/blog/<span class="number">1070438</span>/<span class="number">201704</span>/<span class="number">1070438</span><span class="number">-20170429135650662</span><span class="number">-641596253.</span>png)</div><div class="line"></div><div class="line">设置到服务器</div></pre></td></tr></table></figure>
+<p>###原理：</p>
+<ol>
+<li>服务器通过adb 连接到设备</li>
+<li>代码通过服务器，告诉服务器连接哪一台设备</li>
+<li>执行代码。</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://vanxv.github.io/2017/07/08/appium/appium-mac-environment-settings/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1384,125 +1505,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://vanxv.github.io/2017/06/21/cursor-execute-not-using-variable/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="vanxvBlog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/06/21/cursor-execute-not-using-variable/" itemprop="url">cursor.execute_not_using_variable</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-21T09:29:27+08:00">
-                2017-06-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>bug<br><img src="http://olsv0lzsv.bkt.clouddn.com/20170621284673016A986-11E3-4BD8-9328-557C52E37C1E.png" alt="20170621284673016A986-11E3-4BD8-9328-557C52E37C1E.png"><br>原代码<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">selectalipayid4 = cursor.execute(<span class="string">"select * from financial_alipaydetail WHERE alipayid=testres1;"</span>)</div></pre></td></tr></table></figure></p>
-<p>修改后的代码<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">selectalipayid4 = cursor.execute(<span class="string">"select * from financial_alipaydetail WHERE alipayid='"</span> +  testres1 + <span class="string">"';"</span>)</div></pre></td></tr></table></figure></p>
-<p>因为cursor.execute不能直接传值过去，所以有这个问题<br>debug的办法：</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1547,7 +1554,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-count">51</span>
                 <span class="site-state-item-name">Artikel</span>
               </a>
             </div>

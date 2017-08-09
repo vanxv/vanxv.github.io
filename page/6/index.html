@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="bug,django," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -92,17 +92,12 @@
 
 
 
-<meta name="description" content="原代码：url文件中1url(r&amp;apos;^task/(?P&amp;lt;deviceName&amp;gt;.*)/(?P&amp;lt;platformVersion&amp;gt;.*)/$&amp;apos;, views.Task, name=&amp;apos;autoreturn&amp;apos;), 下面是views.py的方法123def Task(request, deviceName = &amp;apos;&amp;apos;, plat">
-<meta name="keywords" content="bug,django">
-<meta property="og:type" content="article">
-<meta property="og:title" content="django_get_url_parameter_bug">
-<meta property="og:url" content="http://vanxv.github.io/2017/07/16/django/django-get-url-parameter-bug/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="vanxvBlog">
+<meta property="og:url" content="http://vanxv.github.io/page/6/index.html">
 <meta property="og:site_name" content="vanxvBlog">
-<meta property="og:description" content="原代码：url文件中1url(r&amp;apos;^task/(?P&amp;lt;deviceName&amp;gt;.*)/(?P&amp;lt;platformVersion&amp;gt;.*)/$&amp;apos;, views.Task, name=&amp;apos;autoreturn&amp;apos;), 下面是views.py的方法123def Task(request, deviceName = &amp;apos;&amp;apos;, plat">
-<meta property="og:updated_time" content="2017-07-16T12:37:12.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="django_get_url_parameter_bug">
-<meta name="twitter:description" content="原代码：url文件中1url(r&amp;apos;^task/(?P&amp;lt;deviceName&amp;gt;.*)/(?P&amp;lt;platformVersion&amp;gt;.*)/$&amp;apos;, views.Task, name=&amp;apos;autoreturn&amp;apos;), 下面是views.py的方法123def Task(request, deviceName = &amp;apos;&amp;apos;, plat">
+<meta name="twitter:title" content="vanxvBlog">
 
 
 
@@ -130,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://vanxv.github.io/2017/07/16/django/django-get-url-parameter-bug/"/>
+  <link rel="canonical" href="http://vanxv.github.io/page/6/"/>
 
 
 
 
 
-  <title>django_get_url_parameter_bug | vanxvBlog</title>
+  <title>vanxvBlog</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="">
@@ -162,7 +157,9 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail ">
+  <div class="container sidebar-position-left 
+   page-home 
+ ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -245,9 +242,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-
-  <div id="posts" class="posts-expand">
+  <section id="posts" class="posts-expand">
     
+      
 
   
 
@@ -256,7 +253,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://vanxv.github.io/2017/07/16/django/django-get-url-parameter-bug/">
+    <link itemprop="mainEntityOfPage" href="http://vanxv.github.io/2014/03/03/bug/bug/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -273,7 +270,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">django_get_url_parameter_bug</h1>
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2014/03/03/bug/bug/" itemprop="url">python3 无法安装Sendkeys</a></h1>
         
 
         <div class="post-meta">
@@ -285,8 +284,8 @@
               
                 <span class="post-meta-item-text">Veröffentlicht am</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-16T20:35:11+08:00">
-                2017-07-16
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-03-03T19:07:43+08:00">
+                2014-03-03
               </time>
             
 
@@ -295,6 +294,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/bug/" itemprop="url" rel="index">
+                    <span itemprop="name">bug</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -320,83 +341,54 @@
       
 
       
-        <p>原代码：<br>url文件中<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">url(r&apos;^task/(?P&lt;deviceName&gt;.*)/(?P&lt;platformVersion&gt;.*)/$&apos;, views.Task, name=&apos;autoreturn&apos;),</div></pre></td></tr></table></figure></p>
-<p>下面是views.py的方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">def Task(request, deviceName = &apos;&apos;, platformVersion=&apos;&apos;):</div><div class="line">    if request.method==&apos;POST&apos;:</div><div class="line">        return JsonResponse(&#123;&apos;foo&apos;: &apos;bar&apos;&#125;)</div></pre></td></tr></table></figure></p>
-<p>bug原因：在def Task(request, deviceName = ‘’, platformVersion=’’):<br>后面没有加 deviceName = ‘’, platformVersion=’’</p>
-<p>所以报错，所有的传值，得def在后面附加参数</p>
-
+        
+          生命在于折腾，又把博客折腾到Hexo了。给Hexo点赞。
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2014/03/03/bug/bug/">
+              Weiterlesen &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
       
     </div>
 
     <div>
       
-        
-
-      
     </div>
 
     <div>
       
-        
-
-      
     </div>
 
     <div>
-      
-        
-
       
     </div>
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/bug/" rel="tag"># bug</a>
-          
-            <a href="/tags/django/" rel="tag"># django</a>
-          
-        </div>
+
       
 
       
-        
-      
 
       
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2017/07/19/appium/appium-reset/" rel="next" title="appium_app_reset_session_reset">
-                <i class="fa fa-chevron-left"></i> appium_app_reset_session_reset
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/07/14/python/python-class-tutorial/" rel="prev" title="python_class_tutorial">
-                python_class_tutorial <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
       
-
-      
+        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
+    
+  </section>
 
-    <div class="post-spread">
-      
-    </div>
-  </div>
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span>
+  </nav>
+
 
 
           </div>
@@ -404,10 +396,6 @@
 
 
           
-  <div class="comments" id="comments">
-    
-  </div>
-
 
         </div>
         
@@ -610,10 +598,6 @@
   
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
-
-
 
   
 

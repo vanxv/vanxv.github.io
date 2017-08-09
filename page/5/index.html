@@ -253,6 +253,151 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://vanxv.github.io/2017/04/26/python/Python-Crawler/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vanxvBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/04/26/python/Python-Crawler/" itemprop="url">Python_Crawler</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-26T15:59:20+08:00">
+                2017-04-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>#架构：<br>1.phanmjs读取数据<br>2.selenium 自动化点击<br>3.selenium下.find_element<br>可读取页面数据<br>4.页面数据拿到后可往下一步读取<br>5.正则可以洗数据</p>
+<p>#目标：</p>
+<ol>
+<li>写出一本教材（给6个月之前的自己）</li>
+<li>写出爬淘宝的爬虫</li>
+</ol>
+<p>#初知爬虫</p>
+<p>##网络分层：我们打开网页结果是：HTML、CSS、JavaScript，这些是前端页面。</p>
+<p>###原理：</p>
+<ol>
+<li>从A机到B机一次对话。</li>
+<li>B发送一串1和0的比特值，电路上的高低电压，构成一个信息：<ol>
+<li>请求头：B本地的路由器A的mac地址和A的ip服务器</li>
+<li>信息体：发一次请求服务器的应用请求</li>
+</ol>
+</li>
+<li>B家路由器收到1和0的比特质，把它理解成数据包（packet）寄到A的ip地址（盖上自己的ip）</li>
+<li>B的数据包游了很多的中介路由器，沿着物理／电路路径前进到A服务器</li>
+<li>A服务器读取数据包请求头里的目标端口（80）然后把它传递对应的应用-网络服务器应用上<pre><code>如果是网站的话，就是GET请求，然后返回一个index.html文件
+</code></pre></li>
+<li>网络对应给Bob返回一个HTML文件<br><img src="http://olsv0lzsv.bkt.clouddn.com/20170426149319554978913.png" alt="img"></li>
+</ol>
+<p>alice收到封包后</p>
+<p>#BeautifulSoup<br>什么是Beautifulsoup？<br>一个读取读取html页面的框架</p>
+<p>下面执行一下代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">from urllib.request import urlopen</div><div class="line">html = urlopen(&quot;http://pythonscraping.com/pages/page1.html&quot;)</div><div class="line">print(html.read())</div></pre></td></tr></table></figure></p>
+<p>可以在里面换html的数据值<br>urlopen：读取页面的html。<br>发送GET到网站，然后返回html代码</p>
+<p>安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip3 install beautifulsoup4</div></pre></td></tr></table></figure></p>
+<p>运行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">from urllib.request import urlopen</div><div class="line">from bs4 import BeautifulSoup</div><div class="line">html = urlopen(&quot;http://www.pythonscraping.com/pages/page1.html&quot;) bsObj = BeautifulSoup(html.read())</div><div class="line">print(bsObj.h1)</div></pre></td></tr></table></figure></p>
+<p><img src="http://olsv0lzsv.bkt.clouddn.com/20170426149319963014053.png" alt="img"><br>可以读取到h1的主题</p>
+<p>还可以print其他的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">from urllib.request import urlopen</div><div class="line">from bs4 import BeautifulSoup</div><div class="line">html = urlopen(&quot;http://www.pythonscraping.com/pages/page1.html&quot;) bsObj = BeautifulSoup(html.read())</div><div class="line">print(bsObj.body)</div><div class="line">print(bsObj.html)</div></pre></td></tr></table></figure></p>
+<p><img src="http://olsv0lzsv.bkt.clouddn.com/20170426149319976073266.png" alt="img"></p>
+<p>原理：BeautifulSoup是读取关键字段标签符</p>
+<p>如果网络不太好，请加判断语句：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> urllib.request <span class="keyword">import</span> urlopen</div><div class="line"><span class="keyword">from</span> urllib.error <span class="keyword">import</span> HTTPError</div><div class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getTitle</span><span class="params">(url)</span>:</span></div><div class="line">        <span class="keyword">try</span>:</div><div class="line">            html = urlopen(url)</div><div class="line">             HTTPError <span class="keyword">as</span> e:</div><div class="line">            <span class="keyword">return</span> <span class="keyword">None</span></div><div class="line">        <span class="keyword">try</span>:</div><div class="line">            bsObj = BeautifulSoup(html.read())</div><div class="line">            title = bsObj.body.h1</div><div class="line">        <span class="keyword">except</span> AttributeError <span class="keyword">as</span> e:</div><div class="line">            <span class="keyword">return</span> <span class="keyword">None</span></div><div class="line">        <span class="keyword">return</span> title</div><div class="line">title = getTitle(<span class="string">"http://www.pythonscraping.com/pages/page1.html"</span>)</div><div class="line"><span class="keyword">if</span> title == <span class="keyword">None</span>:</div><div class="line">    print(<span class="string">"Title could not be found"</span>)</div><div class="line"><span class="keyword">else</span>:</div><div class="line">    print(title)</div></pre></td></tr></table></figure></p>
+<h1 id="BeautifulSoup的find-和findAll"><a href="#BeautifulSoup的find-和findAll" class="headerlink" title="BeautifulSoup的find()和findAll()"></a>BeautifulSoup的find()和findAll()</h1><p>测试下下面的代码<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> urllib.request <span class="keyword">import</span> urlopen</div><div class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</div><div class="line">html = urlopen(<span class="string">"http://www.pythonscraping.com/pages/page3.html"</span>)</div><div class="line">bsObj = BeautifulSoup(html)</div><div class="line"><span class="keyword">for</span> child <span class="keyword">in</span> bsObj.find(<span class="string">"table"</span>,&#123;<span class="string">"id"</span>:<span class="string">"giftList"</span>&#125;).children:</div><div class="line">    print(child)</div></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://vanxv.github.io/2017/04/26/python/qqmarktting/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1599,149 +1744,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://vanxv.github.io/2014/03/03/bug/bug/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="vanxvBlog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2014/03/03/bug/bug/" itemprop="url">python3 无法安装Sendkeys</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-03-03T19:07:43+08:00">
-                2014-03-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/bug/" itemprop="url" rel="index">
-                    <span itemprop="name">bug</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          生命在于折腾，又把博客折腾到Hexo了。给Hexo点赞。
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2014/03/03/bug/bug/">
-              Weiterlesen &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1786,7 +1793,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-count">51</span>
                 <span class="site-state-item-name">Artikel</span>
               </a>
             </div>
