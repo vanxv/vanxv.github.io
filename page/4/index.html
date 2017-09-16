@@ -253,6 +253,162 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://vanxv.github.io/2017/06/02/Javascript-tutorial/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vanxvBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/06/02/Javascript-tutorial/" itemprop="url">Javascript_tutorial</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-02T16:58:10+08:00">
+                2017-06-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="1-1-Javascript入门"><a href="#1-1-Javascript入门" class="headerlink" title="1.1 Javascript入门"></a>1.1 Javascript入门</h2><p>Javascript是一门脚本语言<br>他的运行环境：</p>
+<p>Firefox chrome IE</p>
+<p>不需要安装解释器哦</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></div><div class="line">alert("hello world!")</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="2-0-调用js"><a href="#2-0-调用js" class="headerlink" title="2.0 调用js"></a>2.0 调用js</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span> my javascript code in "out.js"</div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">scr</span>=<span class="string">"out.js"</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="2-1-来来，我们一起玩耍一下Javascrapy的基本小语法"><a href="#2-1-来来，我们一起玩耍一下Javascrapy的基本小语法" class="headerlink" title="2.1 来来，我们一起玩耍一下Javascrapy的基本小语法"></a>2.1 来来，我们一起玩耍一下Javascrapy的基本小语法</h2><h2 id="2-1-1-变量"><a href="#2-1-1-变量" class="headerlink" title="2.1.1 变量"></a>2.1.1 变量</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var test ;    // 声明了一个名为 test 的变量。</div><div class="line"></div><div class="line">var test_2 = "van" ;  // 声明一个名为 test_2 van</div><div class="line"></div><div class="line">x = 100 ;     // 变量 x 为整数</div><div class="line">y = "hello" ; // 变量 y 为字符串</div><div class="line">z = True ;    // 变量 z 为布尔型</div><div class="line">cars=["Audi","BMW","Volvo"]; // cars 是一个数组</div></pre></td></tr></table></figure>
+<h2 id="2-2-data-types"><a href="#2-2-data-types" class="headerlink" title="2.2 data types"></a>2.2 data types</h2><h2 id="2-2-1-string"><a href="#2-2-1-string" class="headerlink" title="2.2.1 string"></a>2.2.1 string</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var stvarchar="hello word";</div></pre></td></tr></table></figure>
+<h2 id="2-2-2-number"><a href="#2-2-2-number" class="headerlink" title="2.2.2 number"></a>2.2.2 number</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var x1 =34.00;</div><div class="line">var x2=34;</div></pre></td></tr></table></figure>
+<h2 id="2-2-3-boolean"><a href="#2-2-3-boolean" class="headerlink" title="2.2.3 boolean"></a>2.2.3 boolean</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var x=true </div><div class="line">var y=false</div></pre></td></tr></table></figure>
+<h2 id="2-2-4-Array"><a href="#2-2-4-Array" class="headerlink" title="2.2.4 Array():"></a>2.2.4 Array():</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var boys=new Array():</div><div class="line">boys[0]="today";</div><div class="line">boys[1]="jack";</div></pre></td></tr></table></figure>
+<p>or<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var boys=new Array("tome","jack","Alex");</div></pre></td></tr></table></figure></p>
+<h2 id="2-3-1-operation"><a href="#2-3-1-operation" class="headerlink" title="2.3.1 operation"></a>2.3.1 operation</h2><ul>
+<li>加   x+y</li>
+</ul>
+<ul>
+<li>减   x-y</li>
+</ul>
+<ul>
+<li>乘   x*y<br>/   除   x/y<br>++  累加  x++<br>–  累减  x–<br>%   取余数 x%y</li>
+</ul>
+<hr>
+<p>2.3.1 Comparison operations<br>&lt; (小于)、&gt; (大于)、&lt;= (小于等于)、&gt;= (大于等于)、== (等于)、!= (不等于)。</p>
+<p>2.3.2 Logical operations<br><img src="![2017060214963897445694.png](http://olsv0lzsv.bkt.clouddn.com/2017060214963897445694.png" alt="img"></p>
+<p>next homework<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">x=5+5;</div><div class="line">document.wirte(x);</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">y=&quot;6&quot;+&quot;6&quot;;</div><div class="line">document.wirte(y);</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">m=7+&quot;7&quot;;  // 数字 + 字符串</div><div class="line">document.write(m);</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">m=7+&quot;7&quot;;  // 数字 + 字符串</div><div class="line">document.write(m);</div></pre></td></tr></table></figure>
+<h2 id="JavaScript-基本语法（下）Loop"><a href="#JavaScript-基本语法（下）Loop" class="headerlink" title="##JavaScript 基本语法（下）Loop"></a>##JavaScript 基本语法（下）Loop</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></div><div class="line">for(var i=0;i&lt;8;i++)</div><div class="line">&#123;</div><div class="line">document.write("number is "+i+"&lt;br&gt;");</div><div class="line">&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="function-example"><a href="#function-example" class="headerlink" title="###function example"></a>###function example</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></div><div class="line">for(var i=0;i&lt;8;i++)</div><div class="line">&#123;</div><div class="line">document.write("number is "+i+"&lt;br&gt;");</div><div class="line">&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="xml"></span></div><div class="line">function my_func()&#123;</div><div class="line">document.write(1);</div><div class="line">&#125;</div><div class="line"></div><div class="line">my_func()</div><div class="line"></div><div class="line">document.write("<span class="tag">&lt;<span class="name">br</span>&gt;</span>");</div><div class="line"></div><div class="line">function my_func()&#123;</div><div class="line">document.write(2);</div><div class="line">&#125;</div><div class="line"></div><div class="line">my_func()</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="next-event-coding"><a href="#next-event-coding" class="headerlink" title="##next event coding"></a>##next event coding</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></div><div class="line">function click_button() &#123;     // 事件处理程序，弹出提示窗</div><div class="line">alert('welcome to shiyanlou');</div><div class="line">&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">align</span>=<span class="string">"center"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span><span class="tag">&lt;/<span class="name">br</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">onclick</span>=<span class="string">"click_button()"</span>&gt;</span>click me<span class="tag">&lt;/<span class="name">button</span>&gt;</span>  <span class="comment">&lt;!--发生事件 onclick 的时候，执行 click_button()--&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><a href="http://olsv0lzsv.bkt.clouddn.com/20170602149639130764580.png" target="_blank" rel="external">20170602149639130764580.png</a></p>
+<h2 id="event-code-list"><a href="#event-code-list" class="headerlink" title="#event code list"></a>#event code list</h2><p>除了刚才提到的 onclick 事件，还有这些常用的事件：</p>
+<p>onclick 单击<br>ondblclick 双击<br>onfocus 元素获得焦点<br>onblur 元素失去焦点<br>onmouseover 鼠标移到某元素之上<br>onmouseout 鼠标从某元素移开<br>onmousedown 鼠标按钮被按下<br>onmouseup 鼠标按键被松开<br>onkeydown 某个键盘按键被按下<br>onkeyup 某个键盘按键被松开</p>
+<h2 id="onkeypress-某个键盘按键被按下并松开"><a href="#onkeypress-某个键盘按键被按下并松开" class="headerlink" title="onkeypress 某个键盘按键被按下并松开"></a>onkeypress 某个键盘按键被按下并松开</h2><h2 id="再来一波例子"><a href="#再来一波例子" class="headerlink" title="##再来一波例子"></a>##再来一波例子</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"background-color:green;width:200px;height:50px;margin:20px;padding-top:10px;color:#ffffff;font-weight:bold;font-size:18px;text-align:center;"</span></span></div><div class="line"></div><div class="line"><span class="attr">onmouseover</span>=<span class="string">"this.innerHTML='good'"</span></div><div class="line"></div><div class="line"><span class="attr">onmouseout</span>=<span class="string">"this.innerHTML='you have moved out'"</span></div><div class="line"></div><div class="line">&gt;move your mouse to here<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><img src="http://olsv0lzsv.bkt.clouddn.com/20170602149639163257528.png" alt="20170602149639163257528.png"></p>
+<h2 id="再来一波class"><a href="#再来一波class" class="headerlink" title="##再来一波class"></a>##再来一波class</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">student= <span class="keyword">new</span> <span class="built_in">Object</span>():</div><div class="line"></div><div class="line">student.name = <span class="string">"Tom"</span>;</div><div class="line">student.age = <span class="string">"19"</span>;</div><div class="line">student.study = <span class="function"><span class="keyword">function</span>(<span class="params"></span>):</span>&#123;</div><div class="line">alert(<span class="string">"studying"</span>);</div><div class="line">&#125;;</div><div class="line">student.eat =<span class="function"><span class="keyword">function</span>(<span class="params"></span>):</span>&#123;</div><div class="line">alert(<span class="string">"eating"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> student1 = <span class="keyword">new</span> student(<span class="string">'Tom'</span>,<span class="string">'19'</span>);</div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line"><span class="keyword">var</span> x = student1.name;  <span class="comment">// 访问对象的属性</span></div><div class="line"><span class="keyword">var</span> y = student1.age;</div><div class="line"></div><div class="line"><span class="built_in">document</span>.write(x);</div><div class="line"><span class="built_in">document</span>.write(y);</div><div class="line"></div><div class="line">student1.study();     <span class="comment">// 调用对象的方法</span></div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>把上面的对象代码过一次（class）</p>
+<h2 id="关于DOM"><a href="#关于DOM" class="headerlink" title="##关于DOM"></a>##关于DOM</h2><p>DOM is changer structure document<br>DOM 不属于javascript<br><img src="http://olsv0lzsv.bkt.clouddn.com/20170602149639321089072.png" alt="20170602149639321089072.png"></p>
+<h2 id="DOM-come-baby"><a href="#DOM-come-baby" class="headerlink" title="#DOM come baby"></a>#DOM come baby</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"my_div"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line"><span class="built_in">document</span>.getElementById(<span class="string">"my_div"</span>).style.height=<span class="string">"100px"</span>;  <span class="comment">// 设置 my_div 高度为 100px</span></div><div class="line"><span class="built_in">document</span>.getElementById(<span class="string">"my_div"</span>).style.background=<span class="string">"red"</span>; <span class="comment">// 设置 my_div 颜色为 红色</span></div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><img src="http://olsv0lzsv.bkt.clouddn.com/20170602149639330622055.png" alt="20170602149639330622055.png"></p>
+<h2 id="DOM-come-baby-to"><a href="#DOM-come-baby-to" class="headerlink" title="#DOM come baby to"></a>#DOM come baby to</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> /&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line"><span class="built_in">document</span>.getElementsByTagName(<span class="string">"input"</span>)[<span class="number">0</span>].value=<span class="string">"hello"</span>;   <span class="comment">// 下标为 [0] 表示选取第 1 个 input 标签</span></div><div class="line"><span class="built_in">document</span>.getElementsByTagName(<span class="string">"input"</span>)[<span class="number">1</span>].value=<span class="string">"shiyanlou"</span>; <span class="comment">// 下标为 [1] 表示选取第 2 个 input 标签</span></div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="DOM-remote"><a href="#DOM-remote" class="headerlink" title="#DOM remote"></a>#DOM remote</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"div_red"</span> <span class="attr">style</span>=<span class="string">"background:#F00; height:100px"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"div_blue"</span> <span class="attr">style</span>=<span class="string">"background:#00F; height:100px"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">remove_red</span>(<span class="params"></span>)</span>&#123;</div><div class="line"><span class="keyword">var</span> obj = <span class="built_in">document</span>.getElementById(<span class="string">"div_red"</span>);</div><div class="line">obj.parentNode.removeChild(obj);</div><div class="line">&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">onclick</span>=<span class="string">"remove_red()"</span>&gt;</span>remove red div<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://vanxv.github.io/2017/05/31/orderplueflow/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1488,141 +1644,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://vanxv.github.io/2017/05/12/bug/Django/input-Unable-to-read/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="vanxvBlog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/05/12/bug/Django/input-Unable-to-read/" itemprop="url">input Unable to read</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-12T16:52:52+08:00">
-                2017-05-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/bug/" itemprop="url" rel="index">
-                    <span itemprop="name">bug</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">method</span>=<span class="string">"post"</span> <span class="attr">action</span>=<span class="string">"/good/GoodIndexAdd/"</span>&gt;</span></div><div class="line">&#123;% csrf_token %&#125;</div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"input-group"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">"txtIndexAddUrl"</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">class</span>=<span class="string">"form-control"</span> <span class="attr">name</span>=<span class="string">"txtIndexAddUrl"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"Submit"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>每一个input必须拥有一个name<br>name=”txtIndexAddUrl”<br>否则读不到。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1672,7 +1693,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">56</span>
+                <span class="site-state-item-count">57</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>

@@ -253,6 +253,141 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://vanxv.github.io/2017/05/12/bug/Django/input-Unable-to-read/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vanxvBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/05/12/bug/Django/input-Unable-to-read/" itemprop="url">input Unable to read</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-12T16:52:52+08:00">
+                2017-05-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/bug/" itemprop="url" rel="index">
+                    <span itemprop="name">bug</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">method</span>=<span class="string">"post"</span> <span class="attr">action</span>=<span class="string">"/good/GoodIndexAdd/"</span>&gt;</span></div><div class="line">&#123;% csrf_token %&#125;</div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"input-group"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">"txtIndexAddUrl"</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">class</span>=<span class="string">"form-control"</span> <span class="attr">name</span>=<span class="string">"txtIndexAddUrl"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"Submit"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>每一个input必须拥有一个name<br>name=”txtIndexAddUrl”<br>否则读不到。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://vanxv.github.io/2017/05/09/officeMemory-with-anxiety/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1423,145 +1558,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://vanxv.github.io/2017/04/25/crawler/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="vanxvBlog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/04/25/crawler/" itemprop="url">crawler</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-25T18:32:48+08:00">
-                2017-04-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>#大纲：<br>· 搭建环境<br>· HTTP协议<br>· 宽度与深度抓取<br>· 不重复抓取策略<br>· 网站结构分析</p>
-<p>##环境</p>
-<ol>
-<li>python 2.7</li>
-<li>pip设置源<br>配置 pip conf<br>[global]<br>index-url=<a href="https://pypi.tuna.tsinghua.edu.cn/simple" target="_blank" rel="external">https://pypi.tuna.tsinghua.edu.cn/simple</a></li>
-</ol>
-<p>windows：安装<br>Anaconda：所有的库都有。</p>
-<p>##HTTP协议<br><img src="http://olsv0lzsv.bkt.clouddn.com/20170425149311668764576.png" alt="gras"><br>物理层： 电器连接<br>数据连接层： 交换机，STP，贞中续<br>网络层：路由器，IP协议<br>传输层：TCP、UDP协议<br>会话层：简历通讯连接，网络拨号<br>表现层：每次连接只处理一个请求<br>应用层：HTTP、FTP</p>
-<p>###HTTP HEADER原理<br><img src="http://olsv0lzsv.bkt.clouddn.com/2017042514931176002240.png" alt="igras"><br>user-agent:告诉服务器你的浏览器版本<br>Cookie：你的网页字符串</p>
-<p>GET：和服务器读取数据<br>POST：给服务器值，并且读取</p>
-<p>###错误处理<br><img src="http://olsv0lzsv.bkt.clouddn.com/20170425149311776699188.png" alt="igras"></p>
-<p>####网页抓取原理<br>我们可以拿到爬虫的树<br><img src="http://olsv0lzsv.bkt.clouddn.com/20170425149311795465702.png" alt="igras"><br>爬虫会一直趴下去<br>爬虫的策略：<br>1.深度优先<br>2.横向优先</p>
-<p>##Scrapy<br>Cookie服务器：爬虫可以从数据库中读取Cookie值，然后添加到其他的爬虫中。<br>            例：服务器A拿到COOKIE，服务器B可以从服务器获取cookie取爬。<br>phantomJS：是一个浏览器，让网站认为我们是一个正规的网站。</p>
-<p>Selenium：一个浏览器驱动<br>page_source：获取当前html文本<br>title：HTML的抬头<br>Current_url：当前的url<br>get_cookie() &amp; get_cookies(): 获取cookie<br>delete_cookie() &amp; delete_all_cookies()：删除所有的cookies<br>add_cookie():同步执行一段javascript指令<br>set_page_load_timeout(): 设置超时时间<br>execute_script():同步执行一段javascript指令<br>execute_async_script()：异步执行javascript指令<br>driver.set_window_size(1280,2400)：1280等于宽度，2400高度加载进去</p>
-<h2 id="selenium-and-phantomjs"><a href="#selenium-and-phantomjs" class="headerlink" title="selenium and phantomjs"></a>selenium and phantomjs</h2><p><img src="http://olsv0lzsv.bkt.clouddn.com/20170425149312159428809.png" alt="igras"><br>selenium 与 phantomjs的关系<br>selenium：是操作浏览器用的，有chrome版，<br>phantomjs：不用显示的浏览器<br>chrome：是有显示的版本<br>lxml：抓取网页定位用的库</p>
-<p>driver.close() 及 driver.quit() 如果phantomjs不用的情况下，退出<br>phantomjs会占进程</p>
-<h2 id="phantomjs的配置："><a href="#phantomjs的配置：" class="headerlink" title="phantomjs的配置："></a>phantomjs的配置：</h2><ul>
-<li>– ignore-ssl-errors=[true|false]<ul>
-<li>ignores忽略 SSL errors, 这样是这样过期签名不会出错， 同样接受。</li>
-</ul>
-</li>
-<li>– images=[true|false] load all inlined images(default is true).</li>
-<li>disk-cache=[true|false] enables disk cache硬盘存储</li>
-<li>cookies-file = /path/to/cookies.txt specifies(指定)the file name to store the persistent Cookies</li>
-<li>debug = [true|false] prints additional(额外)等待 and debug message</li>
-<li>config specifies JSON-formatted configuration file(see below)</li>
-</ul>
-<p>###什么是SSL ？加密的算法，https加密，</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1611,7 +1607,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">56</span>
+                <span class="site-state-item-count">57</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
